@@ -1,12 +1,13 @@
+import Link from 'next/link';
 export default function Nav() {
   return (
     <nav className="flex flex-col p-8 gap-4">
-      <a href="/" className="text-red-400">
-        Home
-      </a>
-      <a href="/items/all" className="text-blue-400">
-        View Items
-      </a>
+      <Link href="/">
+        <p className="text-red-400">Home</p>
+      </Link>
+      <Link href="/items/all">
+        <p className="text-blue-400">view items</p>
+      </Link>
     </nav>
   );
 }
