@@ -2,7 +2,7 @@ const express = require('express');
 const colors = require('colors');
 const dotenv = require('dotenv');
 const cors = require('cors');
-
+const connectDB = require('./config/db');
 //inits app
 const app = express();
 
@@ -19,10 +19,14 @@ app.get('/', (req, res, next) => {
   res.status(200).json({ fuck: 'you' });
 });
 
+//ROUTES
+const itemRoute = require('./routes/item');
+app.use('/item', itemRoute);
+
 const startServer = async () => {
   const PORT = process.env.PORT;
   const portString = `${PORT}`.brightYellow;
-
+  await connectDB();
   const server = app.listen(PORT, () => {
     console.log(
       ` Server running in ${process.env.NODE_ENV} , App listening on port ${portString}!`
