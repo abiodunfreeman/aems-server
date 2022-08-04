@@ -1,0 +1,12 @@
+{
+	"version": 3,
+	"file": "globals.css",
+	"sources": [
+		"scss/globals.scss"
+	],
+	"sourcesContent": [
+		"@tailwind base;\r\n@tailwind components;\r\n@tailwind utilities;\r\n* {\r\n  margin: 0;\r\n  padding: 0;\r\n  box-sizing: border-box;\r\n}\r\n"
+	],
+	"names": [],
+	"mappings": "AAAA,SAAS,CAAT,IAAS;AACT,SAAS,CAAT,UAAS;AACT,SAAS,CAAT,SAAS;;AACT,AAAA,CAAC,CAAC;EACA,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,UAAU;CACvB"
+}
