@@ -5,8 +5,14 @@ export default function Nav() {
       <Link href="/">
         <p className="text-red-400">Home</p>
       </Link>
-      <Link href="/items/all">
+      <Link href="/item/all">
         <p className="text-blue-400">view items</p>
+      </Link>
+      <Link href="/item/Laptop">
+        <p className="text-blue-400">view laptops</p>
+      </Link>
+      <Link href="/item/Desktop">
+        <p className="text-blue-400">view desktops</p>
       </Link>
     </nav>
   );
