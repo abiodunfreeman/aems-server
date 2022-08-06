@@ -2,8 +2,13 @@ const mongoose = require('mongoose');
 const ItemSchema = mongoose.Schema(
   {
     category: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Category',
+      required: [true, 'category needed'],
+    },
+    brand: {
       type: String,
-      required: [true, 'please list what kind of item this is'],
+      required: [true, 'please list the brand'],
     },
     model: {
       type: String,

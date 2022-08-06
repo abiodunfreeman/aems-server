@@ -1,7 +1,7 @@
 import Link from 'next/link';
 export default function Nav() {
   return (
-    <nav className="flex p-8 gap-5">
+    <nav className="flex  gap-5">
       <Link href="/">
         <p className="text-red-400 cursor-pointer">Home</p>
       </Link>

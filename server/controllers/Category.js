@@ -1,5 +1,5 @@
 const Category = require('../models/Category');
-
+const Item = require('../models/Item');
 // @desc    Create a new Category
 // @route   POST /category/new
 // @access  Public
@@ -25,11 +25,11 @@ exports.viewCategories = async (req, res, next) => {
   }
 };
 // @desc    View One Category
-// @route   GET /category/:id
+// @route   GET /category/:name
 // @access  Public
 exports.viewOneCategory = async (req, res, next) => {
   try {
-    const oneCategory = await Category.findById(req.params.id);
+    const oneCategory = await Category.findOne({ name: req.params.name });
     res.status(200).json(oneCategory);
   } catch (err) {
     console.log(`${err}`.red);
@@ -38,7 +38,10 @@ exports.viewOneCategory = async (req, res, next) => {
 };
 exports.deleteCategory = async (req, res, next) => {
   try {
-    const deletedCategory = await Category.findByIdAndDelete(req.params.id);
+    const deletedCategory = await Category.findOneAndDelete(req.params.name);
+    const deletedItems = await Item.deleteMany({
+      category: deletedCategory._id,
+    });
     res.status(200).json({ success: true, deletedCategory });
   } catch (err) {
     console.log(`${err}`.red);

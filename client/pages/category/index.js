@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function Home() {
   const deleteCategoryClick = async id => {
-    const res = axios.delete(`http://localhost:5000/category/${id}`);
+    const res = await axios.delete(`http://localhost:5000/category/${id}`);
     getAllCategories();
     console.log(res.data);
   };
@@ -15,7 +15,9 @@ export default function Home() {
     const jsxData = res.data.map(x => {
       return (
         <div key={x._id}>
-          <h1 className="text-3xl">{x.name}</h1>
+          <Link href={`/category/${x.name}`}>
+            <h1 className="text-3xl">{x.name}</h1>
+          </Link>
           <h4>{x._id}</h4>
           <button
             onClick={() => deleteCategoryClick(x._id)}

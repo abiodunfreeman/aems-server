@@ -1,3 +1,4 @@
+import { TextField } from '@mui/material';
 import axios from 'axios';
 import { useState } from 'react';
 import Nav from '../components/Nav';
@@ -16,11 +17,11 @@ export default function New() {
     form.reset();
   };
   return (
-    <div>
+    <div className="flex flex-col justify-center content-center min-h-screen border-4 border-red-500">
       <Nav />
-      <h1>Create a New Category</h1>
-      <form className="border border-red-500 flex flex-col w-1/4">
-        <input
+      <h1 className="text-xl font-extrabold">Create a New Category</h1>
+      <form className="border border-red-500 flex flex-col ">
+        <TextField
           type="text"
           name="name"
           id="name"

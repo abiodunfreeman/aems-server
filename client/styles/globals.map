@@ -5,8 +5,8 @@
 		"scss/globals.scss"
 	],
 	"sourcesContent": [
-		"@tailwind base;\r\n@tailwind components;\r\n@tailwind utilities;\r\n* {\r\n  margin: 0;\r\n  padding: 0;\r\n  box-sizing: border-box;\r\n}\r\n"
+		"@tailwind base;\r\n@tailwind components;\r\n@tailwind utilities;\r\n* {\r\n  margin: 0;\r\n  padding: 0;\r\n  box-sizing: border-box;\r\n}\r\n#new-item-container {\r\n  border: 3px solid red;\r\n  min-height: 100vh;\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  width: 100vw;\r\n  form {\r\n    border: 3px solid red;\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 30px;\r\n    padding: 25px;\r\n    min-width: 400px;\r\n  }\r\n}\r\n@media (max-width: 500px) {\r\n  #new-item-container {\r\n    form {\r\n      min-width: 80vw;\r\n    }\r\n  }\r\n}\r\n"
 	],
 	"names": [],
-	"mappings": "AAAA,SAAS,CAAT,IAAS;AACT,SAAS,CAAT,UAAS;AACT,SAAS,CAAT,SAAS;;AACT,AAAA,CAAC,CAAC;EACA,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,UAAU;CACvB"
+	"mappings": "AAAA,SAAS,CAAT,IAAS;AACT,SAAS,CAAT,UAAS;AACT,SAAS,CAAT,SAAS;;AACT,AAAA,CAAC,CAAC;EACA,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,UAAU;CACvB;;;AACD,AAAA,mBAAmB,CAAC;EAClB,MAAM,EAAE,aAAa;EACrB,UAAU,EAAE,KAAK;EACjB,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;EACtB,WAAW,EAAE,MAAM;EACnB,KAAK,EAAE,KAAK;CASb;;;AAfD,AAOE,mBAPiB,CAOjB,IAAI,CAAC;EACH,MAAM,EAAE,aAAa;EACrB,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;EACtB,GAAG,EAAE,IAAI;EACT,OAAO,EAAE,IAAI;EACb,SAAS,EAAE,KAAK;CACjB;;AAEH,MAAM,EAAE,SAAS,EAAE,KAAK;;EACtB,AACE,mBADiB,CACjB,IAAI,CAAC;IACH,SAAS,EAAE,IAAI;GAChB"
 }

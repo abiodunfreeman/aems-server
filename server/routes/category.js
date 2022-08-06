@@ -10,5 +10,6 @@ const {
 router.route('/all').get(viewCategories);
 router.route('/new').post(createCategory);
 
-router.route('/:id').get(viewOneCategory).delete(deleteCategory);
+router.route('/:name').get(viewOneCategory).delete(deleteCategory);
+
 module.exports = router;

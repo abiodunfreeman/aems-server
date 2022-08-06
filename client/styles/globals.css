@@ -1,10 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 /* line 4, ../GitHub/aems/client/styles/scss/globals.scss */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
+/* line 9, ../GitHub/aems/client/styles/scss/globals.scss */
+#new-item-container {
+  border: 3px solid red;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+}
+
+/* line 16, ../GitHub/aems/client/styles/scss/globals.scss */
+#new-item-container form {
+  border: 3px solid red;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 25px;
+  min-width: 400px;
+}
+
+@media (max-width: 500px) {
+  /* line 27, ../GitHub/aems/client/styles/scss/globals.scss */
+  #new-item-container form {
+    min-width: 80vw;
+  }
+}
+
 /*# sourceMappingURL=globals.css.map */
