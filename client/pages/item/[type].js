@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Nav from '../components/Nav';
 const Type = () => {
   const router = useRouter();
   const { type } = router.query;
@@ -16,11 +17,15 @@ const Type = () => {
   }, []);
   return (
     <div>
+      <Nav />
       <p>Type: {type}</p>
       {items.map(item => {
         return (
           <div className="m-8" key={item._id}>
-            <h1>{item.model}</h1>
+            <h1>
+              {item.category} - {item.model}
+            </h1>
+
             <h1>{item.price}</h1>
           </div>
         );

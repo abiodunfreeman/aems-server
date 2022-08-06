@@ -1,18 +1,21 @@
 import Link from 'next/link';
 export default function Nav() {
   return (
-    <nav className="flex flex-col p-8 gap-4">
+    <nav className="flex p-8 gap-5">
       <Link href="/">
-        <p className="text-red-400">Home</p>
+        <p className="text-red-400 cursor-pointer">Home</p>
+      </Link>
+      <Link href="/category">
+        <p className="text-gray-400 cursor-pointer">view categories</p>
       </Link>
       <Link href="/item/all">
-        <p className="text-blue-400">view items</p>
+        <p className="text-blue-400 cursor-pointer">view items</p>
       </Link>
       <Link href="/item/Laptop">
-        <p className="text-blue-400">view laptops</p>
+        <p className="text-green-400 cursor-pointer">view laptops</p>
       </Link>
       <Link href="/item/Desktop">
-        <p className="text-blue-400">view desktops</p>
+        <p className="text-purple-400 cursor-pointer">view desktops</p>
       </Link>
     </nav>
   );

@@ -23,6 +23,9 @@ app.get('/', (req, res, next) => {
 const itemRoute = require('./routes/item');
 app.use('/item', itemRoute);
 
+const categoryRoute = require('./routes/category');
+app.use('/category', categoryRoute);
+
 const startServer = async () => {
   const PORT = process.env.PORT;
   const portString = `${PORT}`.brightYellow;
