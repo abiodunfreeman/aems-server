@@ -4,9 +4,9 @@ const Model = mongoose.Schema({
     type: String,
     required: [true, 'please enter the model type'],
   },
-  type: {
+  category: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Item_Type',
+    ref: 'Category',
     required: true,
   },
 });
