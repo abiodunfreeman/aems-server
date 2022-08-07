@@ -23,6 +23,10 @@ app.get('/', (req, res, next) => {
 const itemRoute = require('./routes/item');
 app.use('/item', itemRoute);
 
+//USER
+const userRoute = require('./routes/user');
+app.use('/user', userRoute);
+
 const categoryRoute = require('./routes/category');
 app.use('/category', categoryRoute);
 
