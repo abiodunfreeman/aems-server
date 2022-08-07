@@ -25,6 +25,11 @@
     min-width: 400px;
   }
 }
+#category-index {
+  border: 3px solid red;
+  min-height: 100vh;
+  padding: 10px;
+}
 @media (max-width: 500px) {
   #new-item-container {
     form {

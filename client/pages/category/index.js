@@ -33,7 +33,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <div id="category-index">
       <h1 className="text-bold text-center text-3xl uppercase">aems</h1>
       <Nav />
       <Link href="/category/new">
