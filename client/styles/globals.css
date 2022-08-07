@@ -2,13 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 /* line 4, ../GitHub/aems/client/styles/scss/globals.scss */
+.aptiv-primary {
+  color: #f84018;
+}
+
+/* line 7, ../GitHub/aems/client/styles/scss/globals.scss */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* line 9, ../GitHub/aems/client/styles/scss/globals.scss */
+/* line 12, ../GitHub/aems/client/styles/scss/globals.scss */
 #new-item-container {
   border: 3px solid red;
   min-height: 100vh;
@@ -18,7 +23,7 @@
   width: 100vw;
 }
 
-/* line 16, ../GitHub/aems/client/styles/scss/globals.scss */
+/* line 19, ../GitHub/aems/client/styles/scss/globals.scss */
 #new-item-container form {
   border: 3px solid red;
   display: flex;
@@ -29,7 +34,7 @@
 }
 
 @media (max-width: 500px) {
-  /* line 27, ../GitHub/aems/client/styles/scss/globals.scss */
+  /* line 30, ../GitHub/aems/client/styles/scss/globals.scss */
   #new-item-container form {
     min-width: 80vw;
   }

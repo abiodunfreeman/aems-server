@@ -36,9 +36,12 @@ exports.viewOneCategory = async (req, res, next) => {
     res.status(400).json({ success: false, err: err.message });
   }
 };
+// @desc    Delete One Category
+// @route   DELETE /category/:name
+// @access  Public
 exports.deleteCategory = async (req, res, next) => {
   try {
-    const deletedCategory = await Category.findOneAndDelete(req.params.name);
+    const deletedCategory = await Category.findByIdAndDelete(req.params.name);
     const deletedItems = await Item.deleteMany({
       category: deletedCategory._id,
     });

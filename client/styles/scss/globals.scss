@@ -1,6 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.aptiv-primary {
+  color: #f84018;
+}
 * {
   margin: 0;
   padding: 0;

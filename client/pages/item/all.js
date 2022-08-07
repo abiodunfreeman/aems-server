@@ -31,7 +31,7 @@ export default function All() {
         {items.map(item => {
           return (
             <div className="m-8" key={item._id}>
-              {/* <h2>{item.category.name}</h2> */}
+              <h2>{item.category.name}</h2>
               <h2>{item.model}</h2>
               <h2>{item.Total_Value}</h2>
               <h3 className="text-bold text-2xl">

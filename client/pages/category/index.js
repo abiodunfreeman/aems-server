@@ -2,6 +2,7 @@ import Nav from '../components/Nav';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { Button } from '@mui/material';
 
 export default function Home() {
   const deleteCategoryClick = async id => {
@@ -19,12 +20,9 @@ export default function Home() {
             <h1 className="text-3xl">{x.name}</h1>
           </Link>
           <h4>{x._id}</h4>
-          <button
-            onClick={() => deleteCategoryClick(x._id)}
-            className="border-2 border-black cursor-pointer"
-          >
-            delete
-          </button>
+          <Button variant="outlined" onClick={() => deleteCategoryClick(x._id)}>
+            Delete
+          </Button>
         </div>
       );
     });
@@ -39,7 +37,7 @@ export default function Home() {
       <h1 className="text-bold text-center text-3xl uppercase">aems</h1>
       <Nav />
       <Link href="/category/new">
-        <h1 className="my-8 cursor-pointer">Create a New Category</h1>
+        <Button variant="outlined">Create a New Category</Button>
       </Link>
 
       <div className="flex flex-col gap-8">{data}</div>
