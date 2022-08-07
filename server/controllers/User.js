@@ -1,11 +1,16 @@
 const User = require('../models/User');
-
+const brcypt = require('bcryptjs');
 // @desc    Create a new User
 // @route   POST /user/signup
 // @access  Public
 exports.createUser = async (req, res, next) => {
   try {
-    const newUser = User.create(req.body);
+    // console.log(req.body);
+    const newUser = await User.create({
+      username: req.body.username,
+      password: await brcypt.hash(req.body.password, 10),
+    });
+    console.log(newUser);
     res.status(200).json({ success: true, newUser });
   } catch (err) {
     console.log(`${err.message}`.red);
