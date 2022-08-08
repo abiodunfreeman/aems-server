@@ -30,7 +30,7 @@ const New = () => {
   }, []);
 
   const handleFormSubmit = async e => {
-    // e.preventDefault();
+    e.preventDefault();
     const category = catFormData;
     const brand = document.getElementById('brand').value;
     const model = document.getElementById('model').value;
@@ -52,7 +52,7 @@ const New = () => {
     <div id="new-item-container">
       <Nav />
       <h1>New Items</h1>
-      <form>
+      <form onSubmit={e => handleFormSubmit(e)}>
         <FormControl fullWidth required>
           <InputLabel required id="demo-simple-select-label">
             Category
@@ -110,11 +110,7 @@ const New = () => {
           id="quantity"
           required
         />
-        <Button
-          //   type="submit"
-          variant="outlined"
-          onClick={() => handleFormSubmit()}
-        >
+        <Button type="submit" variant="outlined">
           Add New Item
         </Button>
       </form>

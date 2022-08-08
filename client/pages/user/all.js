@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-
+import Nav from '../components/Nav';
 export default function AllUsers() {
   const [users, setUsers] = useState([]);
 
@@ -31,6 +31,7 @@ export default function AllUsers() {
   }, []);
   return (
     <div>
+      <Nav />
       <h1>View All Users</h1>
       {users}
     </div>

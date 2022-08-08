@@ -31,9 +31,12 @@ exports.getItems = async (req, res, next) => {
 // @access  Public
 exports.getTypes = async (req, res, next) => {
   try {
-    const foundItemTypes = await Item.find({ category: req.params.type });
-    console.log(req.params);
-    res.status(200).json(foundItemTypes);
+    console.log(req.params.type);
+    const category = await Category.find({ name: req.params.type });
+    console.log(category);
+    const itemsOfCategory = await Item.find({ category }).populate('category');
+    console.log(itemsOfCategory);
+    res.status(200).json(itemsOfCategory);
   } catch (err) {
     console.log(`${err}`.red);
     res.status(400).json({ success: false, err: err.message });

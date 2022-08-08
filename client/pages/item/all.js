@@ -29,9 +29,13 @@ export default function All() {
           <Button variant="outlined">Create a new Item</Button>
         </Link>
         {items.map(item => {
+          const url = `http://localhost:3000/item/${item.category.name}`;
           return (
             <div className="m-8" key={item._id}>
-              <h2>{item.category.name}</h2>
+              <Link href={url}>
+                <h2 className="cursor-pointer">{item.category.name}</h2>
+              </Link>
+
               <h2>{item.model}</h2>
               <h2>{item.Total_Value}</h2>
               <h3 className="text-bold text-2xl">
