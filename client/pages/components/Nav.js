@@ -11,6 +11,9 @@ export default function Nav() {
       <Link href="/user/signup">
         <p className="text-orange-400 cursor-pointer">sign up</p>
       </Link>
+      <Link href="/user/login">
+        <p className="cursor-pointer text-pink-400">login</p>
+      </Link>
       <Link href="/item/all">
         <p className="text-blue-400 cursor-pointer">view items</p>
       </Link>
