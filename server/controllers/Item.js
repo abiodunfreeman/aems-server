@@ -19,7 +19,6 @@ exports.postNewItem = async (req, res, next) => {
 exports.getItems = async (req, res, next) => {
   try {
     const foundItems = await Item.find().populate('category');
-    console.log(foundItems);
     res.status(200).json(foundItems);
   } catch (err) {
     console.log(`${err}`.red);
@@ -33,9 +32,9 @@ exports.getTypes = async (req, res, next) => {
   try {
     console.log(req.params.type);
     const category = await Category.find({ name: req.params.type });
-    console.log(category);
+    // console.log(category);
     const itemsOfCategory = await Item.find({ category }).populate('category');
-    console.log(itemsOfCategory);
+    // console.log(itemsOfCategory);
     res.status(200).json(itemsOfCategory);
   } catch (err) {
     console.log(`${err}`.red);
@@ -47,8 +46,16 @@ exports.getTypes = async (req, res, next) => {
 // @access  Public
 exports.deleteItem = async (req, res, next) => {
   try {
-    const deletedItem = await Item.findByIdAndDelete(req.params.id);
-    res.status(200).json({ success: true, deletedItem });
+    if (req.user) {
+      if (req.user.status === 'admin') {
+        const deletedItem = await Item.findByIdAndDelete(req.params.id);
+        res.status(200).json({ success: true, deletedItem });
+      } else {
+        res.status(200).json({ success: false, err: 'insufficient rights' });
+      }
+    } else {
+      res.status(200).json({ success: false, err: 'not logged in' });
+    }
   } catch (err) {
     console.log(`${err}`.red);
     res.status(400).json({ success: false, err: err.message });

@@ -1,7 +1,7 @@
 import Nav from '../components/Nav';
 import { TextField, Button } from '@mui/material';
 import axios from 'axios';
-
+import Router from 'next/router';
 function Login() {
   axios.defaults.withCredentials = true;
   const login = async e => {
@@ -14,7 +14,10 @@ function Login() {
     const user = { username, password };
 
     const res = await axios.post('http://localhost:5000/user/login', user);
-    console.log(res);
+    if (res.data.user) {
+      console.log('redirect');
+      Router.push('/');
+    }
   };
   return (
     <div className="min-h-screen">

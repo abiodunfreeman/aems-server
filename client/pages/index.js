@@ -25,6 +25,7 @@ export default function Home() {
       <main>
         <h1 className="text-bold text-center text-3xl uppercase">aems</h1>
         <Nav />
+        <h1 className="text-center text-4xl text-red-400">homepage</h1>
       </main>
     </div>
   );

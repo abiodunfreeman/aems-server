@@ -75,8 +75,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 app.use((req, res, next) => {
-  console.log(req.user);
-  res.locals.currentUser = req.user;
+  if (req.user) res.locals.user = req.user;
   next();
 });
 
@@ -87,9 +86,17 @@ app.post(
     failureRedirect: '/user',
   })
 );
+app.get('/logout', (req, res) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect('/');
+  });
+});
 app.get('/', (req, res, next) => {
-  console.log('success');
-  console.log(req.user);
+  console.log('LOCAL');
+  if (res.locals.user) console.log(res.locals.user + 'FUCK');
   res.status(200).json({ user: req.user });
 });
 
