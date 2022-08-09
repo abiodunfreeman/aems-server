@@ -40,3 +40,15 @@ exports.deleteUser = async (req, res, next) => {
     res.status(400).json({ success: false, err: err.message });
   }
 };
+// @desc    View One User
+// @route   GET /user/:id
+// @access  Public
+exports.getOneUser = async (req, res, next) => {
+  try {
+    const oneUser = await User.findById(req.params.id);
+    res.status(200).json({ success: true, oneUser });
+  } catch (err) {
+    console.log(`${err.message}`.red);
+    res.status(400).json({ success: false, err: err.message });
+  }
+};

@@ -9,8 +9,7 @@ const Type = () => {
   useEffect(() => {
     setTypeState(type);
   }, []);
-  const x = type;
-  console.log(x);
+
   const [items, setItems] = useState([]);
 
   const getData = async () => {

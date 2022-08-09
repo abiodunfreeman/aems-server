@@ -44,7 +44,7 @@ export default function All() {
           <Button variant="outlined">Create a new Item</Button>
         </Link>
         <h1>{errMsg}</h1>
-        <section className="border-8 border-blue-400 flex gap-4">
+        <section className="border-8 border-blue-400 flex gap-4 flex-wrap justify-evenly">
           {items.map(item => {
             const url = `http://localhost:3000/item/${item.category.name}`;
             return (

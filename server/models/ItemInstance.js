@@ -9,7 +9,7 @@ const ItemInstanceSchema = mongoose.Schema({
     type: String,
     required: true,
     enum: ['Available', 'Loaned', 'Maintenance', 'Reserved'],
-    default: 'Maintenance',
+    default: 'Available',
   },
   notes: [String],
 });

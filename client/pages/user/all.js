@@ -1,6 +1,7 @@
 import { Button } from '@mui/material';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import Nav from '../components/Nav';
 export default function AllUsers() {
   const [users, setUsers] = useState([]);
@@ -8,9 +9,14 @@ export default function AllUsers() {
   const getUsers = async () => {
     const res = await axios.get('http://localhost:5000/user/all');
     const userJSX = res.data.map(user => {
+      const url = `/user/${user._id}`;
       return (
         <div key={user._id}>
-          <h1>{user.username}</h1>
+          <Link href={url}>
+            <h1 className="cursor-pointer text-bold text-3xl">
+              {user.username}
+            </h1>
+          </Link>
           <h2>{user.password}</h2>
           <Button variant="outlined" onClick={() => deleteUser(user._id)}>
             Delete User
