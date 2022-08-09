@@ -3,17 +3,17 @@ import { TextField, Button } from '@mui/material';
 import axios from 'axios';
 
 function Login() {
+  axios.defaults.withCredentials = true;
   const login = async e => {
     e.preventDefault();
+
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     const form = document.querySelector('form');
 
     const user = { username, password };
 
-    const res = await axios.post('http://localhost:5000/user/login', user, {
-      withCredentials: true,
-    });
+    const res = await axios.post('http://localhost:5000/user/login', user);
     console.log(res);
   };
   return (

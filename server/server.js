@@ -19,8 +19,25 @@ dotenv.config({ path: './config/config.env' });
 app.use(express.json());
 
 //Cors
-app.use(cors());
+app.use(
+  cors({
+    origin: 'http:localhost:3000',
+    preflightContinue: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  })
+);
 
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+  next();
+});
 //Passport
 passport.use(
   new LocalStrategy((username, password, done) => {
