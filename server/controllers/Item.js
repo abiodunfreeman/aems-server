@@ -61,3 +61,20 @@ exports.deleteItem = async (req, res, next) => {
     res.status(400).json({ success: false, err: err.message });
   }
 };
+// @desc    Get one Item based on req.params.id
+// @route   GET /item/:id
+// @access  Public
+exports.getOneItem = async (req, res, next) => {
+  try {
+    const oneItem = await Item.findById(req.params.id);
+    if (!oneItem) {
+      res
+        .status(200)
+        .json({ success: false, err: 'Cant find item with given id' });
+    }
+    res.status(200).json({ success: true, item: oneItem });
+  } catch (err) {
+    console.log(`${err}`.red);
+    res.status(400).json({ success: false, err: err.message });
+  }
+};

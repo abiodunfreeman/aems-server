@@ -2,13 +2,14 @@
 
 This application lets users keep track of items. Users can be assigned different items from admins. Admins can add new items, update items , and delete items as needed. Items can be viewed, sorted by categories and users.
 
+Users can have one of two statuses, 'admin' or 'default'. Admins can add new items, update items, and delete items as needed. Items can be viewed by category or all together by anyone. Admins can add notes to items, and assign instances of items to users.
 **Link to project:** http://recruiters-love-seeing-live-demos.com/
 
 ![alt tag](http://placecorgi.com/1200/650)
 
 ## How It's Made:
 
-**Tech used:** Next JS, Tailwind, MUI , SCSS, Express, Mongo DB
+**Tech used:** Next JS, Tailwind, MUI , SCSS, Express, Mongo DB, bCrypt, passport js
 
 Here's where you can go to town on how you actually built this thing. Write as much as you can here, it's totally fine if it's not too much just make sure you write _something_. If you don't have too much experience on your resume working on the front end that's totally fine. This is where you can really show off your passion and make up for that ten fold.
 

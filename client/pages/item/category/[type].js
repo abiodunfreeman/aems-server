@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Nav from '../components/Nav';
+import Nav from '../../components/Nav';
 const Type = () => {
   const router = useRouter();
   const { type } = router.query;
@@ -13,7 +13,9 @@ const Type = () => {
   const [items, setItems] = useState([]);
 
   const getData = async () => {
-    const res = await axios.get(`http://localhost:5000/item/${typeState}`);
+    const res = await axios.get(
+      `http://localhost:5000/item/category/${typeState}`
+    );
     setItems(res.data);
     console.log(res.data);
   };

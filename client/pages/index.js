@@ -4,16 +4,6 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Nav from './components/Nav';
 export default function Home() {
-  const [items, setItems] = useState([]);
-  const fetchItems = async () => {
-    const res = await axios.get('http://localhost:5000/item/all');
-    setItems(res.data);
-    console.log(res.data);
-  };
-
-  useEffect(() => {
-    fetchItems();
-  }, []);
   return (
     <div>
       <Head>
@@ -22,10 +12,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <h1 className="text-bold text-center text-3xl uppercase">aems</h1>
+      <main className="page-container">
         <Nav />
-        <h1 className="text-center text-4xl text-red-400">homepage</h1>
+        <div>
+          <h1>Welcome to Aptiv Electronic Management System Homepage</h1>
+        </div>
       </main>
     </div>
   );

@@ -38,7 +38,6 @@ export default function All() {
   return (
     <div>
       <main>
-        <h1 className="text-bold text-center text-3xl uppercase">aems</h1>
         <Nav />
         <Link href="/item/new">
           <Button variant="outlined">Create a new Item</Button>
@@ -46,14 +45,17 @@ export default function All() {
         <h1>{errMsg}</h1>
         <section className="border-8 border-blue-400 flex gap-4 flex-wrap justify-evenly">
           {items.map(item => {
-            const url = `http://localhost:3000/item/${item.category.name}`;
+            const url = `http://localhost:3000/item/category/${item.category.name}`;
+            const idUrl = `http://localhost:3000/item/${item._id}`;
             return (
               <div className="m-8" key={item._id}>
                 <Link href={url}>
                   <h2 className="cursor-pointer">{item.category.name}</h2>
                 </Link>
 
-                <h2>{item.model}</h2>
+                <Link href={idUrl}>
+                  <h2>{item.model}</h2>
+                </Link>
                 <h2>{item.Total_Value}</h2>
                 <h3 className="text-bold text-2xl">
                   ${item.quantity * item.price}
