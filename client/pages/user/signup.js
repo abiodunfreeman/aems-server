@@ -1,9 +1,15 @@
-import { Button, TextField } from '@mui/material';
 import Link from 'next/link';
 import axios from 'axios';
 import Nav from '../components/Nav';
 import { useState } from 'react';
 import Router from 'next/router';
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  TextField,
+} from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
@@ -39,39 +45,44 @@ export default function User() {
     <ThemeProvider theme={theme}>
       <div
         id="signup-container"
-        className="flex flex-col justify-center min-h-screen "
+        className="flex flex-col justify-center min-h-screen page-container "
       >
         <Nav />
+        <Card raised={true} className="mt-4 p-4 self-center  max-w-screen-sm ">
+          <form
+            className="flex flex-col m-8 p-8 items-center"
+            onSubmit={e => createUser(e)}
+          >
+            <CardContent className=" flex flex-col">
+              <h1 className="text-center font-bold">create an account</h1>
+              <p>{errMsg}</p>
+              <TextField
+                type="string"
+                placeholder="enter a username"
+                label="username"
+                name="username"
+                variant="standard"
+                id="username"
+                required
+              />
+              <TextField
+                type="password"
+                placeholder="enter a password"
+                label="password"
+                name="password"
+                variant="standard"
+                id="password"
+                required
+              />
+            </CardContent>
 
-        <form
-          className="flex flex-col m-8 p-8 items-center"
-          onSubmit={e => createUser(e)}
-        >
-          <p>{errMsg}</p>
-          <TextField
-            type="string"
-            placeholder="enter a username"
-            label="username"
-            name="username"
-            variant="standard"
-            id="username"
-            required
-          />
-          <TextField
-            type="password"
-            placeholder="enter a password"
-            label="password"
-            name="password"
-            variant="standard"
-            id="password"
-            required
-          />
-          <div className="pt-8">
-            <Button type="submit" variant="outlined">
-              Sign Up
-            </Button>
-          </div>
-        </form>
+            <CardActions className="flex flex-col items-center">
+              <Button type="submit" variant="outlined">
+                Sign Up
+              </Button>
+            </CardActions>
+          </form>
+        </Card>
       </div>
     </ThemeProvider>
   );
