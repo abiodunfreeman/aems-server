@@ -52,3 +52,22 @@ exports.getOneUser = async (req, res, next) => {
     res.status(400).json({ success: false, err: err.message });
   }
 };
+// @desc    Change User Status
+// @route   Put /user/:id
+// @access  Public
+exports.changeUserStatus = async (req, res, next) => {
+  try {
+    // console.log(req.body.status);
+    const status = req.body.status === 'default' ? 'admin' : 'default';
+    // console.log(`new status - ${status}`);
+    const user = await User.findByIdAndUpdate(
+      req.params.id,
+      { status },
+      { new: true }
+    );
+    res.status(200).json({ success: true, user });
+  } catch (err) {
+    console.log(`${err.message}`.red);
+    res.status(400).json({ success: false, err: err.message });
+  }
+};

@@ -37,7 +37,7 @@ export default function Nav() {
     // handleLinkClick();
     const res = await axios.get('http://localhost:5000/logout');
 
-    Router.push('/');
+    Router.push('/user/logout');
   };
 
   useEffect(() => {

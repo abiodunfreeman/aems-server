@@ -3,6 +3,7 @@ import Link from 'next/link';
 import axios from 'axios';
 import Nav from '../components/Nav';
 import { useState } from 'react';
+import Router from 'next/router';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
@@ -27,6 +28,7 @@ export default function User() {
       if (res) {
         form.reset();
         setErrMsg('');
+        Router.push('/user/login');
       }
     } catch (err) {
       setErrMsg('Username taken');

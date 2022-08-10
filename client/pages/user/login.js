@@ -54,7 +54,7 @@ function Login() {
   };
   return (
     <ThemeProvider theme={theme}>
-      <div className="min-h-screen flex flex-col" id="login-container">
+      <div className="page-container">
         <Nav />
         <Card raised={true} className="mt-4 p-4 self-center  max-w-screen-sm ">
           <form className=" flex flex-col " onSubmit={e => loginAuto(e)}>

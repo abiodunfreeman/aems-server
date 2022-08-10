@@ -13,7 +13,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="page-container">
+      <main className="">
         <Nav />
         <div className="">
           <h1>Welcome to Aptiv Electronic Management System Homepage</h1>

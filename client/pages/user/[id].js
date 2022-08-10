@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Nav from '../components/Nav';
+import { Button } from '@mui/material';
 const OneUser = () => {
   const router = useRouter();
   const { id } = router.query;
@@ -22,6 +23,12 @@ const OneUser = () => {
   useEffect(() => {
     console.log(userData);
   }, [userData]);
+  const changeUserStatus = async () => {
+    const res = await axios.put(`http://localhost:5000/user/${userId}`, {
+      status: userData.status,
+    });
+    setUserData(res.data.user);
+  };
   return (
     <div>
       <Nav />
@@ -29,6 +36,9 @@ const OneUser = () => {
       <h1>{userData.username}</h1>
       <h1>{userData.status}</h1>
       <h1>{userData.password}</h1>
+      <Button onClick={() => changeUserStatus()} variant="outlined">
+        Change Status
+      </Button>
     </div>
   );
 };

@@ -24,12 +24,10 @@
 #login-container,
 #new-item-container,
 #new-category-container {
-  // border: 3px solid red;
-  background-color: #f25633e2;
+  background-color: #222;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  // align-items: center;
   justify-content: center;
   position: relative;
   width: 100vw;
@@ -119,9 +117,13 @@
   }
 }
 .page-container {
-  max-width: 100vw;
+  background-color: #222;
   min-height: 100vh;
-  // border: 8px solid rebeccapurple;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  width: 100vw;
 }
 
 @media (max-width: 500px) {

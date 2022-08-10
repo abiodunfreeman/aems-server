@@ -31,7 +31,7 @@
 #login-container,
 #new-item-container,
 #new-category-container {
-  background-color: #f25633e2;
+  background-color: #222;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -40,17 +40,17 @@
   width: 100vw;
 }
 
-/* line 38, ../GitHub/aems/client/styles/scss/globals.scss */
+/* line 36, ../GitHub/aems/client/styles/scss/globals.scss */
 #category-index {
   min-height: 100vh;
 }
 
-/* line 43, ../GitHub/aems/client/styles/scss/globals.scss */
+/* line 41, ../GitHub/aems/client/styles/scss/globals.scss */
 #nav-padding {
   height: 15vh;
 }
 
-/* line 46, ../GitHub/aems/client/styles/scss/globals.scss */
+/* line 44, ../GitHub/aems/client/styles/scss/globals.scss */
 #navbar {
   width: 100vw;
   background-color: black;
@@ -63,7 +63,7 @@
   top: 0;
 }
 
-/* line 59, ../GitHub/aems/client/styles/scss/globals.scss */
+/* line 57, ../GitHub/aems/client/styles/scss/globals.scss */
 #navbar #nav-drop-down {
   position: absolute;
   top: 80px;
@@ -77,7 +77,7 @@
   gap: 4vh;
 }
 
-/* line 72, ../GitHub/aems/client/styles/scss/globals.scss */
+/* line 70, ../GitHub/aems/client/styles/scss/globals.scss */
 #navbar .nav-link {
   color: white;
   text-transform: uppercase;
@@ -87,12 +87,12 @@
   letter-spacing: 1px;
 }
 
-/* line 80, ../GitHub/aems/client/styles/scss/globals.scss */
+/* line 78, ../GitHub/aems/client/styles/scss/globals.scss */
 #navbar .nav-link:hover {
   border-bottom: 2px solid #f84018;
 }
 
-/* line 83, ../GitHub/aems/client/styles/scss/globals.scss */
+/* line 81, ../GitHub/aems/client/styles/scss/globals.scss */
 #navbar #nav-container {
   display: flex;
   justify-content: space-between;
@@ -100,7 +100,7 @@
   width: 80vw;
 }
 
-/* line 92, ../GitHub/aems/client/styles/scss/globals.scss */
+/* line 90, ../GitHub/aems/client/styles/scss/globals.scss */
 #navbar #nav-container #nav-logo {
   letter-spacing: 0.1rem;
   color: white;
@@ -109,13 +109,13 @@
   gap: 0.25rem;
 }
 
-/* line 100, ../GitHub/aems/client/styles/scss/globals.scss */
+/* line 98, ../GitHub/aems/client/styles/scss/globals.scss */
 #navbar #nav-container #nav-logo:hover {
   letter-spacing: 0.3rem;
   gap: 0.5rem;
 }
 
-/* line 104, ../GitHub/aems/client/styles/scss/globals.scss */
+/* line 102, ../GitHub/aems/client/styles/scss/globals.scss */
 #navbar #nav-container #nav-logged-in-desktop {
   display: flex;
   flex-wrap: wrap;
@@ -123,7 +123,7 @@
   gap: 15px;
 }
 
-/* line 111, ../GitHub/aems/client/styles/scss/globals.scss */
+/* line 109, ../GitHub/aems/client/styles/scss/globals.scss */
 #navbar #nav-container #nav-logged-out {
   display: flex;
   flex-wrap: wrap;
@@ -131,27 +131,32 @@
   gap: 15px;
 }
 
-/* line 121, ../GitHub/aems/client/styles/scss/globals.scss */
+/* line 119, ../GitHub/aems/client/styles/scss/globals.scss */
 .page-container {
-  max-width: 100vw;
+  background-color: #222;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  width: 100vw;
 }
 
 @media (max-width: 500px) {
-  /* line 129, ../GitHub/aems/client/styles/scss/globals.scss */
+  /* line 131, ../GitHub/aems/client/styles/scss/globals.scss */
   #new-item-container form {
     min-width: 80vw;
   }
 }
 
-/* line 134, ../GitHub/aems/client/styles/scss/globals.scss */
+/* line 136, ../GitHub/aems/client/styles/scss/globals.scss */
 #ham-container {
   display: none;
   cursor: pointer;
   margin-right: 5vw;
 }
 
-/* line 140, ../GitHub/aems/client/styles/scss/globals.scss */
+/* line 142, ../GitHub/aems/client/styles/scss/globals.scss */
 .bar1,
 .bar2,
 .bar3 {
@@ -163,47 +168,47 @@
 }
 
 /* Rotate first bar */
-/* line 151, ../GitHub/aems/client/styles/scss/globals.scss */
+/* line 153, ../GitHub/aems/client/styles/scss/globals.scss */
 .change .bar1 {
   -webkit-transform: rotate(-45deg) translate(-9px, 6px);
   transform: rotate(-45deg) translate(-9px, 6px);
 }
 
 /* Fade out the second bar */
-/* line 157, ../GitHub/aems/client/styles/scss/globals.scss */
+/* line 159, ../GitHub/aems/client/styles/scss/globals.scss */
 .change .bar2 {
   opacity: 0;
 }
 
 /* Rotate last bar */
-/* line 162, ../GitHub/aems/client/styles/scss/globals.scss */
+/* line 164, ../GitHub/aems/client/styles/scss/globals.scss */
 .change .bar3 {
   -webkit-transform: rotate(45deg) translate(-8px, -8px);
   transform: rotate(45deg) translate(-8px, -8px);
 }
 
 @media (max-width: 1400px) {
-  /* line 168, ../GitHub/aems/client/styles/scss/globals.scss */
+  /* line 170, ../GitHub/aems/client/styles/scss/globals.scss */
   #nav-padding {
     height: 80px;
   }
-  /* line 171, ../GitHub/aems/client/styles/scss/globals.scss */
+  /* line 173, ../GitHub/aems/client/styles/scss/globals.scss */
   #navbar {
     height: 80px;
   }
-  /* line 174, ../GitHub/aems/client/styles/scss/globals.scss */
+  /* line 176, ../GitHub/aems/client/styles/scss/globals.scss */
   #navbar #nav-container {
     width: 100vw;
   }
-  /* line 176, ../GitHub/aems/client/styles/scss/globals.scss */
+  /* line 178, ../GitHub/aems/client/styles/scss/globals.scss */
   #navbar #nav-container #nav-logged-out {
     margin-right: 30px;
   }
-  /* line 179, ../GitHub/aems/client/styles/scss/globals.scss */
+  /* line 181, ../GitHub/aems/client/styles/scss/globals.scss */
   #navbar #nav-container #nav-logged-in-desktop {
     display: none;
   }
-  /* line 182, ../GitHub/aems/client/styles/scss/globals.scss */
+  /* line 184, ../GitHub/aems/client/styles/scss/globals.scss */
   #navbar #nav-container #ham-container {
     display: inline-block;
   }
