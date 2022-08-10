@@ -9,6 +9,11 @@
   padding: 0;
   box-sizing: border-box;
 }
+.login-link {
+  text-align: center;
+  border-bottom: 2px solid transparent;
+}
+
 .orange-dot {
   width: 0.5rem;
   height: 0.5rem;
@@ -16,30 +21,31 @@
 
   border-radius: 50%;
 }
-#new-item-container {
-  border: 3px solid red;
+#login-container,
+#new-item-container,
+#new-category-container {
+  // border: 3px solid red;
+  background-color: #f25633e2;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  // align-items: center;
+  justify-content: center;
+  position: relative;
   width: 100vw;
-  form {
-    border: 3px solid red;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    padding: 25px;
-    min-width: 400px;
-  }
 }
 
 #category-index {
-  border: 3px solid red;
+  // border: 3px solid red;
   min-height: 100vh;
-  padding: 10px;
+  // padding: 10px;
+}
+#nav-padding {
+  height: 15vh;
 }
 #navbar {
   width: 100vw;
+
   // border: 5px solid red;
   // padding: 0.5rem;
   background-color: black;
@@ -47,6 +53,22 @@
   flex-direction: column;
   justify-content: center;
   height: 15vh;
+  z-index: 5;
+  position: absolute;
+  top: 0;
+  #nav-drop-down {
+    // border: 3px solid red;
+    position: absolute;
+    top: 80px;
+    background-color: black;
+    z-index: 10;
+    width: 100vw;
+    height: calc(100vh - 80px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4vh;
+  }
   .nav-link {
     color: white;
     text-transform: uppercase;
@@ -81,7 +103,7 @@
     }
     #nav-logged-out {
       // margin-left: 100%;
-      border: 3px solid blue;
+      // border: 3px solid blue;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
@@ -136,11 +158,17 @@
 }
 
 @media (max-width: 1400px) {
+  #nav-padding {
+    height: 80px;
+  }
   #navbar {
-    height: auto;
-    padding: 1rem;
+    height: 80px;
+    // padding: 1rem;
     #nav-container {
       width: 100vw;
+      #nav-logged-out {
+        margin-right: 30px;
+      }
       #nav-logged-in-desktop {
         display: none;
       }

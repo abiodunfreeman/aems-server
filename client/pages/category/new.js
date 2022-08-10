@@ -2,6 +2,16 @@ import { TextField } from '@mui/material';
 import axios from 'axios';
 import { useState } from 'react';
 import Nav from '../components/Nav';
+import { Button, Card, CardActions, CardContent } from '@mui/material';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: '#f25633e2',
+      main: '#f84018',
+    },
+  },
+});
 export default function New() {
   const [formData, setFormData] = useState();
   const handleFormChange = () => {
@@ -19,27 +29,41 @@ export default function New() {
     form.reset();
   };
   return (
-    <div className="flex flex-col justify-center content-center min-h-screen border-4 border-red-500">
-      <Nav />
-      <h1 className="text-xl font-extrabold aptiv-primary">
-        Create a New Category
-      </h1>
-      <form
-        onSubmit={e => handleClick(e)}
-        className="border border-blue-600 flex flex-col "
+    <ThemeProvider theme={theme}>
+      <div
+        id="new-category-container"
+        className="flex flex-col justify-center content-center min-h-screen "
       >
-        <TextField
-          type="text"
-          name="name"
-          id="name"
-          placeholder="name"
-          className="border border-black"
-          onChange={() => handleFormChange()}
-        />
-        <button type="submit" onClick={e => handleClick(e)}>
-          Submit
-        </button>
-      </form>
-    </div>
+        <Nav />
+        <h1 className="text-center text-xl font-extrabold text-white">
+          Create a New Category
+        </h1>
+        <Card raised={true} className="mt-4 p-4 self-center  max-w-screen-sm ">
+          <form onSubmit={e => handleClick(e)} className=" flex flex-col ">
+            <CardContent className=" flex flex-col">
+              <TextField
+                variant="standard"
+                type="text"
+                name="name"
+                id="name"
+                placeholder="name"
+                className="border border-black"
+                onChange={() => handleFormChange()}
+              />
+            </CardContent>
+            <CardActions className="flex justify-center">
+              {' '}
+              <Button
+                variant="outlined"
+                type="submit"
+                onClick={e => handleClick(e)}
+              >
+                Add New Category
+              </Button>
+            </CardActions>
+          </form>
+        </Card>
+      </div>
+    </ThemeProvider>
   );
 }

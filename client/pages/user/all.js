@@ -11,7 +11,7 @@ export default function AllUsers() {
     const userJSX = res.data.map(user => {
       const url = `/user/${user._id}`;
       return (
-        <div key={user._id}>
+        <div key={user._id} className="relative">
           <Link href={url}>
             <h1 className="cursor-pointer text-bold text-3xl">
               {user.username}

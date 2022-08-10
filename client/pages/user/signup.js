@@ -3,6 +3,15 @@ import Link from 'next/link';
 import axios from 'axios';
 import Nav from '../components/Nav';
 import { useState } from 'react';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: '#f25633e2',
+      main: '#f84018',
+    },
+  },
+});
 export default function User() {
   const [errMsg, setErrMsg] = useState('');
   const createUser = async e => {
@@ -25,44 +34,43 @@ export default function User() {
     }
   };
   return (
-    <div
-      id="signup-container"
-      className="pl-8 flex flex-col items-center justify-center min-h-screen border-8 border-red-500"
-    >
-      <Nav />
-      <h1>Sign up</h1>
-      <Link href="/user/all">
-        <Button variant="outlined">View All Users</Button>
-      </Link>
-      <form
-        className="flex flex-col border border-black p-8 items-center"
-        onSubmit={e => createUser(e)}
+    <ThemeProvider theme={theme}>
+      <div
+        id="signup-container"
+        className="flex flex-col justify-center min-h-screen "
       >
-        <p>{errMsg}</p>
-        <TextField
-          type="string"
-          placeholder="enter a username"
-          label="username"
-          name="username"
-          variant="standard"
-          id="username"
-          required
-        />
-        <TextField
-          type="password"
-          placeholder="enter a password"
-          label="password"
-          name="password"
-          variant="standard"
-          id="password"
-          required
-        />
-        <div className="pt-8">
-          <Button type="submit" variant="outlined">
-            Sign Up
-          </Button>
-        </div>
-      </form>
-    </div>
+        <Nav />
+
+        <form
+          className="flex flex-col m-8 p-8 items-center"
+          onSubmit={e => createUser(e)}
+        >
+          <p>{errMsg}</p>
+          <TextField
+            type="string"
+            placeholder="enter a username"
+            label="username"
+            name="username"
+            variant="standard"
+            id="username"
+            required
+          />
+          <TextField
+            type="password"
+            placeholder="enter a password"
+            label="password"
+            name="password"
+            variant="standard"
+            id="password"
+            required
+          />
+          <div className="pt-8">
+            <Button type="submit" variant="outlined">
+              Sign Up
+            </Button>
+          </div>
+        </form>
+      </div>
+    </ThemeProvider>
   );
 }

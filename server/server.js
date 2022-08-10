@@ -50,7 +50,7 @@ passport.use(
       }
       bcrypt.compare(password, user.password, (err, res) => {
         if (res) {
-          console.log('passwords match!');
+          // console.log('passwords match!');
           return done(null, user);
         } else {
           return done(null, false, { message: 'Incorrect password' });
@@ -89,14 +89,15 @@ app.post(
 app.get('/logout', (req, res) => {
   req.logout(function (err) {
     if (err) {
+      console.log(err + 'not logged out');
       return next(err);
     }
+    console.log('Logged out');
     res.redirect('/');
   });
 });
 app.get('/', (req, res, next) => {
-  console.log('LOCAL');
-  if (res.locals.user) console.log(res.locals.user + 'FUCK');
+  // if (res.locals.user) console.log(res.locals.user + 'FUCK');
   res.status(200).json({ user: req.user });
 });
 

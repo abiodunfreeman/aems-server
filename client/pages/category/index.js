@@ -34,11 +34,12 @@ export default function Home() {
 
   return (
     <div id="category-index">
-      <h1 className="text-bold text-center text-3xl uppercase">aems</h1>
       <Nav />
-      <Link href="/category/new">
-        <Button variant="outlined">Create a New Category</Button>
-      </Link>
+      <div className="flex justify-center p-3">
+        <Link href="/category/new">
+          <Button variant="outlined">Create a New Category</Button>
+        </Link>
+      </div>
 
       <div className="flex flex-col gap-8">{data}</div>
     </div>
