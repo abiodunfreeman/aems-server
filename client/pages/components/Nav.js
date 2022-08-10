@@ -62,7 +62,7 @@ export default function Nav() {
               <span className="text-white font-bold">{user.username}</span>
             </p>
           ) : (
-            <p className="text-white absolute bottom-1 right-3">
+            <p className="aptiv-primary absolute bottom-1 right-3">
               not logged in
             </p>
           )}
@@ -71,10 +71,10 @@ export default function Nav() {
             <Link href="/">
               <div
                 id="nav-logo"
-                className="flex justify-center items-center gap-1 cursor-pointer"
+                className="flex justify-center items-center  cursor-pointer"
               >
                 <div className="orange-dot"></div>
-                <h1 className="text-bold text-center text-3xl uppercase">
+                <h1 className="text-bold text-center text-3xl uppercase ">
                   aptiv
                 </h1>
                 <div className="orange-dot" />
