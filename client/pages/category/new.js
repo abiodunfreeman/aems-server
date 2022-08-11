@@ -30,10 +30,7 @@ export default function New() {
   };
   return (
     <ThemeProvider theme={theme}>
-      <div
-        id="new-category-container"
-        className="flex flex-col justify-center content-center min-h-screen "
-      >
+      <div className="page-container ">
         <Nav />
         <h1 className="text-center text-xl font-extrabold text-white">
           Create a New Category

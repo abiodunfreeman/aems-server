@@ -28,21 +28,28 @@ export default function Nav() {
   const [user, setUser] = useState({});
   const getUser = async () => {
     const res = await axios.get('http://localhost:5000');
-    // console.log(res.data);
+
     setUser(res.data.user);
-    if (res.locals) console.log(res.locals.user + 'FUKC');
   };
 
   useEffect(() => {
     getUser();
   }, []);
   const handleLinkClick = string => {
+    // Closes/Opens menu and changes hamburger icon on click
+    // Click with param "onlyClose" only closes the menu and reverts the ham Icon
     const hamburgerIcon = document.getElementById('ham-container');
     const dropDown = document.getElementById('nav-drop-down');
     if (string === 'onlyClose') {
-      dropDown.classList.add('hidden');
-      dropDown.classList.remove('flex');
-      hamburgerIcon.classList.remove('change');
+      !dropDown.classList.contains('hidden') &&
+        dropDown.classList.add('hidden');
+
+      dropDown.classList.contains('flex') && dropDown.classList.remove('flex');
+
+      hamburgerIcon &&
+        hamburgerIcon.classList.contains('change') &&
+        hamburgerIcon.classList.remove('change');
+
       return;
     }
 
