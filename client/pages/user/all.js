@@ -4,8 +4,31 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Nav from '../components/Nav';
 export default function AllUsers() {
-  const [users, setUsers] = useState([]);
+  const [user, setUser] = useState({});
+  const [errMsg, setErrMsg] = useState('');
+  const getUser = async () => {
+    const res = await axios.get('http://localhost:5000');
+    if (!res.data.user) {
+      setErrMsg('please log in');
+      return;
+    }
+    setUser(res.data.user);
+  };
 
+  useEffect(() => {
+    getUser();
+  }, []);
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+  const [users, setUsers] = useState([]);
+  const deleteUser = async id => {
+    const res = await axios.delete(`http://localhost:5000/user/${id}/delete`);
+
+    getUsers();
+    if (res.data.success === true)
+      setErrMsg(`User ${res.data.user.username} deleted successfully`);
+  };
   const getUsers = async () => {
     const res = await axios.get('http://localhost:5000/user/all');
     const userJSX = res.data.map(user => {
@@ -27,17 +50,14 @@ export default function AllUsers() {
     setUsers(userJSX);
     console.log(res.data);
   };
-  const deleteUser = async id => {
-    const res = await axios.delete(`http://localhost:5000/user/${id}/delete`);
-    console.log(res.data);
-    getUsers();
-  };
+
   useEffect(() => {
     getUsers();
   }, []);
   return (
     <div className="">
       <Nav />
+      <h1>{errMsg}</h1>
       <h1>View All Users</h1>
       {users}
     </div>

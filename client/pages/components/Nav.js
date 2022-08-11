@@ -117,7 +117,7 @@ export default function Nav() {
                   <Link href="/user/all">
                     <Button variant="outlined">View All Users</Button>
                   </Link>
-                  <Link href="/category">
+                  <Link href="/item/category">
                     <p className="nav-link">categories</p>
                   </Link>
                   <Link href="/item/all">
@@ -183,6 +183,11 @@ export default function Nav() {
                     new item
                   </p>
                 </Link>
+                <Link href="/item/category">
+                  <p className="nav-link " onClick={() => handleLinkClick()}>
+                    sort by categories
+                  </p>
+                </Link>
               </AccordionDetails>
             </Accordion>
             <Accordion
@@ -202,7 +207,7 @@ export default function Nav() {
                 <span className="ml-5vw">CATEGORIES</span>
               </AccordionSummary>
               <AccordionDetails sx={{ color: 'white', paddingLeft: '70px;' }}>
-                <Link href="/category">
+                <Link href="/item/category">
                   <p className="nav-link" onClick={() => handleLinkClick()}>
                     veiw all categories
                   </p>

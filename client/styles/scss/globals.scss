@@ -32,7 +32,20 @@
   position: relative;
   width: 100vw;
 }
-
+#items-all-container {
+  background-color: #6c757d;
+  min-height: 100vh;
+  #items-jsx-container {
+    border: 2px solid blue;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+}
+.item-box {
+}
 #category-index {
   // border: 3px solid red;
   min-height: 100vh;
@@ -57,7 +70,7 @@
   #nav-drop-down {
     // border: 3px solid red;
     position: absolute;
-    top: 80px;
+    top: 90px;
     background-color: black;
     z-index: 10;
     width: 100vw;
@@ -175,10 +188,10 @@
 
 @media (max-width: 1400px) {
   #nav-padding {
-    height: 80px;
+    height: 90px;
   }
   #navbar {
-    height: 80px;
+    height: 90px;
 
     #nav-container {
       width: 100vw;

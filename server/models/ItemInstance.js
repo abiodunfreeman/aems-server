@@ -11,6 +11,10 @@ const ItemInstanceSchema = mongoose.Schema({
     enum: ['Available', 'Loaned', 'Maintenance', 'Reserved'],
     default: 'Available',
   },
+  current_user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  },
   notes: [String],
 });
 module.exports = mongoose.model('ItemInstance', ItemInstanceSchema);
