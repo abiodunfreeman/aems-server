@@ -1,6 +1,17 @@
 import Link from 'next/link';
 import axios from 'axios';
-import { Button } from '@mui/material';
+import {
+  Button,
+  Box,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+} from '@mui/material';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import { useEffect, useState } from 'react';
 import Router from 'next/router';
@@ -25,9 +36,15 @@ export default function Nav() {
   useEffect(() => {
     getUser();
   }, []);
-  const handleLinkClick = () => {
+  const handleLinkClick = string => {
     const hamburgerIcon = document.getElementById('ham-container');
     const dropDown = document.getElementById('nav-drop-down');
+    if (string === 'onlyClose') {
+      dropDown.classList.add('hidden');
+      dropDown.classList.remove('flex');
+      hamburgerIcon.classList.remove('change');
+      return;
+    }
 
     dropDown.classList.toggle('hidden');
     dropDown.classList.toggle('flex');
@@ -51,7 +68,12 @@ export default function Nav() {
     dropDown.classList.toggle('flex');
     hamburgerIcon.classList.toggle('change');
   };
-
+  const [selectUrl, setSelectUrl] = useState('');
+  const handleChange = e => {
+    console.log(e.target.value);
+    handleLinkClick();
+    Router.push(e.target.value);
+  };
   return (
     <ThemeProvider theme={theme}>
       <div>
@@ -72,6 +94,7 @@ export default function Nav() {
               <div
                 id="nav-logo"
                 className="flex justify-center items-center  cursor-pointer"
+                onClick={() => handleLinkClick('onlyClose')}
               >
                 <div className="orange-dot"></div>
                 <h1 className="text-bold text-center text-3xl uppercase ">
@@ -124,28 +147,74 @@ export default function Nav() {
             )}
           </div>
 
-          {/* {user && (
-      <p className="text-white text-center mb-3">Welcome: {user.username}</p>
-    )} */}
+          {/* MOBILE NAV */}
           <section id="nav-drop-down" className="hidden">
-            <Link href="/category">
-              <p className="nav-link" onClick={() => handleLinkClick()}>
-                categories
-              </p>
-            </Link>
-            <Link href="/item/all">
-              <p className="nav-link" onClick={() => handleLinkClick()}>
-                items
-              </p>
-            </Link>
-            <Link href="/item/new">
-              <p className="nav-link" onClick={() => handleLinkClick()}>
-                new item
-              </p>
-            </Link>
+            <Accordion
+              sx={{
+                backgroundColor: 'rgb(0,0,0)',
+                width: '100%',
+                borderBottom: '1px solid #6c757d',
+                borderRadius: '0',
+              }}
+            >
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon sx={{ color: '#f84018' }} />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+                sx={{ color: 'white' }}
+              >
+                <span className="ml-5vw">ITEMS</span>
+              </AccordionSummary>
+              <AccordionDetails sx={{ color: 'white', paddingLeft: '70px;' }}>
+                <Link href="/item/all">
+                  <p className="nav-link " onClick={() => handleLinkClick()}>
+                    all items
+                  </p>
+                </Link>
+                <Link href="/item/new">
+                  <p className="nav-link " onClick={() => handleLinkClick()}>
+                    new item
+                  </p>
+                </Link>
+              </AccordionDetails>
+            </Accordion>
+            <Accordion
+              sx={{
+                backgroundColor: 'rgb(0,0,0)',
+                width: '100%',
+                borderBottom: '1px solid #6c757d',
+                borderRadius: '0',
+              }}
+            >
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon sx={{ color: '#f84018' }} />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+                sx={{ color: 'white' }}
+              >
+                <span className="ml-5vw">CATEGORIES</span>
+              </AccordionSummary>
+              <AccordionDetails sx={{ color: 'white', paddingLeft: '70px;' }}>
+                <Link href="/category">
+                  <p className="nav-link" onClick={() => handleLinkClick()}>
+                    veiw all categories
+                  </p>
+                </Link>
+                <Link href="/category/new">
+                  <p className="nav-link" onClick={() => handleLinkClick()}>
+                    create a new category
+                  </p>
+                </Link>
+              </AccordionDetails>
+            </Accordion>
+
             {user && user.status === 'admin' && (
               <Link href="/user/all">
-                <Button variant="outlined" onClick={() => handleLinkClick()}>
+                <Button
+                  variant="contained"
+                  onClick={() => handleLinkClick()}
+                  sx={{ backgroundColor: 'white' }}
+                >
                   View All Users
                 </Button>
               </Link>

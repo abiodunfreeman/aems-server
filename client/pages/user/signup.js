@@ -24,8 +24,13 @@ export default function User() {
   const createUser = async e => {
     e.preventDefault();
     try {
-      const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
+      const confirmPass = document.getElementById('confirm-password').value;
+      if (password !== confirmPass) {
+        setErrMsg('passwords do not match');
+        return;
+      }
+      const username = document.getElementById('username').value;
       const form = document.querySelector('form');
 
       const user = { username, password };
@@ -54,7 +59,7 @@ export default function User() {
             onSubmit={e => createUser(e)}
           >
             <CardContent className=" flex flex-col">
-              <h1 className="text-center font-bold">create an account</h1>
+              <h1 className="text-center font-bold pb-1">create an account</h1>
               <p>{errMsg}</p>
               <TextField
                 type="string"
@@ -72,6 +77,15 @@ export default function User() {
                 name="password"
                 variant="standard"
                 id="password"
+                required
+              />
+              <TextField
+                type="password"
+                placeholder="Enter your password again"
+                label="confirm password"
+                name="confirm-password"
+                variant="standard"
+                id="confirm-password"
                 required
               />
             </CardContent>

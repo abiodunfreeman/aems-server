@@ -58,6 +58,7 @@ function Login() {
         <Card raised={true} className="mt-4 p-4 self-center  max-w-screen-sm ">
           <form className=" flex flex-col " onSubmit={e => loginAuto(e)}>
             <CardContent className=" flex flex-col">
+              <h1 className="text-center font-bold pb-1">login</h1>
               <TextField
                 type="string"
                 placeholder="enter a username"
@@ -77,20 +78,20 @@ function Login() {
                 required
               />
             </CardContent>
-            <CardActions className="flex flex-col items-center">
-              <Button type="submit" variant="outlined">
+            <CardActions className="flex flex-col items-center gap-3">
+              <Button type="submit" variant="outlined" fullWidth>
                 login
               </Button>
+              <div className="flex gap-3">
+                <Button variant="outlined" onClick={() => login('default')}>
+                  <p className="login-link">login as guest</p>
+                </Button>
+                <Button variant="outlined" onClick={() => login('admin')}>
+                  <p className="login-link"> login as ADMIN</p>
+                </Button>
+              </div>
             </CardActions>
           </form>
-          <div className="flex gap-3">
-            <Button variant="outlined" onClick={() => login('default')}>
-              <p className="login-link">login as guest</p>
-            </Button>
-            <Button variant="outlined" onClick={() => login('admin')}>
-              <p className="login-link"> login as ADMIN</p>
-            </Button>
-          </div>
         </Card>
       </div>
     </ThemeProvider>

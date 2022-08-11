@@ -11,13 +11,13 @@ export default function AllUsers() {
     const userJSX = res.data.map(user => {
       const url = `/user/${user._id}`;
       return (
-        <div key={user._id} className="relative">
+        <div key={user._id} className="">
           <Link href={url}>
             <h1 className="cursor-pointer text-bold text-3xl">
               {user.username}
             </h1>
           </Link>
-          <h2>{user.password}</h2>
+
           <Button variant="outlined" onClick={() => deleteUser(user._id)}>
             Delete User
           </Button>
@@ -36,7 +36,7 @@ export default function AllUsers() {
     getUsers();
   }, []);
   return (
-    <div>
+    <div className="">
       <Nav />
       <h1>View All Users</h1>
       {users}

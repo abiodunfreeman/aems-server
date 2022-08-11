@@ -62,7 +62,7 @@ const New = () => {
   };
   return (
     <ThemeProvider theme={theme}>
-      <div id="new-item-container" className="flex flex-col ">
+      <div className="page-container">
         <Nav />
         <Card className="p-4 self-center  max-w-screen-sm " raised={true}>
           <form onSubmit={e => handleFormSubmit(e)} className="">

@@ -35,7 +35,6 @@ const OneUser = () => {
       <h1>current id - {id}</h1>
       <h1>{userData.username}</h1>
       <h1>{userData.status}</h1>
-      <h1>{userData.password}</h1>
       <Button onClick={() => changeUserStatus()} variant="outlined">
         Change Status
       </Button>
