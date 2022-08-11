@@ -23,25 +23,28 @@ export default function AllUsers() {
   }, [user]);
   const [users, setUsers] = useState([]);
   const deleteUser = async id => {
+    console.log(user.status);
+    if (user.status !== 'admin') {
+      setErrMsg('please see an admin to delete a user');
+      return;
+    }
     const res = await axios.delete(`http://localhost:5000/user/${id}/delete`);
 
     getUsers();
-    if (res.data.success === true)
-      setErrMsg(`User ${res.data.user.username} deleted successfully`);
+    if (res.data.success === true) console.log(res.data);
+    setErrMsg(`User ${res.data.deletedUser.username} deleted successfully`);
   };
   const getUsers = async () => {
     const res = await axios.get('http://localhost:5000/user/all');
-    const userJSX = res.data.map(user => {
-      const url = `/user/${user._id}`;
+    const userJSX = res.data.map(u => {
+      const url = `/user/${u._id}`;
       return (
-        <div key={user._id} className="">
+        <div key={u._id} className="">
           <Link href={url}>
-            <h1 className="cursor-pointer text-bold text-3xl">
-              {user.username}
-            </h1>
+            <h1 className="cursor-pointer text-bold text-3xl">{u.username}</h1>
           </Link>
 
-          <Button variant="outlined" onClick={() => deleteUser(user._id)}>
+          <Button variant="outlined" onClick={() => deleteUser(u._id)}>
             Delete User
           </Button>
         </div>
