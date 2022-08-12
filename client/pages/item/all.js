@@ -58,7 +58,16 @@ export default function All() {
 
     console.log(input.value);
   };
-
+  const handleDeleteItem = async id => {
+    if (user && user.status === 'admin') {
+      const res = await axios.delete(`http://localhost:5000/item/delete/${id}`);
+      // fetchItems();
+      setTimeout(fetchItems, 0);
+      console.log(res);
+    } else {
+      settErrMsg('insufficient rights, please see an admin');
+    }
+  };
   useEffect(() => {
     getUser();
     getAllUsers();
@@ -70,23 +79,20 @@ export default function All() {
     // console.log(user);
     // console.log(allUsers);
     const cards = items.map(item => {
-      return <ItemCard item={item} users={allUsers} key={item._id} />;
+      return (
+        <ItemCard
+          item={item}
+          users={allUsers}
+          key={item._id}
+          deleteItem={handleDeleteItem}
+        />
+      );
     });
     setCardJSX(cards);
   }, [items]);
   useEffect(() => {
     // console.log(cardJSX);
   }, [cardJSX]);
-  async function handleDeleteItem(id) {
-    if (user && user.status === 'admin') {
-      const res = await axios.delete(`http://localhost:5000/item/delete/${id}`);
-      // fetchItems();
-      setTimeout(fetchItems, 0);
-      console.log(res);
-    } else {
-      settErrMsg('insufficient rights, please see an admin');
-    }
-  }
 
   return (
     <ThemeProvider theme={theme}>

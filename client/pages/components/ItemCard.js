@@ -10,7 +10,7 @@ import {
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 const ItemCard = props => {
-  const { item, users } = props;
+  const { item, users, deleteItem } = props;
   const { brand, model, category, quantity } = item;
   var formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -37,7 +37,7 @@ const ItemCard = props => {
           </ul>
         </CardContent>
         <CardActions>
-          <div className="border border-black min-w-full">
+          <div className=" min-w-full">
             <Accordion>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -54,6 +54,42 @@ const ItemCard = props => {
                 }}
               >
                 <Button variant="outlined">assign to user</Button>
+              </AccordionDetails>
+            </Accordion>
+            <Accordion>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                edit item
+              </AccordionSummary>
+              <AccordionDetails
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                }}
+              >
+                <Button variant="outlined">confirm changes</Button>
+              </AccordionDetails>
+            </Accordion>
+            <Accordion>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                delete item
+              </AccordionSummary>
+              <AccordionDetails
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                }}
+              >
+                <Button variant="outlined" onClick={() => deleteItem(item._id)}>
+                  delete
+                </Button>
               </AccordionDetails>
             </Accordion>
           </div>
