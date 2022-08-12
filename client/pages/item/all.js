@@ -70,7 +70,7 @@ export default function All() {
     // console.log(user);
     // console.log(allUsers);
     const cards = items.map(item => {
-      return <ItemCard item={item} users={allUsers} />;
+      return <ItemCard item={item} users={allUsers} key={item._id} />;
     });
     setCardJSX(cards);
   }, [items]);
@@ -101,7 +101,7 @@ export default function All() {
             </div>
           )}
           <h1 className="text-center">{errMsg}</h1>
-          <section id="items-jsx-container">{cardJSX[3]}</section>
+          <section id="items-jsx-container">{cardJSX}</section>
         </main>
       </div>
     </ThemeProvider>
