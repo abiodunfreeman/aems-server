@@ -12,6 +12,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import ItemCard from '../components/ItemCard';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
@@ -22,123 +23,60 @@ const theme = createTheme({
   },
 });
 export default function All() {
-  const [chosenUser, setChosenUser] = useState();
-  const handleChosenUserChange = e => {
+  const [user, setUser] = useState({});
+  const [allUsers, setAllUsers] = useState([]);
+  const [errMsg, settErrMsg] = useState('');
+  const [items, setItems] = useState([]);
+  const [cardJSX, setCardJSX] = useState([]);
+  const getAllUsers = async () => {
+    const res = await axios.get('http://localhost:5000/user/all');
+    setAllUsers(res.data);
+  };
+
+  const getUser = async () => {
+    const res = await axios.get('http://localhost:5000');
+    setUser(res.data.user);
+  };
+  const fetchItems = async () => {
+    const res = await axios.get('http://localhost:5000/item/all');
+    setItems(res.data);
+  };
+  const handleChosenUserChange = (e, id) => {
+    const input = document.getElementById(`hidden-${id}`);
     setChosenUser(e.target.value);
+    input.value = e.target.value;
+    // console.log(input.value + ' - NEW');
   };
   const handleAssignItem = async item_id => {
     console.log(item_id);
     console.log(chosenUser);
   };
-  const getAllUsers = async () => {
-    const res = await axios.get('http://localhost:5000/user/all');
-    return res.data;
-  };
-  const [user, setUser] = useState({});
-  const getUser = async () => {
-    const res = await axios.get('http://localhost:5000');
-    console.log(res.data);
-    setUser(res.data.user);
+  const handleAssignForm = async (e, id) => {
+    e.preventDefault();
+
+    const input = document.getElementById(`hidden-${id}`);
+
+    console.log(input.value);
   };
 
   useEffect(() => {
     getUser();
-  }, []);
-  const [errMsg, settErrMsg] = useState('');
-  const [items, setItems] = useState([]);
-  const fetchItems = async () => {
-    const res = await axios.get('http://localhost:5000/item/all');
-    const allUsers = await getAllUsers();
-    const allUsersMenuItem = allUsers.map(user => {
-      return (
-        <MenuItem value={user.username} key={user._id}>
-          {user.username}
-        </MenuItem>
-      );
-    });
-    const itemsJSX = res.data.map(item => {
-      const url = `http://localhost:3000/item/category/${item.category.name}`;
-      const idUrl = `http://localhost:3000/item/${item._id}`;
-      // Create our number formatter.
-      var formatter = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-
-        // These options are needed to round to whole numbers if that's what you want.
-        //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
-        //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
-      });
-      const ppu = formatter.format(item.price);
-      const total = formatter.format(item.price * item.quantity);
-      return (
-        <div key={items._id} className="item-box relative">
-          <Card sx={{ minWidth: '200px' }}>
-            <CardContent>
-              <div className=" min-w-full flex flex-col gap-2 p-2 pl-0">
-                <h1 className="text-center font-semibold">{item.model}</h1>
-                <p className="border-b border-black">Stock: {item.quantity}</p>
-                <p className="border-b border-black">
-                  PPU<span className="invisible">...</span>: {ppu}
-                </p>
-                <p className="">
-                  Total<span className="invisible">..</span>: {total}
-                </p>
-              </div>
-            </CardContent>
-            <CardActions>
-              <div className=" min-w-full">
-                <Link href={url}>
-                  <p className="cursor-pointer underline text-center">
-                    view {item.category.name}
-                  </p>
-                </Link>
-                <Accordion sx={{}}>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                  >
-                    <p className="text-black">assign to user</p>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Box sx={{ minWidth: 120 }}>
-                      <FormControl fullWidth>
-                        <InputLabel id="user-select-label">
-                          Choose User
-                        </InputLabel>
-                        <Select
-                          labelId="user-select-label"
-                          label="assign-user"
-                          value={chosenUser}
-                          onChange={handleChosenUserChange}
-                        >
-                          {allUsersMenuItem}
-                        </Select>
-                      </FormControl>
-                    </Box>
-                    <Button
-                      variant="outlined"
-                      onClick={() => handleAssignItem(item._id)}
-                    >
-                      Assign to (chosen user)
-                    </Button>
-                    <Button onClick={getAllUsers}>Get users</Button>
-                  </AccordionDetails>
-                </Accordion>
-              </div>
-            </CardActions>
-          </Card>
-        </div>
-      );
-    });
-    // console.log(itemsJSX);
-    setItems(itemsJSX);
-    console.log(res.data);
-  };
-
-  useEffect(() => {
+    getAllUsers();
     fetchItems();
   }, []);
+
+  useEffect(() => {
+    // console.log(items);
+    // console.log(user);
+    // console.log(allUsers);
+    const cards = items.map(item => {
+      return <ItemCard item={item} users={allUsers} />;
+    });
+    setCardJSX(cards);
+  }, [items]);
+  useEffect(() => {
+    // console.log(cardJSX);
+  }, [cardJSX]);
   async function handleDeleteItem(id) {
     if (user && user.status === 'admin') {
       const res = await axios.delete(`http://localhost:5000/item/delete/${id}`);
@@ -149,6 +87,7 @@ export default function All() {
       settErrMsg('insufficient rights, please see an admin');
     }
   }
+
   return (
     <ThemeProvider theme={theme}>
       <div id="items-all-container">
@@ -162,7 +101,7 @@ export default function All() {
             </div>
           )}
           <h1 className="text-center">{errMsg}</h1>
-          <section id="items-jsx-container">{items}</section>
+          <section id="items-jsx-container">{cardJSX[3]}</section>
         </main>
       </div>
     </ThemeProvider>

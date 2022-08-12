@@ -11,7 +11,7 @@ const OneItem = () => {
     const x = id;
     console.log(x + ' ID');
     console.log(idState + ' state');
-    const res = await axios.get(`http://localhost:5000/item/${x}`);
+    const res = await axios.get(`http://localhost:5000/item/${idState}`);
     console.log(res);
     if (res.data.success === true) setItem(res.data.item);
     if (res.data.success === false) setItem(undefined);
