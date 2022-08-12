@@ -105,6 +105,9 @@ app.get('/', (req, res, next) => {
 const itemRoute = require('./routes/item');
 app.use('/item', itemRoute);
 
+const itemInstanceRoute = require('./routes/itemInstance');
+app.use('/iteminstance', itemInstanceRoute);
+
 //USER
 const userRoute = require('./routes/user');
 app.use('/user', userRoute);

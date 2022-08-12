@@ -3,6 +3,15 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Nav from '../components/Nav';
 import { Button, Card, CardActions, CardContent } from '@mui/material';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
@@ -13,6 +22,18 @@ const theme = createTheme({
   },
 });
 export default function All() {
+  const [chosenUser, setChosenUser] = useState();
+  const handleChosenUserChange = e => {
+    setChosenUser(e.target.value);
+  };
+  const handleAssignItem = async item_id => {
+    console.log(item_id);
+    console.log(chosenUser);
+  };
+  const getAllUsers = async () => {
+    const res = await axios.get('http://localhost:5000/user/all');
+    return res.data;
+  };
   const [user, setUser] = useState({});
   const getUser = async () => {
     const res = await axios.get('http://localhost:5000');
@@ -27,6 +48,14 @@ export default function All() {
   const [items, setItems] = useState([]);
   const fetchItems = async () => {
     const res = await axios.get('http://localhost:5000/item/all');
+    const allUsers = await getAllUsers();
+    const allUsersMenuItem = allUsers.map(user => {
+      return (
+        <MenuItem value={user.username} key={user._id}>
+          {user.username}
+        </MenuItem>
+      );
+    });
     const itemsJSX = res.data.map(item => {
       const url = `http://localhost:3000/item/category/${item.category.name}`;
       const idUrl = `http://localhost:3000/item/${item._id}`;
@@ -63,6 +92,39 @@ export default function All() {
                     view {item.category.name}
                   </p>
                 </Link>
+                <Accordion sx={{}}>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <p className="text-black">assign to user</p>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Box sx={{ minWidth: 120 }}>
+                      <FormControl fullWidth>
+                        <InputLabel id="user-select-label">
+                          Choose User
+                        </InputLabel>
+                        <Select
+                          labelId="user-select-label"
+                          label="assign-user"
+                          value={chosenUser}
+                          onChange={handleChosenUserChange}
+                        >
+                          {allUsersMenuItem}
+                        </Select>
+                      </FormControl>
+                    </Box>
+                    <Button
+                      variant="outlined"
+                      onClick={() => handleAssignItem(item._id)}
+                    >
+                      Assign to (chosen user)
+                    </Button>
+                    <Button onClick={getAllUsers}>Get users</Button>
+                  </AccordionDetails>
+                </Accordion>
               </div>
             </CardActions>
           </Card>
