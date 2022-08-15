@@ -78,3 +78,19 @@ exports.getOneItem = async (req, res, next) => {
     res.status(400).json({ success: false, err: err.message });
   }
 };
+// @desc    Edit Item
+// @route   PUT /item/:id
+// @access  Public
+exports.editItem = async (req, res, next) => {
+  try {
+    console.log(req.body);
+    const editedItem = await Item.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    res.status(200).json({ success: true, editedItem });
+    // .json({success: true, editedItem})
+  } catch (err) {
+    console.log(`${err}`.red);
+    res.status(400).json({ success: false, err: err.message });
+  }
+};

@@ -68,6 +68,9 @@ export default function All() {
       settErrMsg('insufficient rights, please see an admin');
     }
   };
+  const handleEditItem = async id => {
+    console.log(id);
+  };
   useEffect(() => {
     getUser();
     getAllUsers();
@@ -85,6 +88,7 @@ export default function All() {
           users={allUsers}
           key={item._id}
           deleteItem={handleDeleteItem}
+          fetchItems={fetchItems}
         />
       );
     });
