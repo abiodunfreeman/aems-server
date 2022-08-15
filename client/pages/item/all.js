@@ -28,6 +28,12 @@ export default function All() {
   const [errMsg, settErrMsg] = useState('');
   const [items, setItems] = useState([]);
   const [cardJSX, setCardJSX] = useState([]);
+  const [categoryData, setCategoryData] = useState([]);
+  const getAllCategories = async () => {
+    const res = await axios.get(`http://localhost:5000/category/all`);
+    setCategoryData(res.data);
+    // console.log(res.data);
+  };
   const getAllUsers = async () => {
     const res = await axios.get('http://localhost:5000/user/all');
     setAllUsers(res.data);
@@ -74,6 +80,7 @@ export default function All() {
   useEffect(() => {
     getUser();
     getAllUsers();
+    getAllCategories();
     fetchItems();
   }, []);
 
@@ -86,6 +93,7 @@ export default function All() {
         <ItemCard
           item={item}
           users={allUsers}
+          categoryData={categoryData}
           key={item._id}
           deleteItem={handleDeleteItem}
           fetchItems={fetchItems}
@@ -111,7 +119,7 @@ export default function All() {
             </div>
           )}
           <h1 className="text-center">{errMsg}</h1>
-          <section id="items-jsx-container">{cardJSX}</section>
+          <section id="items-jsx-container">{cardJSX[0]}</section>
         </main>
       </div>
     </ThemeProvider>

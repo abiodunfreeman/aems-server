@@ -17,20 +17,16 @@ import { useEffect, useState } from 'react';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 const ItemCard = props => {
-  const getAllCategories = async () => {
-    const res = await axios.get(`http://localhost:5000/category/all`);
-    setCategoryData(res.data);
-    // console.log(res.data);
-  };
-  const { item, users, deleteItem } = props;
+  const { item, users, deleteItem, categoryData } = props;
+  // console.log(categoryData);
   const { brand, model, category, quantity } = item;
+
   var formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
   });
   const ppu = formatter.format(item.price);
   const total = formatter.format(item.price * item.quantity);
-  const [categoryData, setCategoryData] = useState([]);
 
   const [catFormData, setCatFormData] = useState('');
 
@@ -61,9 +57,7 @@ const ItemCard = props => {
     console.log(res);
   };
 
-  useEffect(() => {
-    getAllCategories();
-  }, []);
+  useEffect(() => {}, []);
 
   //   console.log(item);
   return (
@@ -102,6 +96,27 @@ const ItemCard = props => {
                   justifyContent: 'center',
                 }}
               >
+                <FormControl fullWidth required>
+                  <InputLabel required id="demo-simple-select-label">
+                    Category
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id={`category-${item._id}`}
+                    value={catFormData}
+                    // placeholder={catFormData}
+                    label="Category"
+                    onChange={handleChange}
+                  >
+                    {categoryData.map(category => {
+                      return (
+                        <MenuItem value={category._id} key={category._id}>
+                          {category.name}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                </FormControl>
                 <Button variant="outlined">assign to user</Button>
               </AccordionDetails>
             </Accordion>
