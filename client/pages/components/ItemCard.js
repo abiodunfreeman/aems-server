@@ -18,6 +18,7 @@ import { useEffect, useState } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 const ItemCard = props => {
   const { item, users, deleteItem, categoryData } = props;
+  console.log(users);
   // console.log(categoryData);
   const { brand, model, category, quantity } = item;
 
@@ -29,9 +30,12 @@ const ItemCard = props => {
   const total = formatter.format(item.price * item.quantity);
 
   const [catFormData, setCatFormData] = useState('');
-
+  const [userData, setUserData] = useState('');
   const handleChange = event => {
     setCatFormData(event.target.value);
+  };
+  const handleUserChange = event => {
+    setUserData(event.target.value);
   };
   const editItem = async id => {
     // e.preventDefault();
@@ -56,8 +60,15 @@ const ItemCard = props => {
     props.fetchItems();
     console.log(res);
   };
-
-  useEffect(() => {}, []);
+  const assignToUser = async id => {
+    const res = await axios.put(`http://localhost:5000/user/item/${userData}`, {
+      itemID: id,
+    });
+    console.log(res.data);
+  };
+  useEffect(() => {
+    console.log(userData);
+  }, [userData]);
 
   //   console.log(item);
   return (
@@ -93,31 +104,37 @@ const ItemCard = props => {
                 sx={{
                   border: '2px solid black',
                   display: 'flex',
+                  flexDirection: 'column',
                   justifyContent: 'center',
                 }}
               >
                 <FormControl fullWidth required>
                   <InputLabel required id="demo-simple-select-label">
-                    Category
+                    Choose User
                   </InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
                     id={`category-${item._id}`}
-                    value={catFormData}
+                    value={userData}
                     // placeholder={catFormData}
-                    label="Category"
-                    onChange={handleChange}
+                    label="User"
+                    onChange={handleUserChange}
                   >
-                    {categoryData.map(category => {
+                    {users.map(user => {
                       return (
-                        <MenuItem value={category._id} key={category._id}>
-                          {category.name}
+                        <MenuItem value={user._id} key={user._id}>
+                          {user.username}
                         </MenuItem>
                       );
                     })}
                   </Select>
                 </FormControl>
-                <Button variant="outlined">assign to user</Button>
+                <Button
+                  variant="outlined"
+                  onClick={() => assignToUser(item._id)}
+                >
+                  assign to user
+                </Button>
               </AccordionDetails>
             </Accordion>
             {/* edit item */}

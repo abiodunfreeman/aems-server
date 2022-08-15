@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const ItemInstance = require('../models/ItemInstance');
 const brcypt = require('bcryptjs');
 // @desc    Create a new User
 // @route   POST /user/signup
@@ -66,6 +67,27 @@ exports.changeUserStatus = async (req, res, next) => {
       { new: true }
     );
     res.status(200).json({ success: true, user });
+  } catch (err) {
+    console.log(`${err.message}`.red);
+    res.status(400).json({ success: false, err: err.message });
+  }
+};
+// @desc    Change User Status
+// @route   Put /user/item/:id
+// @access  Public
+exports.addItem = async (req, res, next) => {
+  try {
+    console.log(req.body);
+    const instanceOfItem = await ItemInstance.create({
+      item: req.body.itemID,
+      current_user: req.params.id,
+    });
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      { $push: { currentItems: instanceOfItem._id } },
+      { new: true }
+    ).populate('currentItems');
+    res.status(200).json({ success: true, updatedUser, instanceOfItem });
   } catch (err) {
     console.log(`${err.message}`.red);
     res.status(400).json({ success: false, err: err.message });

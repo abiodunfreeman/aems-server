@@ -118,7 +118,9 @@ export default function All() {
               </Link>
             </div>
           )}
-          <h1 className="text-center">{errMsg}</h1>
+          <h1 className="text-center text-xl text-white uppercase font-bold">
+            {errMsg}
+          </h1>
           <section id="items-jsx-container">{cardJSX[0]}</section>
         </main>
       </div>
