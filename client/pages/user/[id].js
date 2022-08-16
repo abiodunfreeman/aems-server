@@ -58,14 +58,8 @@ const OneUser = () => {
     console.log(userItems);
     const jsx = userItems.map(instance => {
       if (instance.item === null) {
-        return (
-          <div>
-            <h1>Broken Instance</h1>
-            <Button onClick={() => deleteItemInstance(instance._id)}>
-              Delete Item
-            </Button>
-          </div>
-        );
+        deleteItemInstance(instance._id);
+        return;
       }
       setTotalItemValue(prevValue => prevValue + instance.item.price);
       return (
@@ -96,24 +90,29 @@ const OneUser = () => {
     });
     setUserData(res.data.user);
   };
-  const reloadPage = () => {
-    router.reload(window.location.pathname);
-  };
+
   return (
     <ThemeProvider theme={theme}>
-      <div className=" bg-white min-h-screen ">
+      <div className=" bg-white min-h-screen flex flex-col ">
         <Nav />
-        <h1>Total Value of Items - {formatter.format(totalItemValue)}</h1>
-        <h1>current id - {id}</h1>
-        <h1>{userData.username}</h1>
-        <h1>{userData.status}</h1>
-        <Button onClick={() => changeUserStatus()} variant="outlined">
-          Change Status
-        </Button>
+        <div className="text-lg flex flex-col items-center pt-8 border border-black min-w-screen- self-center">
+          <h1>
+            User :{' '}
+            <span className="font-bold uppercase">{userData.username}</span>
+          </h1>
+          <h1>
+            Status:{' '}
+            <span className="font-bold uppercase">{userData.status}</span>
+          </h1>
+          <Button onClick={() => changeUserStatus()} variant="outlined">
+            Change Status
+          </Button>
+        </div>
 
-        <Button onClick={reloadPage}> Reload</Button>
-
-        {userItemsJSX}
+        <div className="userJSX">{userItemsJSX}</div>
+        <h1 className="text-center">
+          Total Value of Items - {formatter.format(totalItemValue)}
+        </h1>
       </div>
     </ThemeProvider>
   );

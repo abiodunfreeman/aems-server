@@ -32,6 +32,7 @@ export default function All() {
   const [user, setUser] = useState({});
   const [allUsers, setAllUsers] = useState([]);
   const [errMsg, setErrMsg] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
   const [items, setItems] = useState([]);
   const [allItems, setAllItems] = useState([]);
   const [cardJSX, setCardJSX] = useState([]);
@@ -77,7 +78,7 @@ export default function All() {
       const res = await axios.delete(`http://localhost:5000/item/delete/${id}`);
       // fetchItems();
       setTimeout(fetchItems, 0);
-      console.log(res);
+      setSuccessMsg(`${res.data.deletedItem.model} deleted successfully`);
     } else {
       setErrMsg('insufficient rights, please see an admin');
     }
@@ -128,7 +129,7 @@ export default function All() {
       <div id="items-all-container">
         <Nav />
         <main>
-          <div className="flex justify-center p-3 gap-4">
+          <div className="flex justify-center p-3 gap-4 flex-wrap">
             {user && user.status === 'admin' && (
               <Link href="/item/new">
                 <Button variant="outlined">Create a new Item</Button>
@@ -139,18 +140,18 @@ export default function All() {
             </Link>
             <TextField
               type="text"
-              placeholder="Filter"
-              label="filter-text"
-              name="filter-text"
+              placeholder="Category name..."
+              label="Filter based on category"
+              name="filter-category"
               variant="standard"
               id={`filter-text`}
               onChange={handleFilterChange}
             />
           </div>
-
-          <h1 className="text-center text-xl text-white uppercase font-bold">
-            {errMsg}
+          <h1 className="text-center text-xl  uppercase font-bold text-green-400">
+            {successMsg}
           </h1>
+          <h1 className="text-center text-xl  uppercase font-bold">{errMsg}</h1>
           <section id="items-jsx-container">{cardJSX}</section>
         </main>
       </div>
