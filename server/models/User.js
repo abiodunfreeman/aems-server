@@ -19,6 +19,5 @@ const UserSchema = mongoose.Schema({
     enum: ['admin', 'default'],
     default: 'default',
   },
-  currentItems: [mongoose.Schema.Types.ObjectId],
 });
 module.exports = mongoose.model('User', UserSchema);

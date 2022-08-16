@@ -11,7 +11,7 @@ const ItemInstanceSchema = mongoose.Schema({
     enum: ['Available', 'Loaned', 'Maintenance', 'Reserved'],
     default: 'Available',
   },
-  current_user: {
+  owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },

@@ -121,7 +121,7 @@ export default function All() {
           <h1 className="text-center text-xl text-white uppercase font-bold">
             {errMsg}
           </h1>
-          <section id="items-jsx-container">{cardJSX[0]}</section>
+          <section id="items-jsx-container">{cardJSX}</section>
         </main>
       </div>
     </ThemeProvider>

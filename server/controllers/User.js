@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Item = require('../models/Item');
 const ItemInstance = require('../models/ItemInstance');
 const brcypt = require('bcryptjs');
 // @desc    Create a new User
@@ -77,17 +78,46 @@ exports.changeUserStatus = async (req, res, next) => {
 // @access  Public
 exports.addItem = async (req, res, next) => {
   try {
-    console.log(req.body);
+    const itemToAdd = await Item.findById(req.body.itemID);
+    const numberOfItemsLoaned = await ItemInstance.find({
+      item: req.body.itemID,
+    }).countDocuments();
+    if (numberOfItemsLoaned > itemToAdd.quantity) {
+      res
+        .status(200)
+        .json({ success: false, err: 'Not enough in stock to give' });
+      return;
+    }
     const instanceOfItem = await ItemInstance.create({
       item: req.body.itemID,
-      current_user: req.params.id,
+      status: 'Loaned',
+      owner: req.params.id,
     });
-    const updatedUser = await User.findByIdAndUpdate(
-      req.params.id,
-      { $push: { currentItems: instanceOfItem._id } },
-      { new: true }
-    ).populate('currentItems');
-    res.status(200).json({ success: true, updatedUser, instanceOfItem });
+    const addedItem = await ItemInstance.findById(instanceOfItem._id)
+      .populate('item')
+      .populate('owner');
+    // console.log(foundItem);
+
+    res.status(200).json({ success: true, addedItem });
+  } catch (err) {
+    console.log(`${err.message}`.red);
+    res.status(400).json({ success: false, err: err.message });
+  }
+};
+// @desc    Find ItemInstances User Has
+// @route   Get /user/item/:id
+// @access  Public
+exports.getItemInstances = async (req, res, next) => {
+  try {
+    const userItems = await ItemInstance.find({
+      owner: req.params.id,
+    }).populate({
+      path: 'item',
+      populate: { path: 'category', model: 'Category' },
+    });
+
+    console.log(userItems);
+    res.status(200).json({ success: true, userItems });
   } catch (err) {
     console.log(`${err.message}`.red);
     res.status(400).json({ success: false, err: err.message });

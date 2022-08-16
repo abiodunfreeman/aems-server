@@ -12,3 +12,15 @@ exports.createItemInstance = async (req, res, next) => {
     res.status(400).json({ success: false, err: err.message });
   }
 };
+// @desc    Delete ItemInstace
+// @route   PUT /item/instance/:id
+// @access  Public
+exports.deleteInstance = async (req, res, next) => {
+  try {
+    const deletedItem = await ItemInstance.findByIdAndDelete(req.params.id);
+    res.status(200).json({ success: true, deletedItem });
+  } catch (err) {
+    console.log(`${err}`.red);
+    res.status(400).json({ success: false, err: err.message });
+  }
+};
