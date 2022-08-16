@@ -2,7 +2,13 @@ import axios from 'axios';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Nav from '../components/Nav';
-import { Button, Card, CardActions, CardContent } from '@mui/material';
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  TextField,
+} from '@mui/material';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -27,6 +33,7 @@ export default function All() {
   const [allUsers, setAllUsers] = useState([]);
   const [errMsg, setErrMsg] = useState('');
   const [items, setItems] = useState([]);
+  const [allItems, setAllItems] = useState([]);
   const [cardJSX, setCardJSX] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
   const getAllCategories = async () => {
@@ -46,6 +53,7 @@ export default function All() {
   const fetchItems = async () => {
     const res = await axios.get('http://localhost:5000/item/all');
     setItems(res.data);
+    setAllItems(res.data);
   };
   const handleChosenUserChange = (e, id) => {
     const input = document.getElementById(`hidden-${id}`);
@@ -106,13 +114,21 @@ export default function All() {
   useEffect(() => {
     // console.log(cardJSX);
   }, [cardJSX]);
+  const handleFilterChange = e => {
+    console.log(e.target.value);
 
+    setItems(prevItems => {
+      return allItems.filter(item =>
+        item.category.name.includes(e.target.value)
+      );
+    });
+  };
   return (
     <ThemeProvider theme={theme}>
       <div id="items-all-container">
         <Nav />
         <main>
-          <div className="flex justify-center p-3">
+          <div className="flex justify-center p-3 gap-4">
             {user && user.status === 'admin' && (
               <Link href="/item/new">
                 <Button variant="outlined">Create a new Item</Button>
@@ -121,6 +137,15 @@ export default function All() {
             <Link href="/item/instance">
               <Button variant="outlined">View Item Instances</Button>
             </Link>
+            <TextField
+              type="text"
+              placeholder="Filter"
+              label="filter-text"
+              name="filter-text"
+              variant="standard"
+              id={`filter-text`}
+              onChange={handleFilterChange}
+            />
           </div>
 
           <h1 className="text-center text-xl text-white uppercase font-bold">
