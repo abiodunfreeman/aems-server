@@ -65,6 +65,10 @@ const ItemCard = props => {
       itemID: id,
     });
     console.log(res.data);
+    props.setErrMsg(
+      `Succesfully added ${res.data.addedItem.item.model} to ${res.data.addedItem.owner.username}`
+    );
+    if (res && res.data.success === false) props.setErrMsg(res.data.err);
   };
   useEffect(() => {
     console.log(userData);
@@ -102,18 +106,18 @@ const ItemCard = props => {
               </AccordionSummary>
               <AccordionDetails
                 sx={{
-                  border: '2px solid black',
                   display: 'flex',
+                  gap: '.5em',
                   flexDirection: 'column',
                   justifyContent: 'center',
                 }}
               >
-                <FormControl fullWidth required>
-                  <InputLabel required id="demo-simple-select-label">
+                <FormControl fullWidth variant="standard">
+                  <InputLabel required id="demo-user-select-label">
                     Choose User
                   </InputLabel>
                   <Select
-                    labelId="demo-simple-select-label"
+                    labelId="demo-user-select-label"
                     id={`category-${item._id}`}
                     value={userData}
                     // placeholder={catFormData}
@@ -154,8 +158,8 @@ const ItemCard = props => {
                   gap: '.5em',
                 }}
               >
-                <FormControl fullWidth required>
-                  <InputLabel required id="demo-simple-select-label">
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">
                     Category
                   </InputLabel>
                   <Select

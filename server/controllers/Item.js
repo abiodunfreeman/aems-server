@@ -83,7 +83,7 @@ exports.getOneItem = async (req, res, next) => {
 // @access  Public
 exports.editItem = async (req, res, next) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
     const editedItem = await Item.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });

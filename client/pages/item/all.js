@@ -25,7 +25,7 @@ const theme = createTheme({
 export default function All() {
   const [user, setUser] = useState({});
   const [allUsers, setAllUsers] = useState([]);
-  const [errMsg, settErrMsg] = useState('');
+  const [errMsg, setErrMsg] = useState('');
   const [items, setItems] = useState([]);
   const [cardJSX, setCardJSX] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
@@ -71,7 +71,7 @@ export default function All() {
       setTimeout(fetchItems, 0);
       console.log(res);
     } else {
-      settErrMsg('insufficient rights, please see an admin');
+      setErrMsg('insufficient rights, please see an admin');
     }
   };
   const handleEditItem = async id => {
@@ -97,6 +97,7 @@ export default function All() {
           key={item._id}
           deleteItem={handleDeleteItem}
           fetchItems={fetchItems}
+          setErrMsg={setErrMsg}
         />
       );
     });
@@ -111,13 +112,17 @@ export default function All() {
       <div id="items-all-container">
         <Nav />
         <main>
-          {user && user.status === 'admin' && (
-            <div className="flex justify-center p-3">
+          <div className="flex justify-center p-3">
+            {user && user.status === 'admin' && (
               <Link href="/item/new">
                 <Button variant="outlined">Create a new Item</Button>
               </Link>
-            </div>
-          )}
+            )}
+            <Link href="/item/instance">
+              <Button variant="outlined">View Item Instances</Button>
+            </Link>
+          </div>
+
           <h1 className="text-center text-xl text-white uppercase font-bold">
             {errMsg}
           </h1>

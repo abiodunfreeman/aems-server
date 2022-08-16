@@ -88,10 +88,12 @@ exports.addItem = async (req, res, next) => {
         .json({ success: false, err: 'Not enough in stock to give' });
       return;
     }
+    const owner = await User.findById(req.params.id);
     const instanceOfItem = await ItemInstance.create({
       item: req.body.itemID,
       status: 'Loaned',
       owner: req.params.id,
+      notes: [`Assigned to ${owner.username}`],
     });
     const addedItem = await ItemInstance.findById(instanceOfItem._id)
       .populate('item')

@@ -86,9 +86,9 @@ const OneUser = () => {
   };
   return (
     <ThemeProvider theme={theme}>
-      <div>
-        <Nav />
-        <h1>Total Item Value - {formatter.format(totalItemValue)}</h1>
+      <Nav />
+      <div className=" bg-white min-h-screen pl-10">
+        <h1>Total Value of Items - {formatter.format(totalItemValue)}</h1>
         <h1>current id - {id}</h1>
         <h1>{userData.username}</h1>
         <h1>{userData.status}</h1>
