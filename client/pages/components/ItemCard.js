@@ -69,9 +69,10 @@ const ItemCard = props => {
       props.setErrMsg(res.data.err);
       return;
     }
-    props.setErrMsg(
+    props.setSuccessMsg(
       `Succesfully added ${res.data.addedItem.item.model} to ${res.data.addedItem.owner.username}`
     );
+    props.setErrMsg('');
   };
   useEffect(() => {
     console.log(userData);

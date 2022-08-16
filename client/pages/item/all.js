@@ -107,6 +107,7 @@ export default function All() {
           deleteItem={handleDeleteItem}
           fetchItems={fetchItems}
           setErrMsg={setErrMsg}
+          setSuccessMsg={setSuccessMsg}
         />
       );
     });
