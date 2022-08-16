@@ -5,23 +5,21 @@ This application lets users keep track of items. Users can be assigned different
 Users can have one of two statuses, 'admin' or 'default'. Admins can add new items, update items, and delete items as needed. Items can be viewed by category or all together by anyone. Admins can add notes to items, and assign instances of items to users.
 **Link to project:** http://recruiters-love-seeing-live-demos.com/
 
-![alt tag](http://placecorgi.com/1200/650)
+![alt tag](/aptiv.png)
 
 ## How It's Made:
 
 **Tech used:** Next JS, Tailwind, MUI , SCSS, Express, Mongo DB, bCrypt, passport js
 
-Here's where you can go to town on how you actually built this thing. Write as much as you can here, it's totally fine if it's not too much just make sure you write _something_. If you don't have too much experience on your resume working on the front end that's totally fine. This is where you can really show off your passion and make up for that ten fold.
+Built with Next/React front end and an Express backend. Tailwind, SCSS, and MUI components were used for styling. MongoDB is used for the database, with passport js for user auth, and passwords encrypted with bcrypt.
 
 ## Optimizations
 
-_(optional)_
-
-You don't have to include this section but interviewers _love_ that you can not only deliver a final product that looks great but also functions efficiently. Did you write something then refactor it later and the result was 5x faster than the original implementation? Did you cache your assets? Things that you write in this section are **GREAT** to bring up in interviews and you can use this section as reference when studying for technical interviews!
+- Instead of making 50 seprate API calls, call it once and pass down as props
 
 ## Lessons Learned:
 
-No matter what your experience level, being an engineer means continuously learning. Every time you build something you always have those _whoa this is awesome_ or _fuck yeah I did it!_ moments. This is where you should share those moments! Recruiters and interviewers love to see that you're self-aware and passionate about growing.
+I really felt the power of object-oriented programming, encapsulation, and making small parts to build the whole. Rather than making 50 separate API calls, call it once and pass the data down as props.
 
 ## To-Do
 

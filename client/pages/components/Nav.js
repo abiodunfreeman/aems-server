@@ -212,7 +212,7 @@ export default function Nav() {
                     veiw all categories
                   </p>
                 </Link>
-                <Link href="/category/new">
+                <Link href="/item/category/new">
                   <p className="nav-link" onClick={() => handleLinkClick()}>
                     create a new category
                   </p>

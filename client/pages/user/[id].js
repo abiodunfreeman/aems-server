@@ -32,10 +32,14 @@ const OneUser = () => {
   };
   const fetchUserItems = async () => {
     const res = await axios.get(`http://localhost:5000/user/item/${userId}`);
+    // console.log(res.data);
     setUserItems(res.data.userItems);
   };
-  const deleteItemInstance = async (id, price) => {
-    const res = await axios.delete(`http://localhost:5000/iteminstance/${id}`);
+  const deleteItemInstance = async (itemId, price) => {
+    const res = await axios.delete(
+      `http://localhost:5000/iteminstance/${itemId}`
+    );
+    console.log(res.data);
     setTotalItemValue(prevVal => prevVal - price);
     fetchUserItems();
   };
@@ -53,6 +57,16 @@ const OneUser = () => {
   useEffect(() => {
     console.log(userItems);
     const jsx = userItems.map(instance => {
+      if (instance.item === null) {
+        return (
+          <div>
+            <h1>Broken Instance</h1>
+            <Button onClick={() => deleteItemInstance(instance._id)}>
+              Delete Item
+            </Button>
+          </div>
+        );
+      }
       setTotalItemValue(prevValue => prevValue + instance.item.price);
       return (
         <div
@@ -82,6 +96,9 @@ const OneUser = () => {
     });
     setUserData(res.data.user);
   };
+  const reloadPage = () => {
+    router.reload(window.location.pathname);
+  };
   return (
     <ThemeProvider theme={theme}>
       <Nav />
@@ -93,6 +110,9 @@ const OneUser = () => {
         <Button onClick={() => changeUserStatus()} variant="outlined">
           Change Status
         </Button>
+
+        <Button onClick={reloadPage}> Reload</Button>
+
         {userItemsJSX}
       </div>
     </ThemeProvider>

@@ -17,7 +17,9 @@ exports.createItemInstance = async (req, res, next) => {
 // @access  Public
 exports.deleteInstance = async (req, res, next) => {
   try {
-    const deletedItem = await ItemInstance.findByIdAndDelete(req.params.id);
+    const deletedItem = await ItemInstance.findByIdAndDelete(
+      req.params.id
+    ).populate('item');
     res.status(200).json({ success: true, deletedItem });
   } catch (err) {
     console.log(`${err}`.red);
