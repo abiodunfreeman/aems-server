@@ -59,10 +59,8 @@ const OneUser = () => {
           key={instance._id}
           className="max-w-screen-sm border border-black m-3"
         >
-          <a href={`/item/${instance.item._id}`}>
-            {' '}
-            <h1 className="font-bold text-center">{instance.item.model}</h1>
-          </a>
+          <h1 className="font-bold text-center">{instance.item.model}</h1>
+
           <h1>{instance.item.brand}</h1>
           <h2>Category: {instance.item.category.name}</h2>
 

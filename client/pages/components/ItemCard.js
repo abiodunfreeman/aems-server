@@ -65,10 +65,13 @@ const ItemCard = props => {
       itemID: id,
     });
     console.log(res.data);
+    if (res && res.data.success === false) {
+      props.setErrMsg(res.data.err);
+      return;
+    }
     props.setErrMsg(
       `Succesfully added ${res.data.addedItem.item.model} to ${res.data.addedItem.owner.username}`
     );
-    if (res && res.data.success === false) props.setErrMsg(res.data.err);
   };
   useEffect(() => {
     console.log(userData);
