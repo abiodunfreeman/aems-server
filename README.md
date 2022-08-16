@@ -26,8 +26,9 @@ No matter what your experience level, being an engineer means continuously learn
 ## To-Do
 
     - delete item instances on user deletion
-    - delete item instances on category deletion
+    - delete item instances on category deletion [x]
     - delete item instances on item deletion
     - edit item instances - switch owner, edit status, make notes
     - display all item instances, filter by user && || category
     - automatically generate some notes for instances, like assignment history (name + date) , status history, etc
+    - visualize data with react vis
