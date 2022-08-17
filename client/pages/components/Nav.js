@@ -123,9 +123,39 @@ export default function Nav() {
             {user && (
               <div id="nav-logged-in" className="">
                 <div id="nav-logged-in-desktop">
-                  <Link href="/user/all">
-                    <Button variant="outlined">View All Users</Button>
-                  </Link>
+                  <div>
+                    <Button
+                      id="basic-button"
+                      aria-controls={open ? 'basic-menu' : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={open ? 'true' : undefined}
+                      onClick={handleMenuClick}
+                    >
+                      USER
+                    </Button>
+                    <Menu
+                      id="basic-menu"
+                      anchorEl={anchorEl}
+                      open={open}
+                      onClose={handleMenuClose}
+                      MenuListProps={{
+                        'aria-labelledby': 'basic-button',
+                      }}
+                    >
+                      <MenuItem onClick={handleMenuClose}>
+                        {' '}
+                        <Link href="/user/all">
+                          <p className="nav-link">view all</p>
+                        </Link>
+                      </MenuItem>
+                      <MenuItem onClick={handleMenuClose}>
+                        {' '}
+                        <Link href="/user/new">
+                          <p className="nav-link">create</p>
+                        </Link>
+                      </MenuItem>
+                    </Menu>
+                  </div>
                   <div>
                     <Button
                       id="basic-button"
@@ -159,13 +189,40 @@ export default function Nav() {
                       </MenuItem>
                     </Menu>
                   </div>
+                  <div>
+                    <Button
+                      id="basic-button"
+                      aria-controls={open ? 'basic-menu' : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={open ? 'true' : undefined}
+                      onClick={handleMenuClick}
+                    >
+                      ITEMS
+                    </Button>
+                    <Menu
+                      id="basic-menu"
+                      anchorEl={anchorEl}
+                      open={open}
+                      onClose={handleMenuClose}
+                      MenuListProps={{
+                        'aria-labelledby': 'basic-button',
+                      }}
+                    >
+                      <MenuItem onClick={handleMenuClose}>
+                        {' '}
+                        <Link href="/item/all">
+                          <p className="nav-link">view all</p>
+                        </Link>
+                      </MenuItem>
+                      <MenuItem onClick={handleMenuClose}>
+                        {' '}
+                        <Link href="/item/new">
+                          <p className="nav-link">create</p>
+                        </Link>
+                      </MenuItem>
+                    </Menu>
+                  </div>
 
-                  <Link href="/item/all">
-                    <p className="nav-link">items</p>
-                  </Link>
-                  <Link href="/item/new">
-                    <p className="nav-link">new item</p>
-                  </Link>
                   <Link href="/">
                     <p onClick={() => logout()} className="nav-link">
                       logout
