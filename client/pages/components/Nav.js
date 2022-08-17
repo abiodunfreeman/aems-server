@@ -7,6 +7,7 @@ import {
   MenuItem,
   FormControl,
   Select,
+  Menu,
 } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -26,6 +27,14 @@ const theme = createTheme({
 });
 export default function Nav() {
   const [user, setUser] = useState({});
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleMenuClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
   const getUser = async () => {
     const res = await axios.get('http://localhost:5000');
 
@@ -117,9 +126,40 @@ export default function Nav() {
                   <Link href="/user/all">
                     <Button variant="outlined">View All Users</Button>
                   </Link>
-                  <Link href="/item/category">
-                    <p className="nav-link">categories</p>
-                  </Link>
+                  <div>
+                    <Button
+                      id="basic-button"
+                      aria-controls={open ? 'basic-menu' : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={open ? 'true' : undefined}
+                      onClick={handleMenuClick}
+                    >
+                      CATEGORIES
+                    </Button>
+                    <Menu
+                      id="basic-menu"
+                      anchorEl={anchorEl}
+                      open={open}
+                      onClose={handleMenuClose}
+                      MenuListProps={{
+                        'aria-labelledby': 'basic-button',
+                      }}
+                    >
+                      <MenuItem onClick={handleMenuClose}>
+                        {' '}
+                        <Link href="/item/category">
+                          <p className="nav-link">view all</p>
+                        </Link>
+                      </MenuItem>
+                      <MenuItem onClick={handleMenuClose}>
+                        {' '}
+                        <Link href="/item/category/new">
+                          <p className="nav-link">create</p>
+                        </Link>
+                      </MenuItem>
+                    </Menu>
+                  </div>
+
                   <Link href="/item/all">
                     <p className="nav-link">items</p>
                   </Link>
