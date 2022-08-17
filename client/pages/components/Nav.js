@@ -150,7 +150,7 @@ export default function Nav() {
                       </MenuItem>
                       <MenuItem onClick={handleMenuClose}>
                         {' '}
-                        <Link href="/user/new">
+                        <Link href="/user/signup">
                           <p className="nav-link">create</p>
                         </Link>
                       </MenuItem>
