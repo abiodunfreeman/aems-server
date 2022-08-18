@@ -30,3 +30,4 @@ I really felt the power of object-oriented programming, encapsulation, and makin
     - display all item instances, filter by user && || category
     - automatically generate some notes for instances, like assignment history (name + date) , status history, etc
     - visualize data with react vis
+    - dynamic category page that list all items in that category (import and use <ItemCard/>)

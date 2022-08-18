@@ -18,7 +18,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-// import ItemCard from '../components/ItemCard';
+import ItemCard from '../components/ItemCard';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
@@ -153,7 +153,7 @@ export default function All() {
             {successMsg}
           </h1>
           <h1 className="text-center text-xl  uppercase font-bold">{errMsg}</h1>
-          {/* <section id="items-jsx-container">{cardJSX}</section> */}
+          <section id="items-jsx-container">{cardJSX}</section>
         </main>
       </div>
     </ThemeProvider>

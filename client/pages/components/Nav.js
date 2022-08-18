@@ -16,6 +16,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import { useEffect, useState } from 'react';
 import Router from 'next/router';
+import { useUserContext } from '../../context/user';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
@@ -26,7 +27,7 @@ const theme = createTheme({
   },
 });
 export default function Nav() {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useUserContext();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [userAnchorEl, setUserAnchorEl] = useState(null);
@@ -51,14 +52,9 @@ export default function Nav() {
   const handleItemMenuClose = () => {
     setItemAnchorEl(null);
   };
-  const getUser = async () => {
-    const res = await axios.get('http://localhost:5000');
-
-    setUser(res.data.user);
-  };
 
   useEffect(() => {
-    getUser();
+    console.log(user);
   }, []);
   const handleLinkClick = string => {
     // Closes/Opens menu and changes hamburger icon on click
@@ -83,9 +79,8 @@ export default function Nav() {
     hamburgerIcon.classList.toggle('change');
   };
   const logout = async () => {
-    // handleLinkClick();
     const res = await axios.get('http://localhost:5000/logout');
-
+    setUser(false);
     Router.push('/user/logout');
   };
 

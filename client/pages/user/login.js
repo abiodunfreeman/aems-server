@@ -8,6 +8,7 @@ import {
   CardContent,
   TextField,
 } from '@mui/material';
+import { useUserContext } from '../../context/user';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
@@ -19,6 +20,9 @@ const theme = createTheme({
 });
 function Login() {
   axios.defaults.withCredentials = true;
+
+  const [user, setUser] = useUserContext();
+
   const loginAuto = async e => {
     e.preventDefault();
 
@@ -26,28 +30,37 @@ function Login() {
     const password = document.getElementById('password').value;
     const form = document.querySelector('form');
 
-    const user = { username, password };
+    const userData = { username, password };
 
-    const res = await axios.post('http://localhost:5000/user/login', user);
+    const res = await axios.post('http://localhost:5000/user/login', userData);
+    console.log(res.data.user);
     if (res.data.user) {
+      setUser(res.data.user);
       console.log('redirect');
       Router.push('/');
     }
   };
   const login = async status => {
     if (status === 'admin') {
-      const user = { username: 'jayshonk', password: 'aptiv' };
-      const res = await axios.post('http://localhost:5000/user/login', user);
-
+      const userData = { username: 'jayshonk', password: 'aptiv' };
+      const res = await axios.post(
+        'http://localhost:5000/user/login',
+        userData
+      );
+      setUser(res.data.user);
       console.log('redirect');
-      Router.push('/item/all');
+      Router.push('/');
     } else {
-      const user = { username: 'guest', password: 'guest' };
-      const res = await axios.post('http://localhost:5000/user/login', user);
+      const userData = { username: 'guest', password: 'guest' };
+      const res = await axios.post(
+        'http://localhost:5000/user/login',
+        userData
+      );
 
       if (res.data.user) {
+        setUser(res.data.user);
         console.log('redirect');
-        Router.push('/item/new');
+        Router.push('/');
       }
     }
   };
