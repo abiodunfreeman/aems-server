@@ -29,11 +29,19 @@ export default function Nav() {
   const [user, setUser] = useState({});
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const [userAnchorEl, setUserAnchorEl] = useState(null);
+  const userOpen = Boolean(userAnchorEl);
   const handleMenuClick = event => {
     setAnchorEl(event.currentTarget);
   };
   const handleMenuClose = () => {
     setAnchorEl(null);
+  };
+  const handleUserMenuClick = event => {
+    setUserAnchorEl(event.currentTarget);
+  };
+  const handleUserMenuClose = () => {
+    setUserAnchorEl(null);
   };
   const getUser = async () => {
     const res = await axios.get('http://localhost:5000');
@@ -125,30 +133,30 @@ export default function Nav() {
                 <div id="nav-logged-in-desktop">
                   <div>
                     <Button
-                      id="basic-button"
-                      aria-controls={open ? 'basic-menu' : undefined}
+                      id="basic-user-button"
+                      aria-controls={userOpen ? 'basic-user-menu' : undefined}
                       aria-haspopup="true"
-                      aria-expanded={open ? 'true' : undefined}
-                      onClick={handleMenuClick}
+                      aria-expanded={userOpen ? 'true' : undefined}
+                      onClick={handleUserMenuClick}
                     >
                       USER
                     </Button>
                     <Menu
-                      id="basic-menu"
-                      anchorEl={anchorEl}
-                      open={open}
-                      onClose={handleMenuClose}
+                      id="basic-user-menu"
+                      anchorEl={userAnchorEl}
+                      open={userOpen}
+                      onClose={handleUserMenuClose}
                       MenuListProps={{
-                        'aria-labelledby': 'basic-button',
+                        'aria-labelledby': 'basic-user-button',
                       }}
                     >
-                      <MenuItem onClick={handleMenuClose}>
+                      <MenuItem onClick={handleUserMenuClose}>
                         {' '}
                         <Link href="/user/all">
-                          <p className="nav-link">view all</p>
+                          <p className="nav-link">view all users</p>
                         </Link>
                       </MenuItem>
-                      <MenuItem onClick={handleMenuClose}>
+                      <MenuItem onClick={handleUserMenuClose}>
                         {' '}
                         <Link href="/user/signup">
                           <p className="nav-link">create</p>

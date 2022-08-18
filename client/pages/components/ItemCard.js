@@ -17,9 +17,7 @@ import { useEffect, useState } from 'react';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 const ItemCard = props => {
-  let { item, users, deleteItem, categoryData } = props;
-  item = !item ? { brand: '', model: '', category: {}, quantity: 1 } : item;
-  // console.log(categoryData);
+  const { item, users, deleteItem, categoryData } = props;
   const { brand, model, category, quantity } = item;
 
   var formatter = new Intl.NumberFormat('en-US', {
@@ -174,13 +172,13 @@ const ItemCard = props => {
                     label="Category"
                     onChange={handleChange}
                   >
-                    {/* {categoryData.map(category => {
+                    {categoryData.map(category => {
                       return (
                         <MenuItem value={category._id} key={category._id}>
                           {category.name}
                         </MenuItem>
                       );
-                    })} */}
+                    })}
                   </Select>
                 </FormControl>
                 <TextField
