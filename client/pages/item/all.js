@@ -153,7 +153,7 @@ export default function All() {
             {successMsg}
           </h1>
           <h1 className="text-center text-xl  uppercase font-bold">{errMsg}</h1>
-          <section id="items-jsx-container">{cardJSX}</section>
+          {/* <section id="items-jsx-container">{cardJSX}</section> */}
         </main>
       </div>
     </ThemeProvider>
