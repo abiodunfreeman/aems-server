@@ -18,7 +18,7 @@ import { useEffect, useState } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 const ItemCard = props => {
   const { item, users, deleteItem, categoryData } = props;
-
+  item = !item ? { brand: '', model: '', category: {}, quantity: 1 } : item;
   // console.log(categoryData);
   const { brand, model, category, quantity } = item;
 
