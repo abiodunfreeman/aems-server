@@ -16,6 +16,7 @@ Built with Next/React front end and an Express backend. Tailwind, SCSS, and MUI 
 ## Optimizations
 
 - Instead of making 50 seprate API calls, call it once and pass down as props
+- took advantage of useContext for user auth
 
 ## Lessons Learned:
 

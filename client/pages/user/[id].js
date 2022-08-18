@@ -5,6 +5,7 @@ import Nav from '../components/Nav';
 import { Button } from '@mui/material';
 import Link from 'next/link';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import InstanceCard from '../components/InstanceCard';
 const theme = createTheme({
   palette: {
     primary: {
@@ -63,23 +64,11 @@ const OneUser = () => {
       }
       setTotalItemValue(prevValue => prevValue + instance.item.price);
       return (
-        <div
+        <InstanceCard
           key={instance._id}
-          className="max-w-screen-sm border border-black m-3"
-        >
-          <h1 className="font-bold text-center">{instance.item.model}</h1>
-
-          <h1>{instance.item.brand}</h1>
-          <h2>Category: {instance.item.category.name}</h2>
-
-          <Button
-            onClick={() =>
-              deleteItemInstance(instance._id, instance.item.price)
-            }
-          >
-            Delete Item
-          </Button>
-        </div>
+          instance={instance}
+          deleteInstance={deleteItemInstance}
+        />
       );
     });
     setUserItemsJSX(jsx);

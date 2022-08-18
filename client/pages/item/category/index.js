@@ -44,7 +44,9 @@ export default function Home() {
     console.log(res.data);
     getAllCategories();
     setSuccesMsg(
-      <h2>Category ${res.data.deletedCategory.name} deleted successfully</h2>
+      <h2 className="font-bold">
+        Category {res.data.deletedCategory.name} deleted successfully
+      </h2>
     );
     // console.log(res.data);
   };
