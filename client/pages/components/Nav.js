@@ -31,6 +31,8 @@ export default function Nav() {
   const open = Boolean(anchorEl);
   const [userAnchorEl, setUserAnchorEl] = useState(null);
   const userOpen = Boolean(userAnchorEl);
+  const [itemAnchorEl, setItemAnchorEl] = useState(null);
+  const itemOpen = Boolean(itemAnchorEl);
   const handleMenuClick = event => {
     setAnchorEl(event.currentTarget);
   };
@@ -42,6 +44,12 @@ export default function Nav() {
   };
   const handleUserMenuClose = () => {
     setUserAnchorEl(null);
+  };
+  const handleItemMenuClick = event => {
+    setItemAnchorEl(event.currentTarget);
+  };
+  const handleItemMenuClose = () => {
+    setItemAnchorEl(null);
   };
   const getUser = async () => {
     const res = await axios.get('http://localhost:5000');
@@ -199,30 +207,30 @@ export default function Nav() {
                   </div>
                   <div>
                     <Button
-                      id="basic-button"
-                      aria-controls={open ? 'basic-menu' : undefined}
+                      id="basic-item-button"
+                      aria-controls={itemOpen ? 'basic-item-menu' : undefined}
                       aria-haspopup="true"
-                      aria-expanded={open ? 'true' : undefined}
-                      onClick={handleMenuClick}
+                      aria-expanded={itemOpen ? 'true' : undefined}
+                      onClick={handleItemMenuClick}
                     >
                       ITEMS
                     </Button>
                     <Menu
-                      id="basic-menu"
-                      anchorEl={anchorEl}
-                      open={open}
-                      onClose={handleMenuClose}
+                      id="basic-item-menu"
+                      anchorEl={itemAnchorEl}
+                      open={itemOpen}
+                      onClose={handleItemMenuClose}
                       MenuListProps={{
-                        'aria-labelledby': 'basic-button',
+                        'aria-labelledby': 'basic-item-button',
                       }}
                     >
-                      <MenuItem onClick={handleMenuClose}>
+                      <MenuItem onClick={handleItemMenuClose}>
                         {' '}
                         <Link href="/item/all">
                           <p className="nav-link">view all</p>
                         </Link>
                       </MenuItem>
-                      <MenuItem onClick={handleMenuClose}>
+                      <MenuItem onClick={handleItemMenuClose}>
                         {' '}
                         <Link href="/item/new">
                           <p className="nav-link">create</p>
