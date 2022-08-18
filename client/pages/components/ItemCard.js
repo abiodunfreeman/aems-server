@@ -174,13 +174,13 @@ const ItemCard = props => {
                     label="Category"
                     onChange={handleChange}
                   >
-                    {categoryData.map(category => {
+                    {/* {categoryData.map(category => {
                       return (
                         <MenuItem value={category._id} key={category._id}>
                           {category.name}
                         </MenuItem>
                       );
-                    })}
+                    })} */}
                   </Select>
                 </FormControl>
                 <TextField
