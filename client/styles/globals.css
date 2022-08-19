@@ -44,12 +44,11 @@
 .userJSX {
   background-color: #e32a009d;
   align-self: center;
-  max-width: 1000px;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  gap: 40px;
+  gap: 20px;
   padding: 20px;
 }
 

@@ -38,7 +38,14 @@ const OneUser = () => {
     // console.log(res.data);
     setUserItems(res.data.userItems);
   };
-  const deleteItemInstance = async (itemId, price) => {
+  const deleteItemInstance = async (itemId, price, setMsg) => {
+    if (!user) {
+      setMsg('please log in');
+      return;
+    } else if (user.status !== 'admin') {
+      setMsg('contact admin to delete instance');
+      return;
+    }
     const res = await axios.delete(
       `http://localhost:5000/iteminstance/${itemId}`
     );
@@ -48,6 +55,7 @@ const OneUser = () => {
   };
   useEffect(() => {
     setUserId(id);
+    console.log(user);
   }, []);
   useEffect(() => {
     setUserId(id);
@@ -71,6 +79,7 @@ const OneUser = () => {
           instance={instance}
           deleteInstance={deleteItemInstance}
           fetchUserItems={fetchUserItems}
+          user={user}
         />
       );
     });
@@ -85,9 +94,9 @@ const OneUser = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className=" bg-white min-h-screen flex flex-col ">
+      <div className=" bg-white min-h-screen flex flex-col w-screen border-8 border-black">
         <Nav />
-        <div className="text-lg flex flex-col items-center pt-8 border border-black min-w-screen- self-center">
+        <div className="text-lg flex flex-col items-center pt-8 border border-black w-screen- self-center">
           <h1>
             User :{' '}
             <span className="font-bold uppercase">{userData.username}</span>

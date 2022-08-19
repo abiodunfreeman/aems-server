@@ -17,7 +17,8 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 export default function InstanceCard(props) {
-  const { instance } = props;
+  const [errMsg, setErrMsg] = useState('');
+  const { instance, user } = props;
   const { item } = instance;
   const { brand, model, category, quantity } = item;
   var formatter = new Intl.NumberFormat('en-US', {
@@ -42,13 +43,21 @@ export default function InstanceCard(props) {
     form.reset();
   }
   async function deleteNote(instanceId, note) {
+    if (!user) {
+      setErrMsg('must be logged in to delete a note');
+      return;
+    } else if (user.status !== 'admin') {
+      setErrMsg('contact an admin to delete this note');
+      return;
+    }
+
     const res = await axios.put(
       `http://localhost:5000/iteminstance/notes/${instanceId}`,
 
       { instanceId, note }
     );
     props.fetchUserItems();
-    // console.log(res.data);
+    console.log(res.data);
   }
   return (
     <div>
@@ -64,6 +73,7 @@ export default function InstanceCard(props) {
               {ppu}
             </li>
           </ul>
+          <p className="text-red-500 text-center">{errMsg}</p>
         </CardContent>
         <CardActions>
           <div>
@@ -79,7 +89,10 @@ export default function InstanceCard(props) {
                 sx={{ display: 'flex', flexDirection: 'column', gap: '5px' }}
               >
                 {instance.notes.map(note => (
-                  <div className="instance-note">
+                  <div
+                    className="instance-note"
+                    key={`${instance._id}-note-${instance.item._id}`}
+                  >
                     <p>{note}</p>
                     <div
                       className="delete-icon"
@@ -129,6 +142,17 @@ export default function InstanceCard(props) {
                 </form>
               </AccordionDetails>
             </Accordion>
+            <Button
+              onClick={() =>
+                props.deleteInstance(
+                  instance._id,
+                  instance.item.price,
+                  setErrMsg
+                )
+              }
+            >
+              Delete Instance
+            </Button>
           </div>
         </CardActions>
       </Card>
