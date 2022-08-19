@@ -3,21 +3,12 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Nav from '../components/Nav';
-export default function AllUsers() {
-  const [user, setUser] = useState({});
-  const [errMsg, setErrMsg] = useState('');
-  const getUser = async () => {
-    const res = await axios.get('http://localhost:5000');
-    if (!res.data.user) {
-      setErrMsg('please log in');
-      return;
-    }
-    setUser(res.data.user);
-  };
+import { useUserContext } from '../../context/user';
 
-  useEffect(() => {
-    getUser();
-  }, []);
+export default function AllUsers() {
+  const [user, setUser] = useUserContext();
+  const [errMsg, setErrMsg] = useState('');
+
   useEffect(() => {
     console.log(user);
   }, [user]);

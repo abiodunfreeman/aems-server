@@ -9,7 +9,7 @@ Users can have one of two statuses, 'admin' or 'default'. Admins can add new ite
 
 ## How It's Made:
 
-**Tech used:** Next JS, Tailwind, MUI , SCSS, Express, Mongo DB, bCrypt, passport js
+**Tech used:** Next JS, Express, Mongo DB , NODE ,Tailwind, MUI , SCSS, bCrypt, passport js
 
 Built with Next/React front end and an Express backend. Tailwind, SCSS, and MUI components were used for styling. MongoDB is used for the database, with passport js for user auth, and passwords encrypted with bcrypt.
 
@@ -22,6 +22,8 @@ Built with Next/React front end and an Express backend. Tailwind, SCSS, and MUI 
 
 I really felt the power of object-oriented programming, encapsulation, and making small parts to build the whole. Rather than making 50 separate API calls, call it once and pass the data down as props.
 
+Found out about useContext out of neccesity, getting a response from the server everytime I needed user auth on a page wasn't realistic. Luckily react has basic global state mangement built in with useContext.
+
 ## To-Do
 
     - delete item instances on user deletion
@@ -32,3 +34,4 @@ I really felt the power of object-oriented programming, encapsulation, and makin
     - automatically generate some notes for instances, like assignment history (name + date) , status history, etc
     - visualize data with react vis
     - dynamic category page that list all items in that category (import and use <ItemCard/>)
+    - assign quantity (default : 1) on instance card
