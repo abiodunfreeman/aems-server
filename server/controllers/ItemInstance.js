@@ -40,3 +40,22 @@ exports.getInstances = async (req, res, next) => {
     res.status(400).json({ success: false, err: err.message });
   }
 };
+// @desc    post new note
+// @route   post /iteminstance/:id
+// @access  Public
+exports.newNote = async (req, res, next) => {
+  try {
+    const instance = await ItemInstance.findByIdAndUpdate(
+      req.body.instanceId,
+      {
+        $push: { notes: req.body.note },
+      },
+      { new: true }
+    );
+
+    res.status(200).json({ success: true, updatedInstance: instance });
+  } catch (err) {
+    console.log(`${err}`.red);
+    res.status(400).json({ success: false, err: err.message });
+  }
+};

@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 export default function InstanceCard(props) {
   const { instance } = props;
   const { item } = instance;
@@ -24,7 +25,19 @@ export default function InstanceCard(props) {
   });
   const ppu = formatter.format(item.price);
   const total = formatter.format(item.price * item.quantity);
-  //   console.log(props);
+
+  async function handleNewNote(e, id) {
+    e.preventDefault();
+    const form = document.getElementById(`form-${id}`);
+    const newNoteText = document.getElementById(`new-note-${id}`).value;
+    const res = await axios.post(`http://localhost:5000/iteminstance/${id}`, {
+      instanceId: id,
+      note: newNoteText,
+    });
+    props.fetchUserItems();
+    form.reset();
+    console.log(res.data);
+  }
   return (
     <div>
       <Card>
@@ -65,19 +78,26 @@ export default function InstanceCard(props) {
                 add notes
               </AccordionSummary>
               <AccordionDetails>
-                <FormControl>
-                  <TextField
-                    variant="standard"
-                    type="text"
-                    name="new-note"
-                    id="new-note"
-                    placeholder="Add a note"
-                    multiline
-                    rows={3}
-                    className=""
-                  />
-                  <Button variant="contained">Add note</Button>
-                </FormControl>
+                <form
+                  onSubmit={e => handleNewNote(e, instance._id)}
+                  id={`form-${instance._id}`}
+                >
+                  <FormControl>
+                    <TextField
+                      variant="standard"
+                      type="text"
+                      name="new-note"
+                      id={`new-note-${instance._id}`}
+                      placeholder="Add a note"
+                      multiline
+                      rows={3}
+                      className=""
+                    />
+                    <Button type="submit" variant="contained">
+                      Add note
+                    </Button>
+                  </FormControl>
+                </form>
               </AccordionDetails>
             </Accordion>
           </div>

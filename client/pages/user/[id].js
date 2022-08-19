@@ -68,6 +68,7 @@ const OneUser = () => {
           key={instance._id}
           instance={instance}
           deleteInstance={deleteItemInstance}
+          fetchUserItems={fetchUserItems}
         />
       );
     });
