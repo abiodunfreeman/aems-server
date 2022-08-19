@@ -210,10 +210,10 @@
   transform: rotate(45deg) translate(-8px, -8px);
 }
 .instance-note {
-  border: 1px solid;
+  border-bottom: 1px solid;
   display: flex;
   justify-content: space-between;
-
+  padding: 10px 10px 0 00px;
   p {
     color: blue;
   }

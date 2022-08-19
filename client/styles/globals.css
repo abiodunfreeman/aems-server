@@ -238,9 +238,10 @@
 
 /* line 212, ../GitHub/aems/client/styles/scss/globals.scss */
 .instance-note {
-  border: 1px solid;
+  border-bottom: 1px solid;
   display: flex;
   justify-content: space-between;
+  padding: 10px 10px 0 00px;
 }
 
 /* line 217, ../GitHub/aems/client/styles/scss/globals.scss */

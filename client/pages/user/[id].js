@@ -6,6 +6,7 @@ import { Button } from '@mui/material';
 import Link from 'next/link';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import InstanceCard from '../components/InstanceCard';
+import { useUserContext } from '../../context/user';
 const theme = createTheme({
   palette: {
     primary: {
@@ -15,6 +16,7 @@ const theme = createTheme({
   },
 });
 const OneUser = () => {
+  const [user, setUser] = useUserContext();
   var formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -94,15 +96,15 @@ const OneUser = () => {
             Status:{' '}
             <span className="font-bold uppercase">{userData.status}</span>
           </h1>
+          <h1 className="text-center">
+            Total Value of Items - {formatter.format(totalItemValue)}
+          </h1>
           <Button onClick={() => changeUserStatus()} variant="outlined">
             Change Status
           </Button>
         </div>
 
         <div className="userJSX">{userItemsJSX}</div>
-        <h1 className="text-center">
-          Total Value of Items - {formatter.format(totalItemValue)}
-        </h1>
       </div>
     </ThemeProvider>
   );

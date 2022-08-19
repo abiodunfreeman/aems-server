@@ -104,7 +104,14 @@ export default function InstanceCard(props) {
                   onSubmit={e => handleNewNote(e, instance._id)}
                   id={`form-${instance._id}`}
                 >
-                  <FormControl>
+                  <FormControl
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '10px',
+                      padding: '15px',
+                    }}
+                  >
                     <TextField
                       variant="standard"
                       type="text"
@@ -115,7 +122,7 @@ export default function InstanceCard(props) {
                       rows={3}
                       className=""
                     />
-                    <Button type="submit" variant="contained">
+                    <Button type="submit" variant="outlined">
                       Add note
                     </Button>
                   </FormControl>
