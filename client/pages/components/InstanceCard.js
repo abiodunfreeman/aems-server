@@ -13,6 +13,7 @@ import {
   MenuItem,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 export default function InstanceCard(props) {
@@ -30,13 +31,24 @@ export default function InstanceCard(props) {
     e.preventDefault();
     const form = document.getElementById(`form-${id}`);
     const newNoteText = document.getElementById(`new-note-${id}`).value;
-    const res = await axios.post(`http://localhost:5000/iteminstance/${id}`, {
-      instanceId: id,
-      note: newNoteText,
-    });
+    const res = await axios.post(
+      `http://localhost:5000/iteminstance/notes/${id}`,
+      {
+        instanceId: id,
+        note: newNoteText,
+      }
+    );
     props.fetchUserItems();
     form.reset();
-    console.log(res.data);
+  }
+  async function deleteNote(instanceId, note) {
+    const res = await axios.put(
+      `http://localhost:5000/iteminstance/notes/${instanceId}`,
+
+      { instanceId, note }
+    );
+    props.fetchUserItems();
+    // console.log(res.data);
   }
   return (
     <div>
@@ -63,9 +75,19 @@ export default function InstanceCard(props) {
               >
                 notes
               </AccordionSummary>
-              <AccordionDetails>
+              <AccordionDetails
+                sx={{ display: 'flex', flexDirection: 'column', gap: '5px' }}
+              >
                 {instance.notes.map(note => (
-                  <p className="border-b border-black">{note}</p>
+                  <div className="instance-note">
+                    <p>{note}</p>
+                    <div
+                      className="delete-icon"
+                      onClick={() => deleteNote(instance._id, note)}
+                    >
+                      <DeleteForeverIcon />
+                    </div>
+                  </div>
                 ))}
               </AccordionDetails>
             </Accordion>

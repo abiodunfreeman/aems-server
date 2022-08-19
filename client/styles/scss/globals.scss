@@ -209,7 +209,25 @@
   -webkit-transform: rotate(45deg) translate(-8px, -8px);
   transform: rotate(45deg) translate(-8px, -8px);
 }
+.instance-note {
+  border: 1px solid;
+  display: flex;
+  justify-content: space-between;
 
+  p {
+    color: blue;
+  }
+  .delete-icon {
+    color: red;
+    display: none;
+  }
+}
+.instance-note:hover {
+  .delete-icon {
+    display: block;
+    cursor: pointer;
+  }
+}
 @media (max-width: 1400px) {
   #nav-padding {
     height: 90px;

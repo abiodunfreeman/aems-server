@@ -6,9 +6,11 @@ const {
   deleteInstance,
   getInstances,
   newNote,
+  deleteNote,
 } = require('../controllers/ItemInstance');
 router.route('/all').get(getInstances);
 router.route('/new').post(createItemInstance);
-router.route('/:id').delete(deleteInstance).post(newNote);
+router.route('/notes/:id').post(newNote).put(deleteNote);
+router.route('/:id').delete(deleteInstance);
 
 module.exports = router;

@@ -59,3 +59,20 @@ exports.newNote = async (req, res, next) => {
     res.status(400).json({ success: false, err: err.message });
   }
 };
+// @desc    delete a note
+// @route   delete /iteminstance/notes/:id
+// @access  Public
+exports.deleteNote = async (req, res, next) => {
+  try {
+    console.log(req.body);
+    const instance = await ItemInstance.findByIdAndUpdate(
+      req.body.instanceId,
+      { $pull: { notes: req.body.note } },
+      { new: true }
+    );
+    res.status(200).json({ success: true, instance });
+  } catch (err) {
+    console.log(`${err}`.red);
+    res.status(400).json({ success: false, err: err.message });
+  }
+};
