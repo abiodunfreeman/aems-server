@@ -60,8 +60,8 @@ export default function InstanceCard(props) {
     console.log(res.data);
   }
   return (
-    <div>
-      <Card>
+    <div className="">
+      <Card sx={{ width: '300px' }}>
         <CardContent>
           <h1 className="text-center font-bold">{model}</h1>
           <h2>Brand: {brand}</h2>
@@ -75,8 +75,13 @@ export default function InstanceCard(props) {
           </ul>
           <p className="text-red-500 text-center">{errMsg}</p>
         </CardContent>
-        <CardActions>
-          <div>
+        <CardActions
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          <div className=" flex flex-col">
             <Accordion sx={{ width: '250px' }}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -88,22 +93,27 @@ export default function InstanceCard(props) {
               <AccordionDetails
                 sx={{ display: 'flex', flexDirection: 'column', gap: '5px' }}
               >
-                {instance.notes.map(note => (
-                  <div
-                    className="instance-note"
-                    key={`${instance._id}-note-${instance.item._id}`}
-                  >
-                    <p>{note}</p>
+                {instance.notes.length > 0 ? (
+                  instance.notes.map((note, pos) => (
                     <div
-                      className="delete-icon"
-                      onClick={() => deleteNote(instance._id, note)}
+                      className="instance-note"
+                      key={`${instance._id}-note-${pos}`}
                     >
-                      <DeleteForeverIcon />
+                      <p>{note}</p>
+                      <div
+                        className="delete-icon self-center"
+                        onClick={() => deleteNote(instance._id, note)}
+                      >
+                        <DeleteForeverIcon />
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))
+                ) : (
+                  <p>no notes</p>
+                )}
               </AccordionDetails>
             </Accordion>
+            {/* add notes */}
             <Accordion sx={{ width: '250px' }}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -131,8 +141,6 @@ export default function InstanceCard(props) {
                       name="new-note"
                       id={`new-note-${instance._id}`}
                       placeholder="Add a note"
-                      multiline
-                      rows={3}
                       className=""
                     />
                     <Button type="submit" variant="outlined">

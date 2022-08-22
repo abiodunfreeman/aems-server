@@ -29,6 +29,7 @@ const ItemCard = props => {
 
   const [catFormData, setCatFormData] = useState('');
   const [userData, setUserData] = useState('');
+  const [msg, setMsg] = useState('');
   const handleChange = event => {
     setCatFormData(event.target.value);
   };
@@ -56,7 +57,7 @@ const ItemCard = props => {
       formData
     );
     props.fetchItems();
-    console.log(res);
+    setMsg('item updated');
   };
   const assignToUser = async id => {
     const res = await axios.put(`http://localhost:5000/user/item/${userData}`, {
@@ -67,6 +68,9 @@ const ItemCard = props => {
       props.setErrMsg(res.data.err);
       return;
     }
+    setMsg(
+      `Succesfully added ${res.data.addedItem.item.model} to ${res.data.addedItem.owner.username}`
+    );
     props.setSuccessMsg(
       `Succesfully added ${res.data.addedItem.item.model} to ${res.data.addedItem.owner.username}`
     );
@@ -79,7 +83,7 @@ const ItemCard = props => {
   //   console.log(item);
   return (
     <div className="item-card-container">
-      <Card sx={{ minWidth: '275px' }}>
+      <Card sx={{ minWidth: '365px' }}>
         <CardContent>
           <h1 className="text-center font-bold">{model}</h1>
           <h2>Brand: {brand}</h2>
@@ -94,6 +98,7 @@ const ItemCard = props => {
               Total:<span className="invisible">..</span> {total}
             </li>
           </ul>
+          <p className="text-center text-green-500 font-bold">{msg}</p>
         </CardContent>
         <CardActions>
           <div className=" min-w-full">

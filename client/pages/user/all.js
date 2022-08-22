@@ -22,7 +22,7 @@ export default function AllUsers() {
           key={u._id}
           className="border border-black p-4 flex flex-col items-center gap-3"
         >
-          <h1 className="cursor-pointer text-bold text-3xl">{u.username}</h1>
+          <h1 className=" text-bold text-3xl">{u.username}</h1>
 
           <Link href={url}>
             <Button variant="outlined">View Profile</Button>

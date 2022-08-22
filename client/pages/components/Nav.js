@@ -61,6 +61,8 @@ export default function Nav() {
     // Click with param "onlyClose" only closes the menu and reverts the ham Icon
     const hamburgerIcon = document.getElementById('ham-container');
     const dropDown = document.getElementById('nav-drop-down');
+    const body = document.querySelector('body');
+    body.classList.remove('overflow-hidden');
     if (string === 'onlyClose') {
       !dropDown.classList.contains('hidden') &&
         dropDown.classList.add('hidden');
@@ -90,7 +92,8 @@ export default function Nav() {
   const toggleHam = () => {
     const hamburgerIcon = document.getElementById('ham-container');
     const dropDown = document.getElementById('nav-drop-down');
-
+    const body = document.querySelector('body');
+    body.classList.toggle('overflow-hidden');
     dropDown.classList.toggle('hidden');
     dropDown.classList.toggle('flex');
     hamburgerIcon.classList.toggle('change');
@@ -103,7 +106,7 @@ export default function Nav() {
   };
   return (
     <ThemeProvider theme={theme}>
-      <div>
+      <div className="nav-container">
         <nav id="navbar">
           {user ? (
             <p className="text-white absolute bottom-1 right-3 aptiv-primary">
@@ -328,7 +331,7 @@ export default function Nav() {
               </AccordionDetails>
             </Accordion>
 
-            {user && user.status === 'admin' && (
+            {user && (
               <Link href="/user/all">
                 <Button
                   variant="contained"

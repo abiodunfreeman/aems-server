@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Nav from '../components/Nav';
-import { Button } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import Link from 'next/link';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import InstanceCard from '../components/InstanceCard';
@@ -26,6 +26,7 @@ const OneUser = () => {
   const [userData, setUserData] = useState({});
   const [userId, setUserId] = useState();
   const [userItems, setUserItems] = useState([]);
+  const [allUserItems, setAllUserItems] = useState([]);
   const [userItemsJSX, setUserItemsJSX] = useState();
   const [totalItemValue, setTotalItemValue] = useState(0);
   const fetchUserData = async () => {
@@ -37,28 +38,27 @@ const OneUser = () => {
     const res = await axios.get(`http://localhost:5000/user/item/${userId}`);
     // console.log(res.data);
     setUserItems(res.data.userItems);
+    setAllUserItems(res.data.userItems);
   };
   const deleteItemInstance = async (itemId, price, setMsg) => {
     if (!user) {
       setMsg('please log in');
       return;
     } else if (user.status !== 'admin') {
-      setMsg('contact admin to delete instance');
+      setMsg('only admins can delete items');
       return;
     }
     const res = await axios.delete(
       `http://localhost:5000/iteminstance/${itemId}`
     );
-    console.log(res.data);
+
     setTotalItemValue(prevVal => prevVal - price);
     fetchUserItems();
   };
   useEffect(() => {
     setUserId(id);
-    console.log(user);
   }, []);
   useEffect(() => {
-    setUserId(id);
     fetchUserData();
     fetchUserItems();
   }, [userId]);
@@ -66,7 +66,7 @@ const OneUser = () => {
     console.log(userData);
   }, [userData]);
   useEffect(() => {
-    console.log(userItems);
+    console.log(allUserItems);
     const jsx = userItems.map(instance => {
       if (instance.item === null) {
         deleteItemInstance(instance._id);
@@ -91,29 +91,52 @@ const OneUser = () => {
     });
     setUserData(res.data.user);
   };
-
+  function handleFilterInstances(e) {
+    setUserItems(
+      allUserItems.filter(instance => {
+        const modelName = instance.item.model.toLowerCase();
+        return modelName.includes(e.target.value.toLowerCase());
+      })
+    );
+  }
   return (
     <ThemeProvider theme={theme}>
-      <div className=" bg-white min-h-screen flex flex-col w-screen border-8 border-black">
+      <div className=" bg-darkgray min-h-screen flex flex-col max-w-screen ">
         <Nav />
-        <div className="text-lg flex flex-col items-center pt-8 border border-black w-screen- self-center">
-          <h1>
-            User :{' '}
-            <span className="font-bold uppercase">{userData.username}</span>
-          </h1>
-          <h1>
-            Status:{' '}
-            <span className="font-bold uppercase">{userData.status}</span>
-          </h1>
-          <h1 className="text-center">
-            Total Value of Items - {formatter.format(totalItemValue)}
-          </h1>
-          <Button onClick={() => changeUserStatus()} variant="outlined">
-            Change Status
-          </Button>
+        <div className="bg-white max-w-full text-lg flex gap-6 justify-around flex-wrap items-center p-8   w-full ">
+          <div>
+            <h1>
+              User :{' '}
+              <span className="font-bold uppercase">{userData.username}</span>
+            </h1>
+            <h1>
+              Status:{' '}
+              <span className="font-bold uppercase">{userData.status}</span>
+            </h1>
+            <Button onClick={() => changeUserStatus()} variant="outlined">
+              Change Status
+            </Button>
+          </div>
+          <div>
+            <h1 className="text-center">
+              Total Value of Items - {formatter.format(totalItemValue)}
+            </h1>
+            <h1>Number of Items: {userItemsJSX && userItemsJSX.length}</h1>
+
+            <TextField
+              className=""
+              id="filter-instance-input"
+              variant="standard"
+              placeholder="enter model name"
+              label="filter items"
+              onChange={handleFilterInstances}
+            />
+          </div>
         </div>
 
-        <div className="userJSX">{userItemsJSX}</div>
+        <div className="  flex p-3 flex-wrap gap-6  justify-center">
+          {userItemsJSX}
+        </div>
       </div>
     </ThemeProvider>
   );
