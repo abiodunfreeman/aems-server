@@ -76,3 +76,17 @@ exports.deleteNote = async (req, res, next) => {
     res.status(400).json({ success: false, err: err.message });
   }
 };
+
+exports.editInstanceOwner = async (req, res, next) => {
+  try {
+    const instance = await ItemInstance.findByIdAndUpdate(
+      req.params.id,
+      { owner: req.body.owner },
+      { new: true }
+    ).populate('owner');
+    res.status(200).json({ success: true, updatedInstance: instance });
+  } catch (err) {
+    console.log(`${err}`.red);
+    res.status(400).json({ success: false, err: err.message });
+  }
+};

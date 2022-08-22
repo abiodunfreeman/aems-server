@@ -29,6 +29,15 @@ const OneUser = () => {
   const [allUserItems, setAllUserItems] = useState([]);
   const [userItemsJSX, setUserItemsJSX] = useState();
   const [totalItemValue, setTotalItemValue] = useState(0);
+  const [options, setOptions] = useState([]);
+  const fetchOptions = async () => {
+    const res = await axios.get('http://localhost:5000/user/all');
+    const options = res.data.map(user => {
+      return { label: user.username, id: user._id };
+    });
+    console.log(options);
+    setOptions(options);
+  };
   const fetchUserData = async () => {
     // console.log(userId);
     const res = await axios.get(`http://localhost:5000/user/${userId}`);
@@ -57,6 +66,7 @@ const OneUser = () => {
   };
   useEffect(() => {
     setUserId(id);
+    fetchOptions();
   }, []);
   useEffect(() => {
     fetchUserData();
@@ -79,6 +89,7 @@ const OneUser = () => {
           instance={instance}
           deleteInstance={deleteItemInstance}
           fetchUserItems={fetchUserItems}
+          options={options}
           user={user}
         />
       );
@@ -116,6 +127,9 @@ const OneUser = () => {
             <Button onClick={() => changeUserStatus()} variant="outlined">
               Change Status
             </Button>
+            <Link href="/user/all">
+              <Button>All Users</Button>
+            </Link>
           </div>
           <div>
             <h1 className="text-center">

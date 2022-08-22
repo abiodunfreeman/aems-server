@@ -11,6 +11,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Autocomplete,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -18,6 +19,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 export default function InstanceCard(props) {
   const [errMsg, setErrMsg] = useState('');
+  const [msg, setMsg] = useState('');
   const { instance, user } = props;
   const { item } = instance;
   const { brand, model, category, quantity } = item;
@@ -59,6 +61,26 @@ export default function InstanceCard(props) {
     props.fetchUserItems();
     console.log(res.data);
   }
+  const handleUserChange = async () => {
+    const autocomplete = document.getElementById(`combo-${instance._id}`).value;
+    console.log(autocomplete);
+    const owner = props.options.filter(option => {
+      if (option.label === autocomplete) {
+        // console.log(option);
+        return option;
+      }
+    })[0].id;
+    console.log(owner);
+
+    const res = await axios.patch(
+      `http://localhost:5000/iteminstance/${instance._id}`,
+      { owner }
+    );
+    setMsg(`assigned to ${res.data.updatedInstance.owner.username}`);
+    setErrMsg('');
+    console.log(res.data);
+  };
+
   return (
     <div className="">
       <Card sx={{ width: '300px' }}>
@@ -74,6 +96,7 @@ export default function InstanceCard(props) {
             </li>
           </ul>
           <p className="text-red-500 text-center">{errMsg}</p>
+          <p className="text-green-500 text-center">{msg}</p>
         </CardContent>
         <CardActions
           sx={{
@@ -148,6 +171,24 @@ export default function InstanceCard(props) {
                     </Button>
                   </FormControl>
                 </form>
+              </AccordionDetails>
+            </Accordion>
+            <Accordion sx={{ width: '250px' }}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                assign to different user
+              </AccordionSummary>
+              <AccordionDetails>
+                <Autocomplete
+                  disablePortal
+                  id={`combo-${instance._id}`}
+                  options={props.options}
+                  renderInput={params => <TextField {...params} label="User" />}
+                />
+                <Button onClick={handleUserChange}>Change User</Button>
               </AccordionDetails>
             </Accordion>
             <Button
