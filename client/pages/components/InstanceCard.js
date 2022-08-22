@@ -47,9 +47,11 @@ export default function InstanceCard(props) {
   async function deleteNote(instanceId, note) {
     if (!user) {
       setErrMsg('must be logged in to delete a note');
+      setMsg('');
       return;
     } else if (user.status !== 'admin') {
       setErrMsg('contact an admin to delete this note');
+      setMsg('');
       return;
     }
 
@@ -76,8 +78,10 @@ export default function InstanceCard(props) {
       `http://localhost:5000/iteminstance/${instance._id}`,
       { owner }
     );
+    props.fetchUserItems();
     setMsg(`assigned to ${res.data.updatedInstance.owner.username}`);
     setErrMsg('');
+
     console.log(res.data);
   };
 
@@ -86,6 +90,7 @@ export default function InstanceCard(props) {
       <Card sx={{ width: '300px' }}>
         <CardContent>
           <h1 className="text-center font-bold">{model}</h1>
+          <h2>Owner: {instance.owner.username}</h2>
           <h2>Brand: {brand}</h2>
           <h3>Category: {category.name}</h3>
           <ul>
