@@ -230,6 +230,12 @@ export default function Nav() {
                       </MenuItem>
                       <MenuItem onClick={handleItemMenuClose}>
                         {' '}
+                        <Link href="/item/instance">
+                          <p className="nav-link">view instances</p>
+                        </Link>
+                      </MenuItem>
+                      <MenuItem onClick={handleItemMenuClose}>
+                        {' '}
                         <Link href="/item/new">
                           <p className="nav-link">create</p>
                         </Link>

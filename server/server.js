@@ -3,7 +3,8 @@ const colors = require('colors');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const connectDB = require('./config/db');
-
+const compression = require('compression');
+const helmet = require('helmet');
 const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
@@ -17,7 +18,9 @@ dotenv.config({ path: './config/config.env' });
 
 // Body Parser
 app.use(express.json());
-
+//Compress all routes
+app.use(compression());
+app.use(helmet());
 //Cors
 app.use(
   cors({
