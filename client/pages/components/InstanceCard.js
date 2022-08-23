@@ -78,7 +78,7 @@ export default function InstanceCard(props) {
       `http://localhost:5000/iteminstance/${instance._id}`,
       { owner }
     );
-    props.fetchUserItems();
+
     setMsg(`assigned to ${res.data.updatedInstance.owner.username}`);
     setErrMsg('');
 

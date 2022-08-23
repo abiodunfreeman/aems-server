@@ -56,23 +56,7 @@ export default function All() {
     setItems(res.data);
     setAllItems(res.data);
   };
-  const handleChosenUserChange = (e, id) => {
-    const input = document.getElementById(`hidden-${id}`);
-    setChosenUser(e.target.value);
-    input.value = e.target.value;
-    // console.log(input.value + ' - NEW');
-  };
-  const handleAssignItem = async item_id => {
-    console.log(item_id);
-    console.log(chosenUser);
-  };
-  const handleAssignForm = async (e, id) => {
-    e.preventDefault();
 
-    const input = document.getElementById(`hidden-${id}`);
-
-    console.log(input.value);
-  };
   const handleDeleteItem = async id => {
     if (user && user.status === 'admin') {
       const res = await axios.delete(`http://localhost:5000/item/delete/${id}`);
@@ -83,9 +67,16 @@ export default function All() {
       setErrMsg('insufficient rights, please see an admin');
     }
   };
-  const handleEditItem = async id => {
-    console.log(id);
+  const handleFilterChange = e => {
+    console.log(e.target.value);
+
+    setItems(prevItems => {
+      return allItems.filter(item =>
+        item.category.name.includes(e.target.value)
+      );
+    });
   };
+
   useEffect(() => {
     getUser();
     getAllUsers();
@@ -94,9 +85,6 @@ export default function All() {
   }, []);
 
   useEffect(() => {
-    // console.log(items);
-    // console.log(user);
-    // console.log(allUsers);
     const cards = items.map(item => {
       return (
         <ItemCard
@@ -113,18 +101,7 @@ export default function All() {
     });
     setCardJSX(cards);
   }, [items]);
-  useEffect(() => {
-    // console.log(cardJSX);
-  }, [cardJSX]);
-  const handleFilterChange = e => {
-    console.log(e.target.value);
 
-    setItems(prevItems => {
-      return allItems.filter(item =>
-        item.category.name.includes(e.target.value)
-      );
-    });
-  };
   return (
     <ThemeProvider theme={theme}>
       <div id="items-all-container">

@@ -19,7 +19,9 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 const ItemCard = props => {
   const { item, users, deleteItem, categoryData } = props;
   const { brand, model, category, quantity } = item;
-
+  const [msgCount, setMsgCount] = useState(1);
+  const [pastItemAdded, setPastItemAdded] = useState('');
+  const [pastUserAdded, setPastUserAdded] = useState('');
   var formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -68,13 +70,22 @@ const ItemCard = props => {
       props.setErrMsg(res.data.err);
       return;
     }
+    let count = msgCount;
+    if (
+      pastItemAdded === res.data.addedItem.item.model &&
+      pastUserAdded === res.data.addedItem.owner.username
+    ) {
+      setMsgCount(prevCount => prevCount + 1);
+      count += 1;
+    } else {
+      setMsgCount(1);
+      count = 1;
+    }
     setMsg(
-      `Succesfully added ${res.data.addedItem.item.model} to ${res.data.addedItem.owner.username}`
+      `Succesfully added ${res.data.addedItem.item.model} to ${res.data.addedItem.owner.username} (${count})`
     );
-    props.setSuccessMsg(
-      `Succesfully added ${res.data.addedItem.item.model} to ${res.data.addedItem.owner.username}`
-    );
-    props.setErrMsg('');
+    setPastItemAdded(res.data.addedItem.item.model);
+    setPastUserAdded(res.data.addedItem.owner.username);
   };
   useEffect(() => {
     console.log(userData);

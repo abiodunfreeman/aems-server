@@ -35,3 +35,4 @@ Found out about useContext out of neccesity, getting a response from the server 
     - visualize data with react vis
     - dynamic category page that list all items in that category (import and use <ItemCard/>)
     - assign quantity (default : 1) on instance card
+    - fix total value of items bug in /user/[id]
