@@ -41,9 +41,23 @@ export default function Home() {
   };
   const handleFilterInstances = e => {
     const filterValue = e.target.value.toLowerCase();
+    const otherInput = document.getElementById('filter-brand-input');
+    otherInput.value = '';
     setItemInstances(prevInstances => {
       const filteredInstances = allInstances.filter(instance => {
         const modelName = instance.item.model.toLowerCase();
+        return modelName.includes(filterValue);
+      });
+      return filteredInstances;
+    });
+  };
+  const handleFilterBrand = e => {
+    const otherInput = document.getElementById('filter-instance-input');
+    otherInput.value = '';
+    const filterValue = e.target.value.toLowerCase();
+    setItemInstances(prevInstances => {
+      const filteredInstances = allInstances.filter(instance => {
+        const modelName = instance.item.brand.toLowerCase();
         return modelName.includes(filterValue);
       });
       return filteredInstances;
@@ -72,14 +86,22 @@ export default function Home() {
   return (
     <div className="bg-darkgray min-h-screen flex flex-col max-w-screen w-screen ">
       <Nav />
-      <div className="bg-white w-screen max-w-screen p-8 mb-4">
+      <div className="gap-4 bg-white w-screen max-w-screen p-8 mb-4 flex justify-center">
         <TextField
           className=""
           id="filter-instance-input"
           variant="standard"
           placeholder="enter model name"
-          label="filter items"
+          label="filter by model"
           onChange={handleFilterInstances}
+        />
+        <TextField
+          className=""
+          id="filter-brand-input"
+          variant="standard"
+          placeholder="enter brand name"
+          label="filter by brand"
+          onChange={handleFilterBrand}
         />
       </div>
 
