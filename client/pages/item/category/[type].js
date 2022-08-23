@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Nav from '../../components/Nav';
+import ItemCard from '../../components/ItemCard';
 const Type = () => {
   const router = useRouter();
   const { type } = router.query;

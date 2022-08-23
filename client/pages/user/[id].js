@@ -26,6 +26,7 @@ const OneUser = () => {
   const [userData, setUserData] = useState({});
   const [userId, setUserId] = useState();
   const [userItems, setUserItems] = useState([]);
+  const [added, setAdded] = useState(false);
   const [allUserItems, setAllUserItems] = useState([]);
   const [userItemsJSX, setUserItemsJSX] = useState();
   const [totalItemValue, setTotalItemValue] = useState(0);
@@ -82,7 +83,10 @@ const OneUser = () => {
         deleteItemInstance(instance._id);
         return;
       }
-      setTotalItemValue(prevValue => prevValue + instance.item.price);
+      if (!added) {
+        setTotalItemValue(prevValue => prevValue + instance.item.price);
+        setAdded(true);
+      }
       return (
         <InstanceCard
           key={instance._id}

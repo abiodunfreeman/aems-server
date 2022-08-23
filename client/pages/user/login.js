@@ -37,7 +37,7 @@ function Login() {
     if (res.data.user) {
       setUser(res.data.user);
       console.log('redirect');
-      Router.push('/');
+      Router.push(`/user/${res.data.user._id}`);
     }
   };
   const login = async status => {
@@ -49,7 +49,7 @@ function Login() {
       );
       setUser(res.data.user);
       console.log('redirect');
-      Router.push('/');
+      Router.push(`/user/${res.data.user._id}`);
     } else {
       const userData = { username: 'guest', password: 'guest' };
       const res = await axios.post(
@@ -60,7 +60,7 @@ function Login() {
       if (res.data.user) {
         setUser(res.data.user);
         console.log('redirect');
-        Router.push('/');
+        Router.push(`/user/${res.data.user._id}`);
       }
     }
   };
