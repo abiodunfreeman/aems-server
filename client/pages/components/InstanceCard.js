@@ -90,7 +90,7 @@ export default function InstanceCard(props) {
       <Card sx={{ width: '300px' }}>
         <CardContent>
           <h1 className="text-center font-bold">{model}</h1>
-          <h2>Owner: {instance.owner.username}</h2>
+          {props.seeOwner && <h2>Owner: {instance.owner.username}</h2>}
           <h2>Brand: {brand}</h2>
           <h3>Category: {category.name}</h3>
           <ul>
