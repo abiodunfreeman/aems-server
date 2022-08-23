@@ -115,7 +115,7 @@ const OneUser = () => {
       <div className=" bg-darkgray min-h-screen flex flex-col max-w-screen ">
         <Nav />
         <div className="bg-white max-w-full text-lg flex gap-6 justify-around flex-wrap items-center p-8   w-full ">
-          <div>
+          <div className="flex flex-col gap-1  items-center">
             <h1>
               User :{' '}
               <span className="font-bold uppercase">{userData.username}</span>
@@ -124,12 +124,14 @@ const OneUser = () => {
               Status:{' '}
               <span className="font-bold uppercase">{userData.status}</span>
             </h1>
-            <Button onClick={() => changeUserStatus()} variant="outlined">
-              Change Status
-            </Button>
-            <Link href="/user/all">
-              <Button>All Users</Button>
-            </Link>
+            <div className="flex flex-col">
+              <Button onClick={() => changeUserStatus()} variant="outlined">
+                Change Status
+              </Button>
+              <Link href="/user/all">
+                <Button>All Users</Button>
+              </Link>
+            </div>
           </div>
           <div>
             <h1 className="text-center">

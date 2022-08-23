@@ -186,14 +186,22 @@ export default function InstanceCard(props) {
               >
                 assign to different user
               </AccordionSummary>
-              <AccordionDetails>
+              <AccordionDetails
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '5px',
+                }}
+              >
                 <Autocomplete
                   disablePortal
                   id={`combo-${instance._id}`}
                   options={props.options}
                   renderInput={params => <TextField {...params} label="User" />}
                 />
-                <Button onClick={handleUserChange}>Change User</Button>
+                <Button variant="outlined" onClick={handleUserChange}>
+                  Change User
+                </Button>
               </AccordionDetails>
             </Accordion>
             <Button
