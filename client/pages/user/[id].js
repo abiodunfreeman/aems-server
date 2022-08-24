@@ -24,11 +24,12 @@ const OneUser = () => {
   const router = useRouter();
   const { id } = router.query;
   const [userData, setUserData] = useState({});
+  const [errMsg, setErrMsg] = useState('');
   const [userId, setUserId] = useState();
   const [userItems, setUserItems] = useState([]);
   const [added, setAdded] = useState(false);
   const [allUserItems, setAllUserItems] = useState([]);
-  const [userItemsJSX, setUserItemsJSX] = useState();
+  const [userItemsJSX, setUserItemsJSX] = useState([]);
   const [totalItemValue, setTotalItemValue] = useState(0);
   const [options, setOptions] = useState([]);
   const fetchOptions = async () => {
@@ -104,6 +105,7 @@ const OneUser = () => {
     const res = await axios.put(`http://localhost:5000/user/${userId}`, {
       status: userData.status,
     });
+    setErrMsg('for changes to take place, please log out then back in');
     setUserData(res.data.user);
   };
   function handleFilterInstances(e) {
@@ -132,6 +134,7 @@ const OneUser = () => {
               <Button onClick={() => changeUserStatus()} variant="outlined">
                 Change Status
               </Button>
+
               <Link href="/user/all">
                 <Button>All Users</Button>
               </Link>
@@ -155,7 +158,18 @@ const OneUser = () => {
         </div>
 
         <div className="  flex p-3 flex-wrap gap-6  justify-center">
-          {userItemsJSX}
+          {userItemsJSX && userItemsJSX.length > 0 ? (
+            userItemsJSX
+          ) : (
+            <div className=" p-4 flex flex-col">
+              <p className="text-white text-4xl font-semibold">
+                no items to show
+              </p>
+              <Link href="/item/all">
+                <Button>Add Items</Button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </ThemeProvider>
