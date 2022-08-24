@@ -120,7 +120,7 @@ export default function Nav() {
           )}
           <div id="nav-container">
             {/* ALWAYS */}
-            <Link href="/">
+            <Link href={user ? `/user/${user._id}` : '/'}>
               <div
                 id="nav-logo"
                 className="flex justify-center items-center  cursor-pointer"
