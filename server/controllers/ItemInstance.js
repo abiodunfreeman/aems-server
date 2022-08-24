@@ -1,3 +1,4 @@
+const debug = require('debug')('ItemInstance');
 const ItemInstance = require('../models/ItemInstance');
 // @desc    Create an Item Instance
 // @route   POST /iteminstance/new
@@ -36,12 +37,12 @@ exports.getInstances = async (req, res, next) => {
       .populate('item');
 
     itemInstances.forEach(async instance => {
-      if (instance.owner === null)
+      if (instance.owner === null || instance.owner === undefined)
         await ItemInstance.findByIdAndDelete(instance._id);
     });
     res.status(200).json({ success: true, itemInstances });
   } catch (err) {
-    console.log(`${err}`.red);
+    debug(`get instances error: ${err}`);
     res.status(400).json({ success: false, err: err.message });
   }
 };

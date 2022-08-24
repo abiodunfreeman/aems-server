@@ -51,7 +51,7 @@ exports.getOneUser = async (req, res, next) => {
     const oneUser = await User.findById(req.params.id);
     res.status(200).json({ success: true, oneUser });
   } catch (err) {
-    console.log(`${err.message}`.red);
+    debug(`get user error: ${err}`);
     res.status(400).json({ success: false, err: err.message });
   }
 };
@@ -122,7 +122,8 @@ exports.getItemInstances = async (req, res, next) => {
     // console.log(userItems);
     res.status(200).json({ success: true, userItems });
   } catch (err) {
-    console.log(`${err.message}`.red);
+    // console.log(`${err.message}`.red);
+    debug(`get instance error: ${err}`);
     res.status(400).json({ success: false, err: err.message });
   }
 };
