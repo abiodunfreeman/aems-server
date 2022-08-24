@@ -22,6 +22,7 @@ app.use(express.json());
 app.use(compression());
 app.use(helmet());
 //Cors
+
 app.use(
   cors({
     origin: 'http:localhost:3000',
