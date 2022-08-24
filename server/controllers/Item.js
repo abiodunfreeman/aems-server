@@ -1,6 +1,7 @@
 const Item = require('../models/Item');
 const Category = require('../models/Category');
 const ItemInstace = require('../models/ItemInstance');
+const debug = require('debug')('Item');
 // @desc    Generate new Item
 // @route   POST /item/new
 // @access  Public
