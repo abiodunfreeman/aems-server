@@ -1,3 +1,4 @@
+const debug = require('debug')('User');
 const User = require('../models/User');
 const Item = require('../models/Item');
 const ItemInstance = require('../models/ItemInstance');
@@ -11,10 +12,10 @@ exports.createUser = async (req, res, next) => {
       username: req.body.username,
       password: await brcypt.hash(req.body.password, 10),
     });
-    console.log(newUser);
+    // console.log(newUser);
     res.status(200).json({ success: true, newUser });
   } catch (err) {
-    console.log(`${err}`.red);
+    debug(`create user error: ${err}`);
     res.status(400).json({ success: false, err: err.message });
   }
 };
@@ -82,7 +83,7 @@ exports.addItem = async (req, res, next) => {
     const numberOfItemsLoaned = await ItemInstance.find({
       item: req.body.itemID,
     }).countDocuments();
-    if (numberOfItemsLoaned > itemToAdd.quantity) {
+    if (numberOfItemsLoaned >= itemToAdd.quantity) {
       res
         .status(200)
         .json({ success: false, err: 'Not enough in stock to give' });
@@ -118,7 +119,7 @@ exports.getItemInstances = async (req, res, next) => {
       populate: { path: 'category', model: 'Category' },
     });
 
-    console.log(userItems);
+    // console.log(userItems);
     res.status(200).json({ success: true, userItems });
   } catch (err) {
     console.log(`${err.message}`.red);

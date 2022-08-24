@@ -16,6 +16,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Link from 'next/link';
 const ItemCard = props => {
   const { item, users, deleteItem, categoryData } = props;
   const { brand, model, category, quantity } = item;
@@ -31,6 +32,7 @@ const ItemCard = props => {
 
   const [catFormData, setCatFormData] = useState('');
   const [userData, setUserData] = useState('');
+  const [errMsg, setErrMsg] = useState('');
   const [msg, setMsg] = useState('');
   const handleChange = event => {
     setCatFormData(event.target.value);
@@ -67,7 +69,8 @@ const ItemCard = props => {
     });
     console.log(res.data);
     if (res && res.data.success === false) {
-      props.setErrMsg(res.data.err);
+      setErrMsg(res.data.err);
+      setMsg('');
       return;
     }
     let count = msgCount;
@@ -110,6 +113,7 @@ const ItemCard = props => {
             </li>
           </ul>
           <p className="text-center text-green-500 font-bold">{msg}</p>
+          <p className="text-center text-red-500 font-bold">{errMsg}</p>
         </CardContent>
         <CardActions>
           <div className=" min-w-full">
@@ -157,6 +161,11 @@ const ItemCard = props => {
                 >
                   assign to user
                 </Button>
+                {userData && (
+                  <Link href={`/user/${userData}`}>
+                    <Button>view user</Button>
+                  </Link>
+                )}
               </AccordionDetails>
             </Accordion>
             {/* edit item */}

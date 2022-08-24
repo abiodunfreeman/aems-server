@@ -23,6 +23,7 @@ export default function User() {
   const [errMsg, setErrMsg] = useState('');
   const createUser = async e => {
     e.preventDefault();
+    const username = document.getElementById('username').value;
     try {
       const password = document.getElementById('password').value;
       const confirmPass = document.getElementById('confirm-password').value;
@@ -30,7 +31,7 @@ export default function User() {
         setErrMsg('passwords do not match');
         return;
       }
-      const username = document.getElementById('username').value;
+
       const form = document.querySelector('form');
 
       const user = { username, password };
@@ -42,7 +43,7 @@ export default function User() {
         Router.push('/user/login');
       }
     } catch (err) {
-      setErrMsg('Username taken');
+      setErrMsg(`Username (${username}) taken`);
       console.log(err);
     }
   };
@@ -50,17 +51,24 @@ export default function User() {
     <ThemeProvider theme={theme}>
       <div
         id="signup-container"
-        className="flex flex-col justify-center min-h-screen page-container "
+        className="flex flex-col  min-h-screen page-container bg-red-500"
       >
         <Nav />
-        <Card raised={true} className="mt-4 p-4 self-center  max-w-screen-sm ">
+
+        <Card
+          raised={true}
+          sx={{ justifySelf: 'center', border: '3px solid blue' }}
+          className="mt-4 p-4  max-w-screen-sm justify-self-center self-center"
+        >
           <form
             className="flex flex-col m-8 p-8 items-center"
             onSubmit={e => createUser(e)}
           >
             <CardContent className=" flex flex-col">
               <h1 className="text-center font-bold pb-1">create an account</h1>
-              <p>{errMsg}</p>
+              <p className="text-red-500 text-center font-bold lowercase">
+                {errMsg}
+              </p>
               <TextField
                 type="string"
                 placeholder="enter a username"
