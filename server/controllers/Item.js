@@ -50,7 +50,10 @@ exports.deleteItem = async (req, res, next) => {
     if (req.user) {
       if (req.user.status === 'admin') {
         const deletedItem = await Item.findByIdAndDelete(req.params.id);
-        res.status(200).json({ success: true, deletedItem });
+        const deletedInstances = await ItemInstace.deleteMany({
+          item: deletedItem._id,
+        });
+        res.status(200).json({ success: true, deletedItem, deletedInstances });
       } else {
         res.status(200).json({ success: false, err: 'insufficient rights' });
       }

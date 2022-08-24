@@ -91,13 +91,13 @@ const ItemCard = props => {
     setPastUserAdded(res.data.addedItem.owner.username);
   };
   useEffect(() => {
-    console.log(userData);
+    // console.log(userData);
   }, [userData]);
 
   //   console.log(item);
   return (
     <div className="item-card-container">
-      <Card sx={{ minWidth: '365px' }}>
+      <Card sx={{ minWidth: '345px' }}>
         <CardContent>
           <h1 className="text-center font-bold">{model}</h1>
           <h2>Brand: {brand}</h2>

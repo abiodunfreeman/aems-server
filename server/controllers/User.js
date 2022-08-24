@@ -37,7 +37,10 @@ exports.getUsers = async (req, res, next) => {
 exports.deleteUser = async (req, res, next) => {
   try {
     const deletedUser = await User.findByIdAndDelete(req.params.id);
-    res.status(200).json({ success: true, deletedUser });
+    const deletedInstances = await ItemInstance.deleteMany({
+      owner: deletedUser._id,
+    });
+    res.status(200).json({ success: true, deletedUser, deletedInstances });
   } catch (err) {
     console.log(`${err.message}`.red);
     res.status(400).json({ success: false, err: err.message });

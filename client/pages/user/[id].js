@@ -37,7 +37,7 @@ const OneUser = () => {
     const options = res.data.map(user => {
       return { label: user.username, id: user._id };
     });
-    console.log(options);
+
     setOptions(options);
   };
   const fetchUserData = async () => {
@@ -53,10 +53,10 @@ const OneUser = () => {
   };
   const deleteItemInstance = async (itemId, price, setMsg) => {
     if (!user) {
-      setMsg('please log in');
+      setErrMsg('please log in');
       return;
     } else if (user.status !== 'admin') {
-      setMsg('only admins can delete items');
+      setErrMsg('only admins can delete items');
       return;
     }
     const res = await axios.delete(
@@ -78,7 +78,7 @@ const OneUser = () => {
     console.log(userData);
   }, [userData]);
   useEffect(() => {
-    console.log(allUserItems);
+    // console.log(allUserItems);
     const jsx = userItems.map(instance => {
       if (instance.item === null) {
         deleteItemInstance(instance._id);

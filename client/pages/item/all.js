@@ -63,6 +63,7 @@ export default function All() {
       // fetchItems();
       setTimeout(fetchItems, 0);
       setSuccessMsg(`${res.data.deletedItem.model} deleted successfully`);
+      console.log(res.data);
     } else {
       setErrMsg('insufficient rights, please see an admin');
     }
