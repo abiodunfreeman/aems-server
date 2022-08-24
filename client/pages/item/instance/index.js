@@ -7,7 +7,7 @@ import { useUserContext } from '../../../context/user';
 
 export default function Home() {
   const [user, setUser] = useUserContext();
-  const [instanceJSX, setInstanceJSX] = useState();
+  const [instanceJSX, setInstanceJSX] = useState([]);
   const [itemInstances, setItemInstances] = useState([]);
   const [allInstances, setAllInstances] = useState([]);
   const [options, setOptions] = useState([]);
@@ -69,17 +69,19 @@ export default function Home() {
   }, []);
   useEffect(() => {
     setInstanceJSX(
-      itemInstances.map(instance => (
-        <InstanceCard
-          key={instance._id}
-          instance={instance}
-          deleteInstance={deleteItemInstance}
-          fetchUserItems={fetchItemInstances}
-          options={options}
-          user={user}
-          seeOwner={true}
-        />
-      ))
+      itemInstances.map(instance => {
+        return (
+          <InstanceCard
+            key={instance._id}
+            instance={instance}
+            deleteInstance={deleteItemInstance}
+            fetchUserItems={fetchItemInstances}
+            options={options}
+            user={user}
+            seeOwner={true}
+          />
+        );
+      })
     );
   }, [itemInstances]);
 

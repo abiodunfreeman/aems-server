@@ -37,8 +37,16 @@ exports.getInstances = async (req, res, next) => {
       .populate('item');
 
     itemInstances.forEach(async instance => {
-      if (instance.owner === null || instance.owner === undefined)
-        await ItemInstance.findByIdAndDelete(instance._id);
+      if (
+        instance.owner === null ||
+        instance.owner === undefined ||
+        instance.item === null ||
+        instance.item === undefined
+      ) {
+        let deletedInstances = await ItemInstance.findByIdAndDelete(
+          instance._id
+        );
+      }
     });
     res.status(200).json({ success: true, itemInstances });
   } catch (err) {
