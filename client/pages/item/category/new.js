@@ -14,8 +14,8 @@ const theme = createTheme({
 });
 export default function New() {
   const [formData, setFormData] = useState();
-  const [successMsg, setSuccessMsg] = useState();
-  const [errMsg, setErrMsg] = useState();
+  const [successMsg, setSuccessMsg] = useState(false);
+  const [errMsg, setErrMsg] = useState(false);
   const handleFormChange = () => {
     const name = document.getElementById('name');
     setFormData(name.value);
@@ -30,13 +30,23 @@ export default function New() {
 
     if (!res.data.success) {
       setErrMsg(
-        <h1 className="text-center">a category with that name already exist</h1>
+        <h3 className="text-center text-red-500">
+          <span className="font-semibold underline">{formData}</span> category
+          already exist
+        </h3>
       );
       setSuccessMsg('');
       return;
     }
 
-    setSuccessMsg(`${res.data.newCategory.name} successfully created`);
+    setSuccessMsg(
+      <h3 className="text-center text-green-500">
+        <span className="font-semibold underline">
+          {res.data.newCategory.name}
+        </span>{' '}
+        successfully created`
+      </h3>
+    );
     setErrMsg('');
     const form = document.querySelector('form');
     form.reset();
@@ -61,7 +71,7 @@ export default function New() {
             }}
           >
             {errMsg}
-            <h3 className="text-center">{successMsg}</h3>
+            {successMsg}
             <form onSubmit={e => handleClick(e)} className=" flex flex-col ">
               <CardContent className=" flex flex-col">
                 <TextField

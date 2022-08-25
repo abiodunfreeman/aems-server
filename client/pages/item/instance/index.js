@@ -65,6 +65,17 @@ export default function Home() {
     const filterValue = e.target.value.toLowerCase();
     const otherInput = document.getElementById('filter-brand-input');
     otherInput.value = '';
+
+    if (statusFilter != 'None') {
+      setItemInstances(prevInstances => {
+        const filteredInstances = itemInstances.filter(instance => {
+          const modelName = instance.item.model.toLowerCase();
+          return modelName.includes(filterValue);
+        });
+        return filteredInstances;
+      });
+      return;
+    }
     setItemInstances(prevInstances => {
       const filteredInstances = allInstances.filter(instance => {
         const modelName = instance.item.model.toLowerCase();
