@@ -257,7 +257,10 @@ const ItemCard = props => {
                   justifyContent: 'center',
                 }}
               >
-                <Button variant="outlined" onClick={() => deleteItem(item._id)}>
+                <Button
+                  variant="outlined"
+                  onClick={() => deleteItem(item._id, setErrMsg, setMsg)}
+                >
                   delete
                 </Button>
               </AccordionDetails>

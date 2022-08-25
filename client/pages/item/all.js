@@ -57,15 +57,17 @@ export default function All() {
     setAllItems(res.data);
   };
 
-  const handleDeleteItem = async id => {
+  const handleDeleteItem = async (id, setChildErrMsg, setChildSuccessMsg) => {
     if (user && user.status === 'admin') {
       const res = await axios.delete(`http://localhost:5000/item/delete/${id}`);
       // fetchItems();
       setTimeout(fetchItems, 0);
-      setSuccessMsg(`${res.data.deletedItem.model} deleted successfully`);
+      setChildSuccessMsg(`${res.data.deletedItem.model} deleted successfully`);
+      setChildErrMsg('');
       console.log(res.data);
     } else {
-      setErrMsg('insufficient rights, please see an admin');
+      setChildErrMsg('insufficient rights, please see an admin');
+      setChildSuccessMsg('');
     }
   };
   const handleFilterChange = e => {
@@ -109,7 +111,7 @@ export default function All() {
         <Nav />
         <main>
           <div className="flex justify-center p-3 gap-4 flex-wrap">
-            {user && user.status === 'admin' && (
+            {user && (
               <Link href="/item/new">
                 <Button variant="outlined">Create a new Item</Button>
               </Link>

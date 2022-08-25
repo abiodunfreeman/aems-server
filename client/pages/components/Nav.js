@@ -317,6 +317,37 @@ export default function Nav() {
 
           {/* MOBILE NAV */}
           <section id="nav-drop-down" className="hidden">
+            {/* USER */}
+            <Accordion
+              sx={{
+                backgroundColor: 'rgb(0,0,0)',
+                width: '100%',
+                borderBottom: '1px solid #6c757d',
+                borderRadius: '0',
+              }}
+            >
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon sx={{ color: '#f84018' }} />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+                sx={{ color: 'white' }}
+              >
+                <span className="ml-5vw">USER</span>
+              </AccordionSummary>
+              <AccordionDetails sx={{ color: 'white', paddingLeft: '70px;' }}>
+                <Link href="/user/all">
+                  <p className="nav-link" onClick={() => handleLinkClick()}>
+                    veiw all users
+                  </p>
+                </Link>
+                <Link href="/user/signup">
+                  <p className="nav-link" onClick={() => handleLinkClick()}>
+                    create a new user
+                  </p>
+                </Link>
+              </AccordionDetails>
+            </Accordion>
+            {/* ITEM */}
             <Accordion
               sx={{
                 backgroundColor: 'rgb(0,0,0)',
@@ -334,23 +365,25 @@ export default function Nav() {
                 <span className="ml-5vw">ITEMS</span>
               </AccordionSummary>
               <AccordionDetails sx={{ color: 'white', paddingLeft: '70px;' }}>
+                <Link href="/item/new">
+                  <p className="nav-link " onClick={() => handleLinkClick()}>
+                    create an item
+                  </p>
+                </Link>
                 <Link href="/item/all">
                   <p className="nav-link " onClick={() => handleLinkClick()}>
                     all items
                   </p>
                 </Link>
-                <Link href="/item/new">
+
+                <Link href="/item/instance">
                   <p className="nav-link " onClick={() => handleLinkClick()}>
-                    new item
-                  </p>
-                </Link>
-                <Link href="/item/category">
-                  <p className="nav-link " onClick={() => handleLinkClick()}>
-                    sort by categories
+                    view all instances
                   </p>
                 </Link>
               </AccordionDetails>
             </Accordion>
+            {/* CATEGORIES */}
             <Accordion
               sx={{
                 backgroundColor: 'rgb(0,0,0)',
@@ -381,22 +414,9 @@ export default function Nav() {
               </AccordionDetails>
             </Accordion>
 
-            {user && (
-              <Link href="/user/all">
-                <Button
-                  variant="contained"
-                  onClick={() => handleLinkClick()}
-                  sx={{ backgroundColor: 'white' }}
-                >
-                  View All Users
-                </Button>
-              </Link>
-            )}
-            <Link href="/">
-              <p onClick={() => logout()} className="nav-link">
-                logout
-              </p>
-            </Link>
+            <Button onClick={() => logout()} color="error">
+              logout
+            </Button>
           </section>
         </nav>
         <div id="nav-padding"></div>
