@@ -1,4 +1,5 @@
 const debug = require('debug')('ItemInstance');
+const User = require('../models/User');
 const ItemInstance = require('../models/ItemInstance');
 // @desc    Create an Item Instance
 // @route   POST /iteminstance/new
@@ -93,14 +94,39 @@ exports.deleteNote = async (req, res, next) => {
 
 exports.editInstanceOwner = async (req, res, next) => {
   try {
+    const newOwner = await User.findById(req.body.owner);
+    console.log(newOwner);
     const instance = await ItemInstance.findByIdAndUpdate(
       req.params.id,
-      { owner: req.body.owner },
+      {
+        owner: req.body.owner,
+        $push: { notes: `reassigned to ${newOwner.username}` },
+      },
       { new: true }
     ).populate('owner');
+
     res.status(200).json({ success: true, updatedInstance: instance });
   } catch (err) {
     console.log(`${err}`.red);
+    res.status(400).json({ success: false, err: err.message });
+  }
+};
+// @desc    change ItemInstance status
+// @route   patch /iteminstance/status/:id
+// @access  Public
+exports.editStatus = async (req, res, next) => {
+  try {
+    const instance = await ItemInstance.findByIdAndUpdate(
+      req.params.id,
+      {
+        status: req.body.status,
+        $push: { notes: `status set to - ${req.body.status}` },
+      },
+      { new: true }
+    );
+    res.status(200).json({ success: true, updatedInstance: instance });
+  } catch (err) {
+    debug(`edit status err: ${err}`);
     res.status(400).json({ success: false, err: err.message });
   }
 };

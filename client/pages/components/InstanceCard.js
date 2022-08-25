@@ -18,11 +18,13 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 export default function InstanceCard(props) {
-  const [errMsg, setErrMsg] = useState('');
-  const [msg, setMsg] = useState('');
   const { instance, user } = props;
   const { item } = instance;
   const { brand, model, category, quantity } = item;
+  const [status, setStatus] = useState(instance.status);
+  const [errMsg, setErrMsg] = useState('');
+  const [msg, setMsg] = useState('');
+
   var formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -84,7 +86,15 @@ export default function InstanceCard(props) {
 
     console.log(res.data);
   };
-
+  const handleStatusChange = async e => {
+    setStatus(e.target.value);
+    const res = await axios.patch(
+      `http://localhost:5000/iteminstance/status/${instance._id}`,
+      { status: e.target.value }
+    );
+    props.fetchUserItems();
+    res.data.success && setMsg('Status Updated Successfully');
+  };
   return (
     <div className="">
       <Card sx={{ width: '300px' }}>
@@ -99,6 +109,7 @@ export default function InstanceCard(props) {
               PPU: <span className="invisible">...</span>
               {ppu}
             </li>
+            <li>status: {status}</li>
           </ul>
           <p className="text-red-500 text-center">{errMsg}</p>
           <p className="text-green-500 text-center">{msg}</p>
@@ -110,6 +121,21 @@ export default function InstanceCard(props) {
           }}
         >
           <div className=" flex flex-col">
+            <FormControl fullWidth>
+              <InputLabel id="status-select-label">Edit Status</InputLabel>
+              <Select
+                labelId="status-select-label"
+                id="status-select"
+                value={status}
+                label="status"
+                onChange={handleStatusChange}
+              >
+                <MenuItem value={'Available'}>Available</MenuItem>
+                <MenuItem value={'Loaned'}>Loaned</MenuItem>
+                <MenuItem value={'Maintenance'}>Maintenance</MenuItem>
+                <MenuItem value={'Reserved'}>Reserved</MenuItem>
+              </Select>
+            </FormControl>
             <Accordion sx={{ width: '250px' }}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
