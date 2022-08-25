@@ -102,7 +102,7 @@ app.get('/logout', (req, res) => {
 });
 app.get('/', (req, res, next) => {
   // if (res.locals.user) console.log(res.locals.user + 'FUCK');
-  res.status(200).json({ foo: 'bar' });
+  res.status(200).json({ user: req.user });
 });
 
 //ROUTES
