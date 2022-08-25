@@ -14,12 +14,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "colors": "^1.4.0",
     "nodemon": "^2.0.19"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "debug": "^4.3.4",
