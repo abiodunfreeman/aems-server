@@ -26,7 +26,4 @@ Found out about useContext out of neccesity, getting a response from the server 
 
 ## To-Do
 
-    - edit filter labels to be more clear
-    - reset button on /item/instance for filters (filters now stack on each other);
-    - keep same instances when updating status filter
     - dynamic category page that list all items in that category (import and use <ItemCard/>)
