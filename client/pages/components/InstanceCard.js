@@ -113,7 +113,14 @@ export default function InstanceCard(props) {
     }
   };
   const handleAutoCompleteChange = e => {
-    console.log(e.target.value);
+    const target = e.currentTarget.innerHTML;
+    const id = props.options.filter(option => {
+      if (option.label === target) {
+        return option;
+      }
+    })[0].id;
+    setDynamicUserLink(`http://localhost:3000/user/${id}`);
+    // console.log(id);
   };
   return (
     <div className="">
