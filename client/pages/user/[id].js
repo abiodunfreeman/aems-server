@@ -158,7 +158,7 @@ const OneUser = () => {
               id="filter-instance-input"
               variant="standard"
               placeholder="enter model name"
-              label="filter items"
+              label="filter by model name"
               onChange={handleFilterInstances}
             />
           </div>

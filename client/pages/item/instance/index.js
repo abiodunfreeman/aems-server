@@ -26,11 +26,24 @@ export default function Home() {
     console.log(options);
     setOptions(options);
   };
-  const fetchItemInstances = async () => {
+  const fetchItemInstances = async status => {
     const res = await axios.get(`http://localhost:5000/iteminstance/all`);
-    console.log(res.data);
-    setItemInstances(res.data.itemInstances);
-    setAllInstances(res.data.itemInstances);
+    const instancesData = res.data.itemInstances;
+    setAllInstances(instancesData);
+    // if status is undefined, sets it to statusFilter which defaults to 'None'
+    status = status ? status : statusFilter;
+    // if status is set returns instance with matching status else returns all
+    if (status && status != 'None') {
+      console.log('status is not none - ' + status);
+      setItemInstances(prevInstances => {
+        return instancesData.filter(instance => {
+          return instance.status == status;
+        });
+      });
+      return;
+    }
+
+    setItemInstances(instancesData);
   };
   const deleteItemInstance = async (itemId, price, setErrMsg, setMsg) => {
     if (!user) {
@@ -94,17 +107,17 @@ export default function Home() {
     );
   }, [itemInstances]);
   const handleStatusChange = e => {
-    setStatusFilter(e.target.value);
+    // i want to change the status
+    // update instances to reflect changes
+    // keep same statusFilter active
+    // newly
+
     if (e.target.value == 'None') {
       setItemInstances(allInstances);
       return;
     }
-    setItemInstances(prevInstances => {
-      const filteredInstances = allInstances.filter(
-        instance => instance.status == e.target.value
-      );
-      return filteredInstances;
-    });
+    setStatusFilter(e.target.value);
+    fetchItemInstances(e.target.value);
   };
   return (
     <div className="bg-darkgray min-h-screen flex flex-col  w-screen max-w-screen">

@@ -103,7 +103,7 @@ export default function InstanceCard(props) {
       `http://localhost:5000/iteminstance/status/${instance._id}`,
       { status: e.target.value }
     );
-    props.fetchUserItems();
+    props.fetchUserItems(undefined);
     if (res.data.success) {
       setMsg('status updated successfully');
       setErrMsg('');
