@@ -27,17 +27,10 @@ Found out about useContext out of neccesity, getting a response from the server 
 ## To-Do
 
     - edit filter labels to be more clear
-    - fix err msg on /user/all (show better)
-    - fix err msg on /item/category (show better)
-    - show err msg on <InstanceCard/> (on delete instance 'must be an admin to delete')
     - reset button on /item/instance for filters (filters now stack on each other);
     - keep same instances when updating status filter
-    - msg when changing user status ("user must log out then back in for changes to take place")
-    - errMsg when deleting instance and not admin status
     - center signup, login, create items/categories
     - uncircle new category
-    - better log out message
     - mobile and desktop nav offer same links
     - easy view user in <InstanceCard/>, just like <ItemCard/>
-    - make <Nav/> match aptiv.com
     - dynamic category page that list all items in that category (import and use <ItemCard/>)

@@ -125,7 +125,7 @@ export default function Nav() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="nav-container">
+      <div className="nav-container ">
         <nav id="navbar">
           {user ? (
             <p className="text-white absolute bottom-1 right-3 aptiv-primary">
