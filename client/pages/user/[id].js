@@ -24,7 +24,7 @@ const OneUser = () => {
   const router = useRouter();
   const { id } = router.query;
   const [userData, setUserData] = useState({});
-  const [errMsg, setErrMsg] = useState('');
+  const [msg, setMsg] = useState(false);
   const [userId, setUserId] = useState();
   const [userItems, setUserItems] = useState([]);
   const [added, setAdded] = useState(false);
@@ -53,10 +53,11 @@ const OneUser = () => {
   };
   const deleteItemInstance = async (itemId, price, setMsg) => {
     if (!user) {
-      setErrMsg('please log in');
+      setMsg('please log in');
       return;
     } else if (user.status !== 'admin') {
-      setErrMsg('only admins can delete items');
+      setMsg('only admins can delete items');
+
       return;
     }
     const res = await axios.delete(
@@ -105,7 +106,11 @@ const OneUser = () => {
     const res = await axios.put(`http://localhost:5000/user/${userId}`, {
       status: userData.status,
     });
-    setErrMsg('for changes to take place, please log out then back in');
+    setMsg(
+      <p className="user-msg font-semibold text-green-500">
+        relog for status update
+      </p>
+    );
     setUserData(res.data.user);
   };
   function handleFilterInstances(e) {
@@ -120,8 +125,8 @@ const OneUser = () => {
     <ThemeProvider theme={theme}>
       <div className=" bg-darkgray min-h-screen flex flex-col max-w-screen ">
         <Nav />
-        <div className="bg-white max-w-full text-lg flex gap-6 justify-around flex-wrap items-center p-8   w-full ">
-          <div className="flex flex-col gap-1  items-center">
+        <div className="relative bg-white max-w-full text-lg flex gap-6 justify-around flex-wrap items-center p-8   w-full ">
+          <div className="flex flex-col gap-1  items-center w-40">
             <h1>
               User :{' '}
               <span className="font-bold uppercase">{userData.username}</span>
@@ -155,6 +160,7 @@ const OneUser = () => {
               onChange={handleFilterInstances}
             />
           </div>
+          {msg}
         </div>
 
         <div className="  flex p-3 flex-wrap gap-6  justify-center">

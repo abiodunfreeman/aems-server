@@ -87,7 +87,7 @@ export default function AllUsers() {
           label="filter by username"
           onChange={handleFilterUsers}
         />
-        <h1 className="text-lg text-red-500">{errMsg}</h1>
+        <h1 className="text-xl text-red-500 font-semibold">{errMsg}</h1>
         {successMsg}
       </div>
       <div className=" flex gap-4 flex-wrap p-4 self-center  justify-evenly w-full ">

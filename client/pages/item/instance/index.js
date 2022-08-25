@@ -34,7 +34,7 @@ export default function Home() {
   };
   const deleteItemInstance = async (itemId, price, setMsg) => {
     if (!user) {
-      setMsg('please log in');
+      setMsg('please log in to delete an instance');
       return;
     } else if (user.status !== 'admin') {
       setMsg('only admins can delete items');
@@ -105,7 +105,7 @@ export default function Home() {
     });
   };
   return (
-    <div className="bg-darkgray min-h-screen flex flex-col max-w-screen w-screen ">
+    <div className="bg-darkgray min-h-screen flex flex-col  w-screen max-w-screen">
       <Nav />
       <div className="gap-6 bg-white w-screen max-w-screen p-8 mb-4 flex justify-center flex-col sm:flex-row items-center ">
         <FormControl variant="filled" sx={{ width: '200px' }}>
@@ -142,7 +142,7 @@ export default function Home() {
         />
       </div>
 
-      <div className=" flex flex-wrap p-8 gap-8 justify-center w-screen">
+      <div className=" flex flex-wrap p-8 gap-8 justify-center w-screen max-w-screen">
         {instanceJSX}
       </div>
     </div>

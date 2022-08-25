@@ -44,10 +44,13 @@ export default function Home() {
     console.log(res.data);
     getAllCategories();
     setSuccesMsg(
-      <h2 className="font-bold">
-        Category {res.data.deletedCategory.name} deleted successfully
+      <h2 className="font-semibold text-green-500 text-xl ">
+        category{' '}
+        <span className="text-red-500">{res.data.deletedCategory.name}</span>{' '}
+        deleted successfully
       </h2>
     );
+    setErrMsg('');
     // console.log(res.data);
   };
 
@@ -59,15 +62,18 @@ export default function Home() {
     <div id="category-index">
       <Nav />
       <div className="flex flex-col items-center justify-center p-3">
-        <h1>{errMsg}</h1>
-        {succesMsg}
-        <Link href="/item/category/new">
-          <Button variant="outlined">Create a New Category</Button>
-        </Link>
-        <h1 className="font-bold text-4xl">
+        <h1 className="font-bold text-3xl">
           Deleting a category will also delete all items and instances of items
           with that category.
         </h1>
+
+        <Link href="/item/category/new">
+          <Button variant="outlined" className="m-4">
+            Create a New Category
+          </Button>
+        </Link>
+        <h1 className="text-red-500 font-semibold text-xl">{errMsg}</h1>
+        {succesMsg}
       </div>
 
       <div className="flex gap-8 flex-wrap">{data}</div>

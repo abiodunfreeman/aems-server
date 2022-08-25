@@ -76,7 +76,16 @@
   // justify-self: flex-start;
   position: relative;
 }
+.max-w-screen {
+  max-width: 100vw;
+}
+.user-msg {
+  max-width: 375px;
 
+  font-size: 1.1em;
+  position: absolute;
+  bottom: 0;
+}
 #navbar {
   // border: 3px solid blue;
   width: 100%;

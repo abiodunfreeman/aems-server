@@ -43,8 +43,13 @@ export default function InstanceCard(props) {
         note: newNoteText,
       }
     );
+    console.log(res.data);
     props.fetchUserItems();
     form.reset();
+    if (res.data.success) {
+      setErrMsg('');
+      setMsg('note added');
+    }
   }
   async function deleteNote(instanceId, note) {
     if (!user) {
@@ -63,6 +68,8 @@ export default function InstanceCard(props) {
       { instanceId, note }
     );
     props.fetchUserItems();
+    setErrMsg('');
+    setMsg('note deleted successfully');
     // console.log(res.data);
   }
   const handleUserChange = async () => {
@@ -237,6 +244,7 @@ export default function InstanceCard(props) {
                   setErrMsg
                 )
               }
+              color="error"
             >
               Delete Instance
             </Button>
