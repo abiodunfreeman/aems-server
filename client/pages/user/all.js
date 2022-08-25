@@ -8,10 +8,7 @@ import { useUserContext } from '../../context/user';
 export default function AllUsers() {
   const [user, setUser] = useUserContext();
   const [errMsg, setErrMsg] = useState('');
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+  const [successMsg, setSuccessMsg] = useState(false);
   const [users, setUsers] = useState([]);
   const [usersJSX, setUsersJSX] = useState([]);
   function returnUserJSX(users) {
@@ -20,7 +17,7 @@ export default function AllUsers() {
       return (
         <div
           key={u._id}
-          className="border border-black p-4 flex flex-col items-center gap-3"
+          className="border border-black p-2 flex flex-col items-center gap-3 w-60"
         >
           <h1 className=" text-bold text-3xl">{u.username}</h1>
 
@@ -43,13 +40,23 @@ export default function AllUsers() {
     console.log(user.status);
     if (user.status !== 'admin') {
       setErrMsg('please see an admin to delete a user');
+      setSuccessMsg(false);
       return;
     }
     const res = await axios.delete(`http://localhost:5000/user/${id}/delete`);
 
     getUsers();
     if (res.data.success === true) console.log(res.data);
-    setErrMsg(`User ${res.data.deletedUser.username} deleted successfully`);
+    setSuccessMsg(
+      <h3 className="text-green-500 text-lg">
+        user{' '}
+        <span className="text-red-500">
+          {res.data.deletedUser.username.toUpperCase()}
+        </span>{' '}
+        deleted successfully
+      </h3>
+    );
+    setErrMsg('');
   };
   const getUsers = async () => {
     const res = await axios.get('http://localhost:5000/user/all');
@@ -61,9 +68,6 @@ export default function AllUsers() {
   useEffect(() => {
     getUsers();
   }, []);
-  useEffect(() => {
-    console.log(users);
-  }, [users]);
 
   function handleFilterUsers(e) {
     const filteredUsers = users.filter(user =>
@@ -72,18 +76,21 @@ export default function AllUsers() {
     setUsersJSX(returnUserJSX(filteredUsers));
   }
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col w-screen max-w-screen">
       <Nav />
-      <h1>{errMsg}</h1>
-      <TextField
-        className="self-center mb-4"
-        id="filter-user-input"
-        variant="standard"
-        placeholder="enter name"
-        label="filter users"
-        onChange={handleFilterUsers}
-      />
-      <div className=" flex gap-4 flex-wrap p-4 self-center  justify-center">
+      <div className="flex flex-col items-center p-2">
+        <TextField
+          className="self-center mb-4"
+          id="filter-user-input"
+          variant="standard"
+          placeholder="enter name"
+          label="filter by username"
+          onChange={handleFilterUsers}
+        />
+        <h1 className="text-lg text-red-500">{errMsg}</h1>
+        {successMsg}
+      </div>
+      <div className=" flex gap-4 flex-wrap p-4 self-center  justify-evenly w-full ">
         {usersJSX}
       </div>
     </div>

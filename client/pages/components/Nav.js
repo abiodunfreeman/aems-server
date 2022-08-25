@@ -48,9 +48,11 @@ export default function Nav() {
   const handleCategoryMenuHover = event => {
     const target = event.currentTarget;
     target.classList.add('menu-hover');
-    setCategoryAnchorEl(event.currentTarget);
+    // setCategoryAnchorEl(event.currentTarget);
   };
   const handleUserMenuClick = event => {
+    const target = event.currentTarget;
+    target.classList.add('menu-hover');
     setUserAnchorEl(event.currentTarget);
   };
   const handleUserMenuClose = () => {
@@ -69,12 +71,16 @@ export default function Nav() {
   const handleUserMenuHover = event => {
     const target = event.currentTarget;
     target.classList.add('menu-hover');
-    setUserAnchorEl(event.currentTarget);
+    // setUserAnchorEl(event.currentTarget);
+  };
+  const handleMenuMouseLeave = event => {
+    const target = event.currentTarget;
+    target.classList.remove('menu-hover');
   };
   const handleItemMenuHover = event => {
     const target = event.currentTarget;
     target.classList.add('menu-hover');
-    setItemAnchorEl(event.currentTarget);
+    // setItemAnchorEl(event.currentTarget);
   };
 
   const handleLinkClick = string => {
@@ -160,6 +166,7 @@ export default function Nav() {
                       aria-expanded={userOpen ? 'true' : undefined}
                       onClick={handleUserMenuClick}
                       onMouseEnter={handleUserMenuHover}
+                      onMouseLeave={handleMenuMouseLeave}
                       className="nav-link"
                     >
                       user
@@ -201,6 +208,7 @@ export default function Nav() {
                       onClick={handleCategoryMenuClick}
                       onMouseEnter={handleCategoryMenuHover}
                       className="nav-link"
+                      onMouseLeave={handleMenuMouseLeave}
                     >
                       CATEGORIES
                     </p>
@@ -237,6 +245,7 @@ export default function Nav() {
                       aria-expanded={itemOpen ? 'true' : undefined}
                       onClick={handleItemMenuClick}
                       onMouseEnter={handleItemMenuHover}
+                      onMouseLeave={handleMenuMouseLeave}
                       className="nav-link"
                     >
                       ITEMS
