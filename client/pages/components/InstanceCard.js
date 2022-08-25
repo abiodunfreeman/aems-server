@@ -120,7 +120,7 @@ export default function InstanceCard(props) {
           }}
         >
           <div className=" flex flex-col">
-            <FormControl fullWidth variant="standard">
+            <FormControl fullWidth variant="filled">
               <InputLabel id="status-select-label">Status</InputLabel>
               <Select
                 labelId="status-select-label"

@@ -1,11 +1,18 @@
 import Nav from '../../components/Nav';
 import axios from 'axios';
-import { TextField } from '@mui/material';
+import {
+  TextField,
+  FormControl,
+  Select,
+  MenuItem,
+  InputLabel,
+} from '@mui/material';
 import { useEffect, useState } from 'react';
 import InstanceCard from '../../components/InstanceCard';
 import { useUserContext } from '../../../context/user';
 
 export default function Home() {
+  const [statusFilter, setStatusFilter] = useState('None');
   const [user, setUser] = useUserContext();
   const [instanceJSX, setInstanceJSX] = useState([]);
   const [itemInstances, setItemInstances] = useState([]);
@@ -84,11 +91,39 @@ export default function Home() {
       })
     );
   }, [itemInstances]);
-
+  const handleStatusChange = e => {
+    setStatusFilter(e.target.value);
+    if (e.target.value == 'None') {
+      setItemInstances(allInstances);
+      return;
+    }
+    setItemInstances(prevInstances => {
+      const filteredInstances = allInstances.filter(
+        instance => instance.status == e.target.value
+      );
+      return filteredInstances;
+    });
+  };
   return (
     <div className="bg-darkgray min-h-screen flex flex-col max-w-screen w-screen ">
       <Nav />
-      <div className="gap-4 bg-white w-screen max-w-screen p-8 mb-4 flex justify-center">
+      <div className="gap-4 bg-white w-screen max-w-screen p-8 mb-4 flex justify-center flex-col sm:flex-row items-center justify-around">
+        <FormControl variant="filled" sx={{ width: '200px' }}>
+          <InputLabel id="status-select-label">Filter by Status</InputLabel>
+          <Select
+            labelId="status-select-label"
+            id="status-select"
+            value={statusFilter}
+            label="status"
+            onChange={handleStatusChange}
+          >
+            <MenuItem value={'None'}>None</MenuItem>
+            <MenuItem value={'Available'}>Available</MenuItem>
+            <MenuItem value={'Loaned'}>Loaned</MenuItem>
+            <MenuItem value={'Maintenance'}>Maintenance</MenuItem>
+            <MenuItem value={'Reserved'}>Reserved</MenuItem>
+          </Select>
+        </FormControl>
         <TextField
           className=""
           id="filter-instance-input"
