@@ -13,6 +13,7 @@ import {
   MenuItem,
   Autocomplete,
 } from '@mui/material';
+import Link from 'next/link';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useEffect, useState } from 'react';
@@ -24,6 +25,9 @@ export default function InstanceCard(props) {
   const [status, setStatus] = useState(instance.status);
   const [errMsg, setErrMsg] = useState('');
   const [msg, setMsg] = useState('');
+  const [dynamicUserLink, setDynamicUserLink] = useState(
+    `http://localhost:3000/user/${instance.owner._id}`
+  );
 
   var formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -107,6 +111,9 @@ export default function InstanceCard(props) {
       setErrMsg('error changing status');
       setMsg('');
     }
+  };
+  const handleAutoCompleteChange = e => {
+    console.log(e.target.value);
   };
   return (
     <div className="">
@@ -237,11 +244,17 @@ export default function InstanceCard(props) {
                   disablePortal
                   id={`combo-${instance._id}`}
                   options={props.options}
+                  onChange={handleAutoCompleteChange}
                   renderInput={params => <TextField {...params} label="User" />}
                 />
                 <Button variant="outlined" onClick={handleUserChange}>
                   Change User
                 </Button>
+                {props.seeOwner && (
+                  <Link href={dynamicUserLink}>
+                    <Button>view owner</Button>
+                  </Link>
+                )}
               </AccordionDetails>
             </Accordion>
             <Button
