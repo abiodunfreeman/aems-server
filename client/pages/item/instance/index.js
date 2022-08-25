@@ -32,12 +32,14 @@ export default function Home() {
     setItemInstances(res.data.itemInstances);
     setAllInstances(res.data.itemInstances);
   };
-  const deleteItemInstance = async (itemId, price, setMsg) => {
+  const deleteItemInstance = async (itemId, price, setErrMsg, setMsg) => {
     if (!user) {
-      setMsg('please log in to delete an instance');
+      setMsg('');
+      setErrMsg('please log in to delete an instance');
       return;
     } else if (user.status !== 'admin') {
-      setMsg('only admins can delete items');
+      setMsg('');
+      setErrMsg('only admins can delete items');
       return;
     }
     const res = await axios.delete(

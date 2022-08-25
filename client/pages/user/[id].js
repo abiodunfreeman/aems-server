@@ -51,12 +51,14 @@ const OneUser = () => {
     setUserItems(res.data.userItems);
     setAllUserItems(res.data.userItems);
   };
-  const deleteItemInstance = async (itemId, price, setMsg) => {
+  const deleteItemInstance = async (itemId, price, setErrMsg, setMsg) => {
     if (!user) {
-      setMsg('please log in');
+      setMsg('');
+      setErrMsg('please log in');
       return;
     } else if (user.status !== 'admin') {
-      setMsg('only admins can delete items');
+      setMsg('');
+      setErrMsg('only admins can delete items');
 
       return;
     }

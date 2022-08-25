@@ -241,7 +241,8 @@ export default function InstanceCard(props) {
                 props.deleteInstance(
                   instance._id,
                   instance.item.price,
-                  setErrMsg
+                  setErrMsg,
+                  setMsg
                 )
               }
               color="error"
