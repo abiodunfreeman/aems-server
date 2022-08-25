@@ -68,7 +68,10 @@ export default function Home() {
 
     if (statusFilter != 'None') {
       setItemInstances(prevInstances => {
-        const filteredInstances = itemInstances.filter(instance => {
+        const statusFilteredInstances = allInstances.filter(
+          instance => instance.status == statusFilter
+        );
+        const filteredInstances = statusFilteredInstances.filter(instance => {
           const modelName = instance.item.model.toLowerCase();
           return modelName.includes(filterValue);
         });
@@ -88,6 +91,19 @@ export default function Home() {
     const otherInput = document.getElementById('filter-instance-input');
     otherInput.value = '';
     const filterValue = e.target.value.toLowerCase();
+    if (statusFilter != 'None') {
+      setItemInstances(prevInstances => {
+        const statusFilteredInstances = allInstances.filter(
+          instance => instance.status == statusFilter
+        );
+        const filteredInstances = statusFilteredInstances.filter(instance => {
+          const modelName = instance.item.model.toLowerCase();
+          return modelName.includes(filterValue);
+        });
+        return filteredInstances;
+      });
+      return;
+    }
     setItemInstances(prevInstances => {
       const filteredInstances = allInstances.filter(instance => {
         const modelName = instance.item.brand.toLowerCase();
