@@ -64,74 +64,79 @@ const New = () => {
     <ThemeProvider theme={theme}>
       <div className="page-container">
         <Nav />
-        <Card className="p-4 self-center  max-w-screen-sm " raised={true}>
-          <form onSubmit={e => handleFormSubmit(e)} className="">
-            <CardContent className=" flex flex-col">
-              <FormControl fullWidth required>
-                <InputLabel required id="demo-simple-select-label">
-                  Category
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="category"
-                  value={catFormData}
-                  label="Category"
-                  onChange={handleChange}
-                  required
-                >
-                  {categoryData.map(category => {
-                    return (
-                      <MenuItem value={category._id} key={category._id}>
-                        {category.name}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-              </FormControl>
+        <div className="m-auto">
+          <h1 className="text-center text-xl font-bold text-white">
+            Create a New Item
+          </h1>
+          <Card className="p-4 self-center  max-w-screen-sm m-4" raised={true}>
+            <form onSubmit={e => handleFormSubmit(e)} className="">
+              <CardContent className=" flex flex-col">
+                <FormControl fullWidth required>
+                  <InputLabel required id="demo-simple-select-label">
+                    Category
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="category"
+                    value={catFormData}
+                    label="Category"
+                    onChange={handleChange}
+                    required
+                  >
+                    {categoryData.map(category => {
+                      return (
+                        <MenuItem value={category._id} key={category._id}>
+                          {category.name}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                </FormControl>
 
-              <TextField
-                type="text"
-                placeholder="(Dell, LogiTech, etc...)"
-                label="Brand"
-                name="brand"
-                variant="standard"
-                id="brand"
-                required
-              />
-              <TextField
-                type="text"
-                placeholder="(Latitude 5560, Zone 900, etc...)"
-                label="Model"
-                name="model"
-                variant="standard"
-                id="model"
-                required
-              />
-              <TextField
-                type="number"
-                placeholder="Price (in dollars)"
-                label="Price ($)"
-                name="price"
-                variant="standard"
-                id="price"
-                required
-              />
-              <TextField
-                type="number"
-                label="Quantity"
-                name="quantity"
-                variant="standard"
-                id="quantity"
-                required
-              />
-            </CardContent>
-            <CardActions className="flex justify-center">
-              <Button type="submit" variant="outlined">
-                Add New Item
-              </Button>
-            </CardActions>
-          </form>
-        </Card>
+                <TextField
+                  type="text"
+                  placeholder="(Dell, LogiTech, etc...)"
+                  label="Brand"
+                  name="brand"
+                  variant="standard"
+                  id="brand"
+                  required
+                />
+                <TextField
+                  type="text"
+                  placeholder="(Latitude 5560, Zone 900, etc...)"
+                  label="Model"
+                  name="model"
+                  variant="standard"
+                  id="model"
+                  required
+                />
+                <TextField
+                  type="number"
+                  placeholder="Price (in dollars)"
+                  label="Price ($)"
+                  name="price"
+                  variant="standard"
+                  id="price"
+                  required
+                />
+                <TextField
+                  type="number"
+                  label="Quantity"
+                  name="quantity"
+                  variant="standard"
+                  id="quantity"
+                  required
+                />
+              </CardContent>
+              <CardActions className="flex justify-center">
+                <Button type="submit" variant="outlined">
+                  Add New Item
+                </Button>
+              </CardActions>
+            </form>
+          </Card>
+        </div>
       </div>
     </ThemeProvider>
   );

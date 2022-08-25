@@ -29,8 +29,7 @@ Found out about useContext out of neccesity, getting a response from the server 
     - edit filter labels to be more clear
     - reset button on /item/instance for filters (filters now stack on each other);
     - keep same instances when updating status filter
-    - center signup, login, create items/categories
-    - uncircle new category
+
     - mobile and desktop nav offer same links
     - easy view user in <InstanceCard/>, just like <ItemCard/>
     - dynamic category page that list all items in that category (import and use <ItemCard/>)
