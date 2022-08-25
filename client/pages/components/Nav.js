@@ -28,34 +28,54 @@ const theme = createTheme({
 });
 export default function Nav() {
   const [user, setUser] = useUserContext();
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
+  const [categoryAnchorEl, setCategoryAnchorEl] = useState(null);
+  const categoryOpen = Boolean(categoryAnchorEl);
   const [userAnchorEl, setUserAnchorEl] = useState(null);
   const userOpen = Boolean(userAnchorEl);
   const [itemAnchorEl, setItemAnchorEl] = useState(null);
   const itemOpen = Boolean(itemAnchorEl);
-  const handleMenuClick = event => {
-    setAnchorEl(event.currentTarget);
+  const handleCategoryMenuClick = event => {
+    const target = document.getElementById('basic-button');
+    target.classList.remove('menu-hover');
+    setCategoryAnchorEl(event.currentTarget);
   };
-  const handleMenuClose = () => {
-    setAnchorEl(null);
+  const handleCategoryMenuClose = () => {
+    const target = document.getElementById('basic-category-button');
+    target.classList.remove('menu-hover');
+    setCategoryAnchorEl(null);
+  };
+  const handleCategoryMenuHover = event => {
+    const target = event.currentTarget;
+    target.classList.add('menu-hover');
+    setCategoryAnchorEl(event.currentTarget);
   };
   const handleUserMenuClick = event => {
     setUserAnchorEl(event.currentTarget);
   };
   const handleUserMenuClose = () => {
+    const target = document.getElementById('basic-user-button');
+    target.classList.remove('menu-hover');
     setUserAnchorEl(null);
   };
   const handleItemMenuClick = event => {
     setItemAnchorEl(event.currentTarget);
   };
   const handleItemMenuClose = () => {
+    const target = document.getElementById('basic-item-button');
+    target.classList.remove('menu-hover');
     setItemAnchorEl(null);
   };
+  const handleItemMenuHover = event => {
+    const target = event.currentTarget;
+    target.classList.add('menu-hover');
+    setItemAnchorEl(event.currentTarget);
+  };
+  const handleUserMenuHover = event => {
+    const target = event.currentTarget;
+    target.classList.add('menu-hover');
+    setUserAnchorEl(event.currentTarget);
+  };
 
-  useEffect(() => {
-    console.log(user);
-  }, []);
   const handleLinkClick = string => {
     // Closes/Opens menu and changes hamburger icon on click
     // Click with param "onlyClose" only closes the menu and reverts the ham Icon
@@ -86,9 +106,6 @@ export default function Nav() {
     Router.push('/user/logout');
   };
 
-  useEffect(() => {
-    // console.log(user);
-  }, [user]);
   const toggleHam = () => {
     const hamburgerIcon = document.getElementById('ham-container');
     const dropDown = document.getElementById('nav-drop-down');
@@ -98,12 +115,7 @@ export default function Nav() {
     dropDown.classList.toggle('flex');
     hamburgerIcon.classList.toggle('change');
   };
-  const [selectUrl, setSelectUrl] = useState('');
-  const handleChange = e => {
-    console.log(e.target.value);
-    handleLinkClick();
-    Router.push(e.target.value);
-  };
+
   return (
     <ThemeProvider theme={theme}>
       <div className="nav-container">
@@ -136,7 +148,9 @@ export default function Nav() {
             {/* USER AUTH */}
             {user && (
               <div id="nav-logged-in" className="">
+                {/* DESKTOP */}
                 <div id="nav-logged-in-desktop">
+                  {/* USER MENU*/}
                   <div>
                     <p
                       id="basic-user-button"
@@ -144,6 +158,7 @@ export default function Nav() {
                       aria-haspopup="true"
                       aria-expanded={userOpen ? 'true' : undefined}
                       onClick={handleUserMenuClick}
+                      onMouseEnter={handleUserMenuHover}
                       className="nav-link"
                     >
                       user
@@ -157,6 +172,7 @@ export default function Nav() {
                       MenuListProps={{
                         'aria-labelledby': 'basic-user-button',
                       }}
+                      sx={{ marginTop: '30px' }}
                     >
                       <MenuItem onClick={handleUserMenuClose}>
                         {' '}
@@ -172,33 +188,38 @@ export default function Nav() {
                       </MenuItem>
                     </Menu>
                   </div>
+                  {/* CATEGORIES MENU */}
                   <div>
                     <p
-                      id="basic-button"
-                      aria-controls={open ? 'basic-menu' : undefined}
+                      id="basic-category-button"
+                      aria-controls={
+                        categoryOpen ? 'basic-category-menu' : undefined
+                      }
                       aria-haspopup="true"
-                      aria-expanded={open ? 'true' : undefined}
-                      onClick={handleMenuClick}
+                      aria-expanded={categoryOpen ? 'true' : undefined}
+                      onClick={handleCategoryMenuClick}
+                      onMouseEnter={handleCategoryMenuHover}
                       className="nav-link"
                     >
                       CATEGORIES
                     </p>
                     <Menu
-                      id="basic-menu"
-                      anchorEl={anchorEl}
-                      open={open}
-                      onClose={handleMenuClose}
+                      id="basic-category-menu"
+                      anchorEl={categoryAnchorEl}
+                      open={categoryOpen}
+                      onClose={handleCategoryMenuClose}
                       MenuListProps={{
                         'aria-labelledby': 'basic-button',
                       }}
+                      sx={{ marginTop: '30px' }}
                     >
-                      <MenuItem onClick={handleMenuClose}>
+                      <MenuItem onClick={handleCategoryMenuClose}>
                         {' '}
                         <Link href="/item/category">
                           <p className="nav-link">view all</p>
                         </Link>
                       </MenuItem>
-                      <MenuItem onClick={handleMenuClose}>
+                      <MenuItem onClick={handleCategoryMenuClose}>
                         {' '}
                         <Link href="/item/category/new">
                           <p className="nav-link">create</p>
@@ -206,6 +227,7 @@ export default function Nav() {
                       </MenuItem>
                     </Menu>
                   </div>
+                  {/* ITEMS MENU */}
                   <div>
                     <p
                       id="basic-item-button"
@@ -213,6 +235,7 @@ export default function Nav() {
                       aria-haspopup="true"
                       aria-expanded={itemOpen ? 'true' : undefined}
                       onClick={handleItemMenuClick}
+                      onMouseEnter={handleItemMenuHover}
                       className="nav-link"
                     >
                       ITEMS
@@ -225,6 +248,7 @@ export default function Nav() {
                       MenuListProps={{
                         'aria-labelledby': 'basic-item-button',
                       }}
+                      sx={{ marginTop: '30px' }}
                     >
                       <MenuItem onClick={handleItemMenuClose}>
                         {' '}
@@ -247,6 +271,7 @@ export default function Nav() {
                     </Menu>
                   </div>
 
+                  {/* LOGOUT */}
                   <Link href="/">
                     <Button
                       onClick={() => logout()}
@@ -257,6 +282,7 @@ export default function Nav() {
                     </Button>
                   </Link>
                 </div>
+                {/* MOBILE HAMBURGER */}
                 <div id="ham-container" onClick={() => toggleHam()}>
                   <div className="bar1"></div>
                   <div className="bar2"></div>

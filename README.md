@@ -27,6 +27,7 @@ Found out about useContext out of neccesity, getting a response from the server 
 ## To-Do
 
     - edit filter labels to be more clear
+    - hover effect for Nav Menus
     - fix err msg on /user/all (show better)
     - fix err msg on /item/category (show better)
     - reset button on /item/instance for filters (filters now stack on each other);

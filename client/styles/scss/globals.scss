@@ -76,6 +76,7 @@
   // justify-self: flex-start;
   position: relative;
 }
+
 #navbar {
   // border: 3px solid blue;
   width: 100%;
@@ -106,15 +107,16 @@
     text-transform: uppercase;
     cursor: pointer;
     transition-duration: 200ms;
-    border-bottom: 2px solid transparent;
+    border-bottom: 4px solid transparent;
     letter-spacing: 1px;
+  }
+  .menu-hover {
+    border-bottom: 4px solid #f84018;
   }
   .accBorder {
     border-bottom: 1px solid #6c757d;
   }
-  .nav-link:hover {
-    border-bottom: 2px solid #f84018;
-  }
+
   #nav-container {
     display: flex;
     justify-content: space-between;
@@ -227,7 +229,7 @@
     cursor: pointer;
   }
 }
-@media (max-width: 1400px) {
+@media (max-width: 800px) {
   #nav-padding {
     height: 90px;
   }
