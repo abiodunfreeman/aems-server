@@ -55,56 +55,59 @@ export default function User() {
       >
         <Nav />
 
-        <Card
-          raised={true}
-          sx={{ justifySelf: 'center', border: '3px solid blue' }}
-          className="mt-4 p-4  max-w-screen-sm justify-self-center self-center"
-        >
-          <form
-            className="flex flex-col m-8 p-8 items-center"
-            onSubmit={e => createUser(e)}
+        <div className="m-auto ">
+          <Card
+            raised={true}
+            className="m-4 p-4  max-w-screen-sm justify-self-center self-center"
           >
-            <CardContent className=" flex flex-col">
-              <h1 className="text-center font-bold pb-1">create an account</h1>
-              <p className="text-red-500 text-center font-bold lowercase">
-                {errMsg}
-              </p>
-              <TextField
-                type="string"
-                placeholder="enter a username"
-                label="username"
-                name="username"
-                variant="standard"
-                id="username"
-                required
-              />
-              <TextField
-                type="password"
-                placeholder="enter a password"
-                label="password"
-                name="password"
-                variant="standard"
-                id="password"
-                required
-              />
-              <TextField
-                type="password"
-                placeholder="Enter your password again"
-                label="confirm password"
-                name="confirm-password"
-                variant="standard"
-                id="confirm-password"
-                required
-              />
-            </CardContent>
+            <form
+              className="flex flex-col m-8 p-8 items-center"
+              onSubmit={e => createUser(e)}
+            >
+              <CardContent className=" flex flex-col">
+                <h1 className="text-center font-bold pb-1">
+                  create an account
+                </h1>
+                <p className="text-red-500 text-center font-bold lowercase">
+                  {errMsg}
+                </p>
+                <TextField
+                  type="string"
+                  placeholder="enter a username"
+                  label="username"
+                  name="username"
+                  variant="standard"
+                  id="username"
+                  required
+                />
+                <TextField
+                  type="password"
+                  placeholder="enter a password"
+                  label="password"
+                  name="password"
+                  variant="standard"
+                  id="password"
+                  required
+                />
+                <TextField
+                  type="password"
+                  placeholder="Enter your password again"
+                  label="confirm password"
+                  name="confirm-password"
+                  variant="standard"
+                  id="confirm-password"
+                  required
+                />
+              </CardContent>
 
-            <CardActions className="flex flex-col items-center">
-              <Button type="submit" variant="outlined">
-                Sign Up
-              </Button>
-            </CardActions>
-          </form>
-        </Card>
+              <CardActions className="flex flex-col items-center">
+                <Button type="submit" variant="outlined">
+                  Sign Up
+                </Button>
+              </CardActions>
+            </form>
+          </Card>
+        </div>
       </div>
     </ThemeProvider>
   );

@@ -68,44 +68,46 @@ function Login() {
     <ThemeProvider theme={theme}>
       <div className="page-container">
         <Nav />
-        <Card raised={true} className="mt-4 p-4 self-center  max-w-screen-sm ">
-          <form className=" flex flex-col " onSubmit={e => loginAuto(e)}>
-            <CardContent className=" flex flex-col">
-              <h1 className="text-center font-bold pb-1">login</h1>
-              <TextField
-                type="string"
-                placeholder="enter a username"
-                label="username"
-                name="username"
-                variant="standard"
-                id="username"
-                required
-              />
-              <TextField
-                type="password"
-                placeholder="enter a password"
-                label="password"
-                name="password"
-                variant="standard"
-                id="password"
-                required
-              />
-            </CardContent>
-            <CardActions className="flex flex-col items-center gap-3">
-              <Button type="submit" variant="outlined" fullWidth>
-                login
-              </Button>
-              <div className="flex gap-3">
-                <Button variant="outlined" onClick={() => login('default')}>
-                  <p className="login-link">login as guest</p>
+        <div className="m-auto">
+          <Card raised={true} className="m-4 p-4 self-center  max-w-screen-sm ">
+            <form className=" flex flex-col " onSubmit={e => loginAuto(e)}>
+              <CardContent className=" flex flex-col">
+                <h1 className="text-center font-bold pb-1">login</h1>
+                <TextField
+                  type="string"
+                  placeholder="enter a username"
+                  label="username"
+                  name="username"
+                  variant="standard"
+                  id="username"
+                  required
+                />
+                <TextField
+                  type="password"
+                  placeholder="enter a password"
+                  label="password"
+                  name="password"
+                  variant="standard"
+                  id="password"
+                  required
+                />
+              </CardContent>
+              <CardActions className="flex flex-col items-center gap-3">
+                <Button type="submit" variant="outlined" fullWidth>
+                  login
                 </Button>
-                <Button variant="outlined" onClick={() => login('admin')}>
-                  <p className="login-link"> login as ADMIN</p>
-                </Button>
-              </div>
-            </CardActions>
-          </form>
-        </Card>
+                <div className="flex gap-3">
+                  <Button variant="outlined" onClick={() => login('default')}>
+                    <p className="login-link">login as guest</p>
+                  </Button>
+                  <Button variant="outlined" onClick={() => login('admin')}>
+                    <p className="login-link"> login as ADMIN</p>
+                  </Button>
+                </div>
+              </CardActions>
+            </form>
+          </Card>
+        </div>
       </div>
     </ThemeProvider>
   );
