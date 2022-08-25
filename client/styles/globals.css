@@ -255,12 +255,10 @@
 /* line 228, ../GitHub/aems/client/styles/scss/globals.scss */
 .instance-note .delete-icon {
   color: #ad1111;
-  visibility: hidden;
 }
 
 /* line 235, ../GitHub/aems/client/styles/scss/globals.scss */
 .instance-note:hover .delete-icon {
-  visibility: visible;
   cursor: pointer;
 }
 

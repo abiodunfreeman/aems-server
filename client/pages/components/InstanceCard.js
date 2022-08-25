@@ -148,6 +148,7 @@ export default function InstanceCard(props) {
                 <MenuItem value={'Reserved'}>Reserved</MenuItem>
               </Select>
             </FormControl>
+            {/* VIEW NOTES */}
             <Accordion sx={{ width: '250px' }}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -216,6 +217,7 @@ export default function InstanceCard(props) {
                 </form>
               </AccordionDetails>
             </Accordion>
+            {/* CHANGE USER */}
             <Accordion sx={{ width: '250px' }}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}

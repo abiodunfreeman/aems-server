@@ -228,12 +228,12 @@
   .delete-icon {
     color: rgb(173, 17, 17);
     // display: none;
-    visibility: hidden;
+    // visibility: hidden;
   }
 }
 .instance-note:hover {
   .delete-icon {
-    visibility: visible;
+    // visibility: visible;
 
     cursor: pointer;
   }
