@@ -102,7 +102,7 @@ export default function InstanceCard(props) {
           <h1 className="text-center font-bold">{model}</h1>
           {props.seeOwner && <h2>Owner: {instance.owner.username}</h2>}
           <h2>Brand: {brand}</h2>
-          <h3>Category: {category.name}</h3>
+          <h3 className="">Category: {category.name}</h3>
           <ul>
             <li>Stock: {quantity}</li>
             <li>

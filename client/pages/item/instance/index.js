@@ -107,7 +107,7 @@ export default function Home() {
   return (
     <div className="bg-darkgray min-h-screen flex flex-col max-w-screen w-screen ">
       <Nav />
-      <div className="gap-4 bg-white w-screen max-w-screen p-8 mb-4 flex justify-center flex-col sm:flex-row items-center justify-around">
+      <div className="gap-6 bg-white w-screen max-w-screen p-8 mb-4 flex justify-center flex-col sm:flex-row items-center ">
         <FormControl variant="filled" sx={{ width: '200px' }}>
           <InputLabel id="status-select-label">Filter by Status</InputLabel>
           <Select

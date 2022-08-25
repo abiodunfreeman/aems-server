@@ -35,7 +35,10 @@ exports.getInstances = async (req, res, next) => {
   try {
     const itemInstances = await ItemInstance.find()
       .populate('owner')
-      .populate('item');
+      .populate({
+        path: 'item',
+        populate: { path: 'category', model: 'Category' },
+      });
 
     itemInstances.forEach(async instance => {
       if (
