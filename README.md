@@ -26,8 +26,5 @@ Found out about useContext out of neccesity, getting a response from the server 
 
 ## To-Do
 
-    - edit item instances - switch owner, edit status, make notes
-
-    - automatically generate some notes for instances, like assignment history (name + date) , status history, etc
     - visualize data with react vis
     - dynamic category page that list all items in that category (import and use <ItemCard/>)

@@ -63,7 +63,7 @@ export default function InstanceCard(props) {
       { instanceId, note }
     );
     props.fetchUserItems();
-    console.log(res.data);
+    // console.log(res.data);
   }
   const handleUserChange = async () => {
     const autocomplete = document.getElementById(`combo-${instance._id}`).value;
@@ -109,7 +109,6 @@ export default function InstanceCard(props) {
               PPU: <span className="invisible">...</span>
               {ppu}
             </li>
-            <li>status: {status}</li>
           </ul>
           <p className="text-red-500 text-center">{errMsg}</p>
           <p className="text-green-500 text-center">{msg}</p>
@@ -121,8 +120,8 @@ export default function InstanceCard(props) {
           }}
         >
           <div className=" flex flex-col">
-            <FormControl fullWidth>
-              <InputLabel id="status-select-label">Edit Status</InputLabel>
+            <FormControl fullWidth variant="standard">
+              <InputLabel id="status-select-label">Status</InputLabel>
               <Select
                 labelId="status-select-label"
                 id="status-select"
