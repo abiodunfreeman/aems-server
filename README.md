@@ -26,6 +26,9 @@ Found out about useContext out of neccesity, getting a response from the server 
 
 ## To-Do
 
+    - center signup, login, create items/categories
+    - uncircle new category
+    - better log out message
     - mobile and desktop nav offer same links
     - easy view user in <InstanceCard/>, just like <ItemCard/>
     - make <Nav/> match aptiv.com
