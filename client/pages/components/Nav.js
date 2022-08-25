@@ -138,15 +138,17 @@ export default function Nav() {
               <div id="nav-logged-in" className="">
                 <div id="nav-logged-in-desktop">
                   <div>
-                    <Button
+                    <p
                       id="basic-user-button"
                       aria-controls={userOpen ? 'basic-user-menu' : undefined}
                       aria-haspopup="true"
                       aria-expanded={userOpen ? 'true' : undefined}
                       onClick={handleUserMenuClick}
+                      className="nav-link"
                     >
-                      USER
-                    </Button>
+                      user
+                    </p>
+
                     <Menu
                       id="basic-user-menu"
                       anchorEl={userAnchorEl}
@@ -171,15 +173,16 @@ export default function Nav() {
                     </Menu>
                   </div>
                   <div>
-                    <Button
+                    <p
                       id="basic-button"
                       aria-controls={open ? 'basic-menu' : undefined}
                       aria-haspopup="true"
                       aria-expanded={open ? 'true' : undefined}
                       onClick={handleMenuClick}
+                      className="nav-link"
                     >
                       CATEGORIES
-                    </Button>
+                    </p>
                     <Menu
                       id="basic-menu"
                       anchorEl={anchorEl}
@@ -204,15 +207,16 @@ export default function Nav() {
                     </Menu>
                   </div>
                   <div>
-                    <Button
+                    <p
                       id="basic-item-button"
                       aria-controls={itemOpen ? 'basic-item-menu' : undefined}
                       aria-haspopup="true"
                       aria-expanded={itemOpen ? 'true' : undefined}
                       onClick={handleItemMenuClick}
+                      className="nav-link"
                     >
                       ITEMS
-                    </Button>
+                    </p>
                     <Menu
                       id="basic-item-menu"
                       anchorEl={itemAnchorEl}
@@ -244,9 +248,13 @@ export default function Nav() {
                   </div>
 
                   <Link href="/">
-                    <p onClick={() => logout()} className="nav-link">
+                    <Button
+                      onClick={() => logout()}
+                      color="error"
+                      variant="outlined"
+                    >
                       logout
-                    </p>
+                    </Button>
                   </Link>
                 </div>
                 <div id="ham-container" onClick={() => toggleHam()}>

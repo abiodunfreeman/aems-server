@@ -26,7 +26,7 @@ Found out about useContext out of neccesity, getting a response from the server 
 
 ## To-Do
 
+    - mobile and desktop nav offer same links
     - easy view user in <InstanceCard/>, just like <ItemCard/>
-    - filter instances by status
-    - visualize data with react vis
+    - make <Nav/> match aptiv.com
     - dynamic category page that list all items in that category (import and use <ItemCard/>)
