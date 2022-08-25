@@ -100,7 +100,13 @@ export default function InstanceCard(props) {
       { status: e.target.value }
     );
     props.fetchUserItems();
-    res.data.success && setMsg('Status Updated Successfully');
+    if (res.data.success) {
+      setMsg('status updated successfully');
+      setErrMsg('');
+    } else {
+      setErrMsg('error changing status');
+      setMsg('');
+    }
   };
   return (
     <div className="">
