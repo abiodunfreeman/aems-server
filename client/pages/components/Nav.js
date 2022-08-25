@@ -28,15 +28,16 @@ const theme = createTheme({
 });
 export default function Nav() {
   const [user, setUser] = useUserContext();
+
   const [categoryAnchorEl, setCategoryAnchorEl] = useState(null);
-  const categoryOpen = Boolean(categoryAnchorEl);
   const [userAnchorEl, setUserAnchorEl] = useState(null);
-  const userOpen = Boolean(userAnchorEl);
   const [itemAnchorEl, setItemAnchorEl] = useState(null);
+
+  const categoryOpen = Boolean(categoryAnchorEl);
+  const userOpen = Boolean(userAnchorEl);
   const itemOpen = Boolean(itemAnchorEl);
+
   const handleCategoryMenuClick = event => {
-    const target = document.getElementById('basic-button');
-    target.classList.remove('menu-hover');
     setCategoryAnchorEl(event.currentTarget);
   };
   const handleCategoryMenuClose = () => {
@@ -65,15 +66,15 @@ export default function Nav() {
     target.classList.remove('menu-hover');
     setItemAnchorEl(null);
   };
-  const handleItemMenuHover = event => {
-    const target = event.currentTarget;
-    target.classList.add('menu-hover');
-    setItemAnchorEl(event.currentTarget);
-  };
   const handleUserMenuHover = event => {
     const target = event.currentTarget;
     target.classList.add('menu-hover');
     setUserAnchorEl(event.currentTarget);
+  };
+  const handleItemMenuHover = event => {
+    const target = event.currentTarget;
+    target.classList.add('menu-hover');
+    setItemAnchorEl(event.currentTarget);
   };
 
   const handleLinkClick = string => {
@@ -172,7 +173,7 @@ export default function Nav() {
                       MenuListProps={{
                         'aria-labelledby': 'basic-user-button',
                       }}
-                      sx={{ marginTop: '30px' }}
+                      sx={{ marginTop: '5px' }}
                     >
                       <MenuItem onClick={handleUserMenuClose}>
                         {' '}
@@ -211,7 +212,7 @@ export default function Nav() {
                       MenuListProps={{
                         'aria-labelledby': 'basic-button',
                       }}
-                      sx={{ marginTop: '30px' }}
+                      sx={{ marginTop: '5px' }}
                     >
                       <MenuItem onClick={handleCategoryMenuClose}>
                         {' '}
@@ -248,7 +249,7 @@ export default function Nav() {
                       MenuListProps={{
                         'aria-labelledby': 'basic-item-button',
                       }}
-                      sx={{ marginTop: '30px' }}
+                      sx={{ marginTop: '5px' }}
                     >
                       <MenuItem onClick={handleItemMenuClose}>
                         {' '}
