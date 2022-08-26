@@ -90,7 +90,7 @@ app.use(
     resave: false,
     saveUninitialized: true,
     store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
-    cookie: { maxAge: 1000 * 60 * 60 * 24 },
+    cookie: { sameSite: 'none', maxAge: 1000 * 60 * 60 * 24 },
   })
 );
 app.use(passport.initialize());
