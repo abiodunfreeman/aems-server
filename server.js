@@ -44,9 +44,12 @@ app.use(function (req, res, next) {
     'Origin, X-Requested-With, Content-Type, Accept'
   );
   res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-  res.cookie({ sameSite: 'none', secure: true });
+
   next();
 });
+app.use(session({ secret: 'cats' }));
+app.use(passport.initialize());
+app.use(passport.session());
 //Passport
 passport.use(
   new LocalStrategy((username, password, done) => {
@@ -80,12 +83,10 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
-app.use(session({ secret: 'cats' }));
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 app.use((req, res, next) => {
-  if (req.user) res.locals.user = req.user;
+  console.log(`res.locals = req.user`);
+  res.locals.user = req.user;
   next();
 });
 
@@ -108,6 +109,7 @@ app.get('/logout', (req, res) => {
   });
 });
 app.get('/', (req, res, next) => {
+  console.log(res.locals.user);
   console.log('------------GET "/" ------------');
   console.log(req.user);
   // if (res.locals.user) console.log(res.locals.user + 'FUCK');
