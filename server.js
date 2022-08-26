@@ -51,7 +51,6 @@ app.use(function (req, res, next) {
 //Passport
 passport.use(
   new LocalStrategy((username, password, done) => {
-    console.log(username);
     User.findOne({ username: username }, (err, user) => {
       if (err) {
         return done(err);
@@ -62,7 +61,8 @@ passport.use(
       }
       bcrypt.compare(password, user.password, (err, res) => {
         if (res) {
-          // console.log('passwords match!');
+          console.log('passwords match!');
+          console.log(user);
           return done(null, user);
         } else {
           return done(null, false, { message: 'Incorrect password' });
