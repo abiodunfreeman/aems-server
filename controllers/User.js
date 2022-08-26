@@ -133,6 +133,7 @@ exports.getItemInstances = async (req, res, next) => {
 
 exports.getLoginFailure = async (req, res, next) => {
   try {
+    console.log('LOGIN FAILURE ROUTE');
     res.status(200).json({ success: false, msg: 'login failure redirect' });
   } catch (err) {
     debug(`login failure error: ${err}`);
