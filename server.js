@@ -103,7 +103,7 @@ app.get('/logout', (req, res) => {
   });
 });
 app.get('/', (req, res, next) => {
-  console.log(req);
+  console.log(req.user);
   // if (res.locals.user) console.log(res.locals.user + 'FUCK');
   res.status(200).json({ success: true, user: req.user });
 });
