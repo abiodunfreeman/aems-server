@@ -1,5 +1,5 @@
 const express = require('express');
-const cookie = require('cookie');
+const Cookie = require('cookie');
 const colors = require('colors');
 const dotenv = require('dotenv');
 const cors = require('cors');
@@ -62,7 +62,6 @@ passport.use(
       bcrypt.compare(password, user.password, (err, res) => {
         if (res) {
           console.log('passwords match!');
-          console.log(user);
           return done(null, user);
         } else {
           return done(null, false, { message: 'Incorrect password' });
@@ -98,7 +97,13 @@ app.post(
   passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/user',
-  })
+  }),
+  (req, res, next) => {
+    console.log('@@@@@@@@@@/user/login @@@@@@@@@');
+    console.log(req.user);
+    console.log('@@@@@@@@@@/user/login @@@@@@@@@');
+    next();
+  }
 );
 
 app.get('/logout', (req, res) => {
@@ -133,7 +138,7 @@ app.use('/user', userRoute);
 const categoryRoute = require('./routes/category');
 app.use('/category', categoryRoute);
 
-const startServer = async () => {
+async function startServer() {
   const PORT = process.env.PORT;
   const portString = `${PORT}`.brightYellow;
   await connectDB();
@@ -143,5 +148,5 @@ const startServer = async () => {
         .yellow.bold
     );
   });
-};
+}
 startServer();
