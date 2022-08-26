@@ -30,7 +30,7 @@ app.enable('trust proxy');
 //Cors
 app.use(
   cors({
-    origin: 'https://aems.vercel.app/',
+    origin: 'https://aems.vercel.app',
     preflightContinue: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
@@ -48,7 +48,25 @@ app.use(function (req, res, next) {
 
   next();
 });
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    preflightContinue: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  })
+);
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
 
+  next();
+});
 //Passport
 passport.use(
   new LocalStrategy((username, password, done) => {
