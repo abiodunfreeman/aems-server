@@ -77,7 +77,7 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
-app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
+app.use(session({ secret: 'cats' }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
@@ -93,13 +93,7 @@ app.post(
     failureRedirect: '/user',
   })
 );
-app.post(
-  '/',
-  passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/user',
-  })
-);
+
 app.get('/logout', (req, res) => {
   req.logout(function (err) {
     if (err) {
