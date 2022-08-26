@@ -47,12 +47,11 @@ app.use(function (req, res, next) {
 
   next();
 });
-app.use(session({ secret: 'cats' }));
-app.use(passport.initialize());
-app.use(passport.session());
+
 //Passport
 passport.use(
   new LocalStrategy((username, password, done) => {
+    console.log(username);
     User.findOne({ username: username }, (err, user) => {
       if (err) {
         return done(err);
@@ -82,7 +81,9 @@ passport.deserializeUser(function (id, done) {
     done(err, user);
   });
 });
-
+app.use(session({ secret: 'cats' }));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 app.use((req, res, next) => {
   console.log(`res.locals = req.user`);
