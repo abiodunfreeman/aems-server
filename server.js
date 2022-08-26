@@ -68,7 +68,7 @@ passport.use(
 );
 
 passport.serializeUser(function (user, done) {
-  done(null, user.id);
+  done(null, user._id);
 });
 
 passport.deserializeUser(function (id, done) {
@@ -105,6 +105,7 @@ app.get('/logout', (req, res) => {
   });
 });
 app.get('/', (req, res, next) => {
+  console.log('------------GET "/" ------------');
   console.log(req.user);
   // if (res.locals.user) console.log(res.locals.user + 'FUCK');
   res.status(200).json({ success: true, user: req.user });
