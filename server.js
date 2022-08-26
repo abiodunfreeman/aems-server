@@ -44,7 +44,7 @@ app.use(function (req, res, next) {
     'Origin, X-Requested-With, Content-Type, Accept'
   );
   res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-  res.cookie('cookie2', 'value2', { sameSite: 'none', secure: true });
+  res.cookie({ sameSite: 'none', secure: true });
   next();
 });
 //Passport
