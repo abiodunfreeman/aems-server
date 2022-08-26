@@ -23,8 +23,9 @@ app.use(express.json());
 //Compress all routes
 app.use(compression());
 app.use(helmet());
-//Cors
 
+app.enable('trust proxy');
+//Cors
 app.use(
   cors({
     origin: 'https://aems.vercel.app/',
