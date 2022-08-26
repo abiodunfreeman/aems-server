@@ -1,4 +1,5 @@
 const express = require('express');
+const cookie = require('cookie');
 const colors = require('colors');
 const dotenv = require('dotenv');
 const cors = require('cors');
@@ -43,6 +44,7 @@ app.use(function (req, res, next) {
     'Origin, X-Requested-With, Content-Type, Accept'
   );
   res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+  res.cookie('cookie2', 'value2', { sameSite: 'none', secure: true });
   next();
 });
 //Passport
