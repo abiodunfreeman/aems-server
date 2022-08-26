@@ -83,7 +83,7 @@ passport.deserializeUser(function (id, done) {
     done(err, user);
   });
 });
-app.use(session({ secret: 'cats' }));
+app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
