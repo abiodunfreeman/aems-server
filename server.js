@@ -27,7 +27,7 @@ app.use(helmet());
 
 app.use(
   cors({
-    origin: 'http:localhost:3000',
+    origin: 'https://aems.vercel.app/',
     preflightContinue: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
