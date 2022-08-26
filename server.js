@@ -18,8 +18,8 @@ dotenv.config({ path: './config/config.env' });
 
 // Body Parser
 app.use(express.json());
-app.use(express.cookieParser());
-app.use(express.bodyParser());
+// app.use(express.cookieParser());
+// app.use(express.bodyParser());
 //Compress all routes
 app.use(compression());
 app.use(helmet());
