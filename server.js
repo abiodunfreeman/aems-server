@@ -52,6 +52,7 @@ passport.use(
         return done(err);
       }
       if (!user) {
+        console.log('That account does not exist!');
         return done(null, false, { message: 'Incorrect username' });
       }
       bcrypt.compare(password, user.password, (err, res) => {
@@ -87,6 +88,13 @@ app.use((req, res, next) => {
 
 app.post(
   '/user/login',
+  passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/user',
+  })
+);
+app.post(
+  '/',
   passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/user',
