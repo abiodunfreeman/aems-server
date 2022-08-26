@@ -72,8 +72,9 @@ passport.use(
 );
 
 passport.serializeUser(function (user, done) {
-  console.log('!!!!!!!!!!!!!!!serialize !!!!!!!!!!!!!!!!!!'.red);
+  console.log('!!!!!!!!!!!!!!!serialize !!!!!!!!!!!!!!!!!!');
   console.log(user);
+  console.log('!!!!!!!!!!!!!!!serialize !!!!!!!!!!!!!!!!!!');
   done(null, user._id);
 });
 
@@ -87,7 +88,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 app.use((req, res, next) => {
-  console.log(`res.locals = req.user`);
+  console.log('--------SET res.locals------');
+  console.log(req.user);
+  console.log('--------SET res.locals------');
   res.locals.user = req.user;
   next();
 });
@@ -97,13 +100,7 @@ app.post(
   passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/user',
-  }),
-  (req, res, next) => {
-    console.log('@@@@@@@@@@/user/login @@@@@@@@@');
-    console.log(req.user);
-    console.log('@@@@@@@@@@/user/login @@@@@@@@@');
-    next();
-  }
+  })
 );
 
 app.get('/logout', (req, res) => {
@@ -117,9 +114,9 @@ app.get('/logout', (req, res) => {
   });
 });
 app.get('/', (req, res, next) => {
-  console.log(res.locals.user);
-  console.log('------------GET "/" ------------');
+  console.log('--------SUCCESS REDIRECT------');
   console.log(req.user);
+  console.log('--------SUCCESS REDIRECT------');
   // if (res.locals.user) console.log(res.locals.user + 'FUCK');
   res.status(200).json({ success: true, user: req.user });
 });
