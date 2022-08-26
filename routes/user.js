@@ -8,8 +8,9 @@ const {
   changeUserStatus,
   addItem,
   getItemInstances,
+  getLoginFailure,
 } = require('../controllers/User');
-
+router.route('/').get(getLoginFailure);
 router.route('/:id/delete').delete(deleteUser);
 router.route('/all').get(getUsers);
 router.route('/signup').post(createUser);

@@ -130,3 +130,12 @@ exports.getItemInstances = async (req, res, next) => {
     res.status(400).json({ success: false, err: err.message });
   }
 };
+
+exports.getLoginFailure = async (req, res, next) => {
+  try {
+    res.status(200).json({ success: false, msg: 'login failure redirect' });
+  } catch (err) {
+    debug(`login failure error: ${err}`);
+    res.status(400).json({ success: false, err: err.message });
+  }
+};
