@@ -11,6 +11,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/User');
 const bcrypt = require('bcryptjs');
+const MongoStore = require('connect-mongo');
 //inits app
 const app = express();
 
@@ -83,7 +84,15 @@ passport.deserializeUser(function (id, done) {
     done(err, user);
   });
 });
-app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
+app.use(
+  session({
+    secret: 'cats',
+    resave: false,
+    saveUninitialized: true,
+    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
+    cookie: { maxAge: 1000 * 60 * 60 * 24 },
+  })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
@@ -117,7 +126,7 @@ app.get('/', (req, res, next) => {
   console.log('--------SUCCESS REDIRECT------');
   console.log(req.user);
   console.log('--------SUCCESS REDIRECT------');
-  // if (res.locals.user) console.log(res.locals.user + 'FUCK');
+
   res.status(200).json({ success: true, user: req.user });
 });
 
